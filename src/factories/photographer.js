@@ -1,12 +1,5 @@
 class PhotographerFactory {
-  id;
-  name;
-  portrait;
-  city;
-  country;
-  price;
-  tagline;
-  constructor(city, country, id, price, name, portrait, tagline) {
+  constructor(id, name, portrait, city, country, price, tagline) {
     this.id = id;
     this.name = name;
     this.portrait = portrait;
@@ -14,6 +7,7 @@ class PhotographerFactory {
     this.country = country;
     this.price = price;
     this.tagline = tagline;
+    this.data = [];
   }
   getUserCardDOM() {
     // création des composants
@@ -58,5 +52,8 @@ class PhotographerFactory {
     article.appendChild(boxDesc);
 
     return article;
+  }
+  setData(data) {
+    return (this.data = data);
   }
 }

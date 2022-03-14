@@ -5,9 +5,17 @@ async function getPhotographers() {
 
 async function displayData(photographers, media) {
   const photographersSection = document.querySelector(".photographer_section");
-  const photographerData = document.querySelector(".photograph-header");
+  // const photographerData = document.querySelector(".photograph-header");
   photographers.forEach((photographer) => {
-    const photographerModel = photographerFactory(photographer);
+    const photographerModel = new PhotographerFactory(
+      photographer.city,
+      photographer.country,
+      photographer.id,
+      photographer.price,
+      photographer.name,
+      photographer.portrait,
+      photographer.tagline,
+    );
     const userCardDOM = photographerModel.getUserCardDOM();
     photographersSection.appendChild(userCardDOM);
     // recuperer l'id du photographe

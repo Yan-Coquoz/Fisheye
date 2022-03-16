@@ -31,10 +31,10 @@ class PhotographerFactory {
     boxDesc.classList.add("box_desc");
     localisation.classList.add("box_desc__localite");
     // attributs
-    anchor.setAttribute("href", `${baseUrl}?photographe=${this.id}`);
+    anchor.setAttribute("href", `${baseUrl}?id=${this.id}`);
     img.setAttribute(
       "src",
-      `../../public/assets/photographers/${this.portrait}`,
+      `../../public/assets/photographers/${this.portrait}`
     );
     img.setAttribute("alt", `photographe ${this.name}`);
     // accessibilité

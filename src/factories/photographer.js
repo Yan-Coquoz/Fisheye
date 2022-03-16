@@ -3,6 +3,7 @@ function photographerFactory(data) {
   const picture = `./assets/photographers/${portrait}`;
 
   function getUserCardDOM() {
+    const baseUrl = "photographer.html";
     // création des composants
     const article = document.createElement("article");
     const anchor = document.createElement("a");
@@ -22,7 +23,7 @@ function photographerFactory(data) {
     boxDesc.classList.add("box_desc");
     localisation.classList.add("box_desc__localite");
     // attributs
-    anchor.setAttribute("href", "photographer.html");
+    anchor.setAttribute("href", `${baseUrl}?photographer=${id}`);
     img.setAttribute("src", picture);
     img.setAttribute("alt", `photographe ${name}`);
     // le contenu du visuel
@@ -44,5 +45,5 @@ function photographerFactory(data) {
     return article;
   }
 
-  return { name, picture, id, getUserCardDOM };
+  return { name, picture, getUserCardDOM };
 }

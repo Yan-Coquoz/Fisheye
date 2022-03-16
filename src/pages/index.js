@@ -10,20 +10,19 @@ async function displayData(photographers, media) {
     const photographerModel = photographerFactory(photographer);
     const userCardDOM = photographerModel.getUserCardDOM();
     photographersSection.appendChild(userCardDOM);
-
-    displayPhotographer();
+    displayPhotographer(
+      photographerModel,
+      media.filter((medias) => {
+        return medias.photographerId === photographerModel.id;
+      })
+    );
   });
-}
-async function displayPhotographer(photographerDatas) {
-  const photographerDatas = document.querySelector(".photograph-header");
-  const formulaire = document.querySelector("form");
 }
 
 async function init() {
   // Récupère les datas des photographes
   const { photographers, media } = await getPhotographers();
-  // console.log("les photographes ", photographers);
-  // console.log("les medias ", media);
+
   displayData(photographers, media);
 }
 

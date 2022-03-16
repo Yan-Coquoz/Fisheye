@@ -1,0 +1,24 @@
+{
+  "name": "front-end-fisheye",
+  "version": "1.0.0",
+  "description": "Site web permettant aux photographes d'exposer leurs travaux",
+  "main": "index.js",
+  "devDependencies": {
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "^2.6.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yan-Coquoz/Front-End-Fisheye.git"
+  },
+  "author": "Yan Coquoz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yan-Coquoz/Front-End-Fisheye/issues"
+  },
+  "homepage": "https://github.com/Yan-Coquoz/Front-End-Fisheye#readme"
+}

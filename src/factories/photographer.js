@@ -10,6 +10,7 @@ class PhotographerFactory {
     this.data = [];
   }
   getUserCardDOM() {
+    const baseUrl = "photographer.html";
     // création des composants
     const article = document.createElement("article");
     const anchor = document.createElement("a");
@@ -30,7 +31,7 @@ class PhotographerFactory {
     boxDesc.classList.add("box_desc");
     localisation.classList.add("box_desc__localite");
     // attributs
-    anchor.setAttribute("href", `./photographer.html`);
+    anchor.setAttribute("href", `${baseUrl}?photographe=${this.id}`);
     img.setAttribute(
       "src",
       `../../public/assets/photographers/${this.portrait}`,

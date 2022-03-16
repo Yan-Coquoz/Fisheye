@@ -3,14 +3,20 @@ async function getPhotographers() {
   return photographers.json();
 }
 
-async function displayData(photographers) {
+async function displayData(photographers, media) {
   const photographersSection = document.querySelector(".photographer_section");
 
   photographers.forEach((photographer) => {
     const photographerModel = photographerFactory(photographer);
     const userCardDOM = photographerModel.getUserCardDOM();
     photographersSection.appendChild(userCardDOM);
+
+    displayPhotographer();
   });
+}
+async function displayPhotographer(photographerDatas) {
+  const photographerDatas = document.querySelector(".photograph-header");
+  const formulaire = document.querySelector("form");
 }
 
 async function init() {

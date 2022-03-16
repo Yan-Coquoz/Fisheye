@@ -22,7 +22,7 @@ function photographerFactory(data) {
     boxDesc.classList.add("box_desc");
     localisation.classList.add("box_desc__localite");
     // attributs
-    anchor.setAttribute("href", `../../photographer.html`);
+    anchor.setAttribute("href", "../../photographer.html");
     img.setAttribute("src", picture);
     img.setAttribute("alt", `photographe ${name}`);
     // le contenu du visuel

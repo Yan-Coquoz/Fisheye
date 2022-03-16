@@ -18,9 +18,20 @@
     </a>
   </header>
   <main id="main">
+
     <div class="photograph-header">
+      <div>
+        <h1 class="photographer__name"></h1>
+        <div class="photographer__desc">
+          <h3 class="photographer__location"></h3>
+          <div class="photographer__motiv"></div>
+        </div>
+      </div>
       <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      <div class="photographer__face">
+      </div>
     </div>
+
   </main>
   <div id="contact_modal">
     <div class="modal">
@@ -37,6 +48,10 @@
       </form>
     </div>
   </div>
+  <script src="../src/pages/photographer.js"></script>
+  <script src="../src/factories/photographer.js"></script>
+
+  <script src="../src/pages/index.js"></script>
   <script src="../src/utils/contactForm.js"></script>
 
 </body>

@@ -21,6 +21,7 @@ class PhotographerFactory {
     const localisation = document.createElement("h3");
     const desc = document.createElement("p");
     const seePrice = document.createElement("p");
+    //
     // les classes
     faceBox.classList.add("face-box");
     imgBox.classList.add("box_img");
@@ -29,12 +30,17 @@ class PhotographerFactory {
     boxDesc.classList.add("box_desc");
     localisation.classList.add("box_desc__localite");
     // attributs
-    anchor.setAttribute("href", `../../photographer.html`);
+    anchor.setAttribute("href", `./photographer.html`);
     img.setAttribute(
       "src",
       `../../public/assets/photographers/${this.portrait}`,
     );
     img.setAttribute("alt", `photographe ${this.name}`);
+    // accessibilité
+    article.setAttribute("role", "article");
+    h2.setAttribute("role", "heading");
+    localisation.setAttribute("role", "heading");
+    seePrice.setAttribute("aria-valuetext", `${this.price} euro par jours`);
     // le contenu du visuel
     h2.textContent = this.name;
     localisation.textContent = `${this.city}, ${this.country}`;

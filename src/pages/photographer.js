@@ -15,8 +15,18 @@ async function getPhotographerAndDatas() {
 }
 
 async function displayPhotographerAndDatas(user, work) {
-  const h1 = document.querySelector(".photographer__name");
-  // TODO
+  const photographHeader = document.querySelector(".photograph-header");
+  const photographer = new PhotographerFactory(
+    user.id,
+    user.name,
+    user.portrait,
+    user.city,
+    user.country,
+    user.price,
+    user.tagline
+  );
+  const cardPhotographer = photographer.getPhotographerDOM();
+  photographHeader.appendChild(cardPhotographer);
 }
 
 function getDatasByPhotographId(id, medias) {
@@ -29,14 +39,15 @@ function getPhotographer(id, users) {
   const datas = users.filter((user) => {
     return user.id === id;
   });
-  return datas;
+  return datas[0];
 }
 async function rendu() {
   const id = extractUrlParam();
   const { photographers, media } = await getPhotographerAndDatas();
   const datas = getDatasByPhotographId(id, media);
   const photographer = getPhotographer(id, photographers);
-  console.log(photographer);
+  console.log(photographer); // un objet
+  console.log(datas); // un tableau d'objets
   displayPhotographerAndDatas(photographer, datas);
 }
 rendu();

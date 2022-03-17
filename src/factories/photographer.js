@@ -7,7 +7,6 @@ class PhotographerFactory {
     this.country = country;
     this.price = price;
     this.tagline = tagline;
-    this.data = [];
   }
   getUserCardDOM() {
     const baseUrl = "photographer.html";
@@ -60,7 +59,21 @@ class PhotographerFactory {
 
     return article;
   }
-  setData(data) {
-    return (this.data = data);
+  getPhotographerDOM() {
+    const headerBlock = document.createElement("section");
+    headerBlock.classList.add("header__block");
+    headerBlock.innerHTML = `
+    <div class="header__block-left">  
+      <h1 class="header__block-name">${this.name}</h1>
+      <div class="header__block-desc">
+      <p class="city">${this.city}, ${this.country}</p>
+      <p class="tagline">${this.tagline}</p>
+    </div></div>
+    <div class="header__block-right">
+      <img class="photographer" src="../../public/assets/photographers/${this.portrait}">
+    </div>
+    `;
+
+    return headerBlock;
   }
 }

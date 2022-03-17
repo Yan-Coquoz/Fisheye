@@ -21,7 +21,7 @@ class PhotographerFactory {
     const localisation = document.createElement("h3");
     const desc = document.createElement("p");
     const seePrice = document.createElement("p");
-    //
+
     // les classes
     faceBox.classList.add("face-box");
     imgBox.classList.add("box_img");
@@ -29,6 +29,7 @@ class PhotographerFactory {
     seePrice.classList.add("box_desc__price");
     boxDesc.classList.add("box_desc");
     localisation.classList.add("box_desc__localite");
+
     // attributs
     anchor.setAttribute("href", `${baseUrl}?id=${this.id}`);
     img.setAttribute(
@@ -36,16 +37,24 @@ class PhotographerFactory {
       `../../public/assets/photographers/${this.portrait}`
     );
     img.setAttribute("alt", `photographe ${this.name}`);
-    // accessibilité
-    article.setAttribute("role", "article");
+
+    // + accessibilité
     h2.setAttribute("role", "heading");
+    h2.setAttribute("tabindex", "2");
+    anchor.setAttribute(
+      "aria-label",
+      `voir le travail du photographe ${this.name}`
+    );
+
     localisation.setAttribute("role", "heading");
     seePrice.setAttribute("aria-valuetext", `${this.price} euro par jours`);
-    // le contenu du visuel
+
+    // le contenu dynamique
     h2.textContent = this.name;
     localisation.textContent = `${this.city}, ${this.country}`;
     desc.textContent = this.tagline;
     seePrice.textContent = `${this.price}€/jour`;
+
     // injection dans le DOM
     article.appendChild(anchor);
     anchor.appendChild(faceBox);
@@ -64,11 +73,10 @@ class PhotographerFactory {
     headerBlock.classList.add("header__block");
     headerBlock.innerHTML = `
     <div class="header__block-left">  
-      <h1 class="header__block-name">${this.name}</h1>
-      <div class="header__block-desc">
+      <h2 class="header__block-name" >${this.name}</h2>
       <p class="city">${this.city}, ${this.country}</p>
       <p class="tagline">${this.tagline}</p>
-    </div></div>
+    </div>
     <div class="header__block-right">
       <img class="photographer" src="../../public/assets/photographers/${this.portrait}">
     </div>

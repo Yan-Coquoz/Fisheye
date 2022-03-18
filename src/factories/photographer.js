@@ -40,7 +40,7 @@ class PhotographerFactory {
 
     // + accessibilité
     h2.setAttribute("role", "heading");
-    h2.setAttribute("tabindex", "2");
+
     anchor.setAttribute(
       "aria-label",
       `voir le travail du photographe ${this.name}`
@@ -73,15 +73,15 @@ class PhotographerFactory {
     headerBlock.classList.add("header__block");
     headerBlock.innerHTML = `
     <div class="header__block-left">  
-      <h2 class="header__block-name" >${this.name}</h2>
-      <p class="city">${this.city}, ${this.country}</p>
+      <h1 class="header__block-name" >${this.name}</h1>
+      <h2 class="city">${this.city}, ${this.country}</h2>
       <p class="tagline">${this.tagline}</p>
     </div>
     <div class="header__block-right">
-      <img class="photographer" src="../../public/assets/photographers/${this.portrait}">
+      <img class="photographer" alt="" src="../../public/assets/photographers/${this.portrait}">
     </div>
     `;
-
+    // TODO l'encard pour les tarifs du photographe
     return headerBlock;
   }
 }

@@ -7,13 +7,12 @@
   <meta charset="utf-8">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-  <script src="../src/api/api.js"></script>
   <title lang="en">Fisheye</title>
 </head>
 
 <body>
   <header role="banner">
-    <a href="index.html" lang="en" aria-label="Fisheye, page d'accueil" tabindex="1">
+    <a href="index.html" lang="en" aria-label="Fisheye, page d'accueil" tabindex="0">
       <img src="assets/images/logo.png" class="logo" alt="logo Fisheye" />
     </a>
     <h1 role="heading">Nos photographes</h1>
@@ -21,8 +20,9 @@
   <main id="main" role="main">
     <div class="photographer_section"></div>
   </main>
+  <script src="../src/api/api.js"></script>
   <script src="../src/factories/photographer.js"></script>
-  <script src="../src/pages/index.js"></script>
+  <script type="module" src="../src/pages/index.js"></script>
 
 
 </body>

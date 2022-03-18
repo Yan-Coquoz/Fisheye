@@ -3,16 +3,16 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["eslint:recommended", "prettier"],
-
+  "extends": "eslint:recommended",
   "parserOptions": {
-    "ecmaVersion": "latest"
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
   "rules": {
     "indent": ["error", 2],
     "linebreak-style": ["error", "windows"],
     "quotes": ["error", "double"],
     "semi": ["error", "always"],
-    "eslint-disable": "no-undef"
+    "eslint-disable": " no-unused-vars"
   }
 }

@@ -2,6 +2,7 @@
   "name": "front-end-fisheye",
   "version": "1.0.0",
   "description": "Site web permettant aux photographes d'exposer leurs travaux",
+  "type": "module",
   "main": "index.js",
   "devDependencies": {
     "eslint": "^8.11.0",

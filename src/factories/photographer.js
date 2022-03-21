@@ -8,66 +8,30 @@ class PhotographerFactory {
     this.price = price;
     this.tagline = tagline;
   }
+
   getUserCardDOM() {
     const baseUrl = "photographer.html";
-    // création des composants
     const article = document.createElement("article");
-    const anchor = document.createElement("a");
-    const faceBox = document.createElement("div");
-    const imgBox = document.createElement("div");
-    const img = document.createElement("img");
-    const h2 = document.createElement("h2");
-    const boxDesc = document.createElement("div");
-    const localisation = document.createElement("h3");
-    const desc = document.createElement("p");
-    const seePrice = document.createElement("p");
-
-    // les classes
-    faceBox.classList.add("face-box");
-    imgBox.classList.add("box_img");
-    desc.classList.add("box_desc__desc");
-    seePrice.classList.add("box_desc__price");
-    boxDesc.classList.add("box_desc");
-    localisation.classList.add("box_desc__localite");
-
-    // attributs
-    anchor.setAttribute("href", `${baseUrl}?id=${this.id}`);
-    img.setAttribute(
-      "src",
-      `../../public/assets/photographers/${this.portrait}`
-    );
-    img.setAttribute("alt", `photographe ${this.name}`);
-
-    // + accessibilité
-    h2.setAttribute("role", "heading");
-
-    anchor.setAttribute(
-      "aria-label",
-      `voir le travail du photographe ${this.name}`
-    );
-
-    localisation.setAttribute("role", "heading");
-    seePrice.setAttribute("aria-valuetext", `${this.price} euro par jours`);
-
-    // le contenu dynamique
-    h2.textContent = this.name;
-    localisation.textContent = `${this.city}, ${this.country}`;
-    desc.textContent = this.tagline;
-    seePrice.textContent = `${this.price}€/jour`;
-
-    // injection dans le DOM
-    article.appendChild(anchor);
-    anchor.appendChild(faceBox);
-    faceBox.appendChild(imgBox);
-    imgBox.appendChild(img);
-    faceBox.appendChild(h2);
-    boxDesc.appendChild(localisation);
-    boxDesc.appendChild(desc);
-    boxDesc.appendChild(seePrice);
-    article.appendChild(boxDesc);
+    article.classList.add("article");
+    article.innerHTML = `
+    <a href="${baseUrl}?id=${this.id}" aria-label="voir le travail du photographe ${this.name}">
+    <div class="face-box">
+      <div class="box_img">
+        <img src="../../public/assets/photographers/${this.portrait}" alt="photographe ${this.name}">
+      </div>
+      <h2 role="heading">${this.name}</h2>
+    </div>
+    </a>
+    <div class="box_desc">
+      <h3 class="box_desc__localite" ">${this.city}, ${this.country}</h3>
+      <p class="box_desc__desc">${this.tagline}</p>
+      <p class="box_desc__price">${this.price}€/jour</p>
+    </div>
+    `;
 
     return article;
   }
+
   getPhotographerDOM() {
     const headerBlock = document.createElement("section");
     headerBlock.classList.add("header__block");
@@ -81,7 +45,8 @@ class PhotographerFactory {
       <img class="photographer" alt="" src="../../public/assets/photographers/${this.portrait}">
     </div>
     `;
-    // TODO l'encard pour les tarifs du photographe
+
     return headerBlock;
   }
 }
+export { PhotographerFactory };

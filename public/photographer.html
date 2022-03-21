@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-  <script src="../src/api/api.js"></script>
+
   <title>Fisheye - photographe | formulaire</title>
 </head>
 
@@ -18,16 +18,19 @@
     </a>
   </header>
   <main id="main">
-
     <div class="photograph-header">
       <div class="box__btn">
         <button class="contact_button" tabindex="0" onclick="displayModal()"
           aria-label="Formulaire de contact">Contactez-moi</button>
       </div>
-
     </div>
+    <!-- media -->
 
   </main>
+  <!-- modale Lightbox -->
+  <div id="lightbox"></div>
+
+  <!-- modale formulaire -->
   <div id="contact_modal">
     <div class="modal">
       <header>
@@ -43,11 +46,7 @@
       </form>
     </div>
   </div>
-  <script src="../src/pages/photographer.js"></script>
-  <script src="../src/factories/photographer.js"></script>
-
-
-  <script src="../src/utils/contactForm.js"></script>
+  <script type="module" src="../src/pages/photographer.js"></script>
 
 </body>
 

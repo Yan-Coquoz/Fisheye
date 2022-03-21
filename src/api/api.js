@@ -6,7 +6,7 @@ class Api {
     return fetch(this.url)
       .then((res) => res.json())
       .then((res) => {
-        console.log("res : ", res);
+        console.log("Api / response : ", res);
         return res;
       })
       .catch((err) => {
@@ -15,6 +15,4 @@ class Api {
   }
 }
 
-// async function callApi() {
-//   return await fetch("../../data/photographers.json");
-// }
+export { Api };

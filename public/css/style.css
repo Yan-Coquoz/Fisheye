@@ -34,7 +34,9 @@ a {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 70px;
   margin-top: 100px;
+
   margin-bottom: 3rem;
+
 }
 
 .photographer_section article {
@@ -47,13 +49,15 @@ a {
 
 .photographer_section article h2 {
   color: #d3573c;
+
   font-size: 2.25rem;
 }
 
 .photographer_section article img {
+  height: 200px;  
   object-fit: cover;
-  height: 200px;
   width: 200px;
+  font-size: 36px;
   border-radius: 50%;
 }
 .face-box {
@@ -75,11 +79,15 @@ a {
 }
 .box_desc__localite {
   color: #901c1c;
+
   font-size: 1.2rem;
+
   margin: 0;
 }
 .box_desc__price {
   color: #757575;
+
   font-size: 1rem;
+
   margin: 0;
 }

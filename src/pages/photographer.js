@@ -1,3 +1,4 @@
+
 import { Api } from "../api/api.js";
 import { PhotographerFactory } from "../factories/photographer.js";
 
@@ -53,3 +54,4 @@ class Photographer {
 }
 const user = new Photographer();
 user.rendu();
+

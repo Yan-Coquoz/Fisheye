@@ -1,3 +1,4 @@
+
 class PhotographerFactory {
   constructor(id, name, portrait, city, country, price, tagline) {
     this.id = id;
@@ -29,8 +30,10 @@ class PhotographerFactory {
     </div>
     `;
 
+
     return article;
   }
+
 
   getPhotographerDOM() {
     const headerBlock = document.createElement("section");
@@ -50,3 +53,4 @@ class PhotographerFactory {
   }
 }
 export { PhotographerFactory };
+

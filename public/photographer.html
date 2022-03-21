@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="fr">
+
 
 <head>
   <link href="./css/normalize.css" rel="stylesheet" type="text/css" />
@@ -7,42 +9,50 @@
   <meta charset="utf-8">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-  <script src="/src/api/api.js"></script>
+
+
+
   <title>Fisheye - photographe | formulaire</title>
 </head>
 
 <body>
   <header role="banner">
-    <a href="index.html" aria-label="Fisheye">
+
+    <a href="index.html" aria-label="Fisheye, retour à la page d'accueil">
       <img src="assets/images/logo.png" class="logo" alt="logo Fisheye" />
     </a>
   </header>
-
   <main id="main">
     <div class="photograph-header">
-      <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      <div class="box__btn">
+        <button class="contact_button" tabindex="0" onclick="displayModal()"
+          aria-label="Formulaire de contact">Contactez-moi</button>
+      </div>
     </div>
+    <!-- media -->
+
   </main>
-  <!-- Modale -->
+  <!-- modale Lightbox -->
+  <div id="lightbox"></div>
+
+  <!-- modale formulaire -->
   <div id="contact_modal">
     <div class="modal">
       <header>
-        <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" />
+        <h2 tabindex="1" aria-label="formualaire de contact">Contactez-moi</h2>
+        <img src="assets/icons/close.svg" onclick="closeModal()" aria-label="Fermer le formulaire" tabindex="2" />
       </header>
       <form>
         <div>
-          <label>Prénom</label>
-          <input />
+          <label for="prenom">Prénom</label>
+          <input id="prenom" name="prenom" />
         </div>
-        <button class="contact_button">Envoyer</button>
+        <button class="contact_button" aria-label="Envoyer le formulaire">Envoyer</button>
       </form>
     </div>
   </div>
-  <script src="/src/utils/contactForm.js"></script>
-  <script src="/src/pages/photographer.js"></script>
-  <script src="/src/pages/index.js"></script>
-  <script src="/src/factories/photographer.js"></script>
+  <script type="module" src="../src/pages/photographer.js"></script>
+
 
 </body>
 

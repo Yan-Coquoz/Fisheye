@@ -1,3 +1,126 @@
+
+.photograph-header {
+  background-color: #fafafa;
+  height: 300px;
+  margin: 0 100px;
+  position: relative;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: center;
+}
+.header__block {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__block-left {
+  align-self: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.header__block-name {
+  color: #d3573c;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+.box__btn {
+  position: absolute;
+  align-self: center;
+}
+.city {
+  color: #901c1c;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.tagline {
+  color: #525252;
+  font-size: 1.2rem;
+}
+.contact_button {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 70px;
+  border: none;
+  background-color: #901c1c;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.header__block-right img {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+#contact_modal {
+  display: none;
+  background-color: #c4c4c466;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.modal {
+  border-radius: 5px;
+  background-color: #db8876;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 35px;
+  margin: 4rem auto;
+  box-shadow: 0 4px 14px 1px #312e2e;
+}
+
+.modal header {
+  justify-content: space-between;
+  width: 100%;
+}
+
+.modal header img {
+  cursor: pointer;
+}
+
+.modal header h2 {
+  font-size: 64px;
+  font-weight: normal;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+form label {
+  color: #312e2e;
+  font-size: 36px;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: self-start;
+  margin-bottom: 26px;
+}
+
+form input {
+  width: 100%;
+  height: 68px;
+  border: none;
+  border-radius: 5px;
+}
+=======
 #contact_modal {
     display: none;
 }
@@ -74,3 +197,4 @@ form input {
     border: none;
     border-radius: 5px;
 }
+

@@ -1,5 +1,4 @@
 {
-
   "arrowParens": "always",
   "bracketSameLine": false,
   "bracketSpacing": true,
@@ -17,5 +16,4 @@
   "trailingComma": "es5",
   "useTabs": false,
   "vueIndentScriptAndStyle": false
-
 }

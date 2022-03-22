@@ -1,6 +1,5 @@
-
 class PhotographerFactory {
-  constructor(id, name, portrait, city, country, price, tagline) {
+  constructor(id, name, portrait, city, country, price, tagline,datas) {
     this.id = id;
     this.name = name;
     this.portrait = portrait;
@@ -8,13 +7,14 @@ class PhotographerFactory {
     this.country = country;
     this.price = price;
     this.tagline = tagline;
+    this.datas = datas
   }
 
   getUserCardDOM() {
     const baseUrl = "photographer.html";
     const article = document.createElement("article");
     article.classList.add("article");
-    article.innerHTML = `
+    const cardPhotographer = `
     <a href="${baseUrl}?id=${this.id}" aria-label="voir le travail du photographe ${this.name}">
     <div class="face-box">
       <div class="box_img">
@@ -29,15 +29,15 @@ class PhotographerFactory {
       <p class="box_desc__price">${this.price}€/jour</p>
     </div>
     `;
-
+    article.innerHTML = cardPhotographer
 
     return article;
   }
 
-
   getPhotographerDOM() {
     const headerBlock = document.createElement("section");
     headerBlock.classList.add("header__block");
+    
     headerBlock.innerHTML = `
     <div class="header__block-left">  
       <h1 class="header__block-name" >${this.name}</h1>
@@ -46,7 +46,8 @@ class PhotographerFactory {
     </div>
     <div class="header__block-right">
       <img class="photographer" alt="" src="../../public/assets/photographers/${this.portrait}">
-    </div>
+    </div> 
+    <div class="like-price"><span>❤</span><span>${this.price}€ / jour</span></div>
     `;
 
     return headerBlock;

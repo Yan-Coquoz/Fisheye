@@ -26,10 +26,6 @@
 
   "homepage": "https://github.com/Yan-Coquoz/Front-End-Fisheye#readme"
 
-  
-  "devDependencies": {
-    "eslint": "^8.11.0",
-    "prettier": "2.6.0"
-  }
+ 
 
 }

@@ -49,16 +49,15 @@ a {
 
 .photographer_section article h2 {
   color: #d3573c;
-
   font-size: 2.25rem;
 }
 
 .photographer_section article img {
+  border-radius: 50%;
+  font-size: 36px;
   height: 200px;  
   object-fit: cover;
   width: 200px;
-  font-size: 36px;
-  border-radius: 50%;
 }
 .face-box {
   display: flex;
@@ -79,15 +78,14 @@ a {
 }
 .box_desc__localite {
   color: #901c1c;
-
   font-size: 1.2rem;
-
   margin: 0;
+}
+.box_desc__desc {
+font-size: .7rem;
 }
 .box_desc__price {
   color: #757575;
-
-  font-size: 1rem;
-
+  font-size: .7rem;
   margin: 0;
 }

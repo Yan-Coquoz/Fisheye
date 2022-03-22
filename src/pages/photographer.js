@@ -32,17 +32,26 @@ class Photographer {
     photographHeader.appendChild(cardPhotographer);
   }
 
+  async displayForm() {
+    const photogHeader = document.querySelector(".photograph-header");
+    const div = document.createElement("div");
+    div.className.add("form_content");
+    // TODO injecter le formulaire
+    return photogHeader.after(div);
+  }
   async displayMedia(datas) {
     const photographHeader = document.querySelector(".photograph-header");
-    console.log(datas);
-
+    const section = document.createElement("section");
+    section.classList.add("media_content");
+    photographHeader.after(section);
+    // instanciation des medias
     const cardMedia = datas.map((data) => {
       const values = new MediaFactory(data);
-
       return values.getMediaDom();
     });
+    // rendu des medias
     cardMedia.forEach((card) => {
-      return photographHeader.after(card);
+      return section.appendChild(card);
     });
   }
 
@@ -66,6 +75,7 @@ class Photographer {
     const datas = await this.getDatasByPhotographId(this.id, media);
     const photographer = await this.getPhotographer(this.id, photographers);
     this.displayPhotographer(photographer);
+    this.displayForm();
     this.displayMedia(datas);
   }
 }

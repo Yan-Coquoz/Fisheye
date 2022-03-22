@@ -29,16 +29,15 @@ class MediaFactory {
     return this._image ? this._image : this._video;
   }
   getFormDom() {
-    const formBloc = document.createElement("div");
+    const formBloc = document.createElement("form");
     const formulaire = `
-        <form>
+        
             <label for="trie">Trier par </label>
             <select name="choice" id="trie">
                 <option value="popularite">Popularité</option>
                 <option value="date">Date</option>
                 <option value="titre">Titre</option>
             </select>
-        </form>
     
     `;
     formBloc.classList.add("from-block");
@@ -47,7 +46,7 @@ class MediaFactory {
   }
 
   getMediaDom() {
-    const mediaBox = document.createElement("section");
+    const mediaBox = document.createElement("article");
     const media = this.isImgOrVid(this.TypeMedia);
     mediaBox.classList.add("media-box");
     mediaBox.innerHTML = `
@@ -59,12 +58,13 @@ class MediaFactory {
     return mediaBox;
   }
   isImgOrVid(element) {
+    // TODO ajouter l'accessibilité
     const assets = "../../public/assets/images/";
     // console.log("-- __", element);
     if (element.includes(".jpg")) {
       return `<div class="card_media--img"><img src=${assets}${element} alt="${element}"}></div>`;
     } else if (element.includes(".mp4")) {
-      return `<video width="350" controls>
+      return `<video  controls class="card_media--vid">
       <source src="${assets}${element}" type="video/mp4">
       </video>`;
     }

@@ -75,10 +75,35 @@
   gap: 50px;
 }
 /* liste des medias*/
+.media_content {
+  margin-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 95px;
+}
+.media-box {
+  margin: 0;
+  padding: 0;
+}
 .card_media--img img {
+  border-radius: 5px;
   width: 350px;
   height: 300px;
   object-fit: cover;
+}
+.card_media--vid {
+  border-radius: 5px;
+  width: 350px;
+  height: 300px;
+  object-fit: cover;
+}
+.card_media--title {
+  color: #901c1c;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  font-weight: 400;
 }
 
 /* Modale */

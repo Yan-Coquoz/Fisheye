@@ -7,8 +7,8 @@ class MediaFactory {
     this.likes = media.likes;
     this.price = media.price;
     this.title = media.title;
-    this._image = media.image;
-    this._video = media.video;
+    this.image = media.image;
+    this.video = media.video;
   }
   getId() {
     return this.id;
@@ -26,33 +26,41 @@ class MediaFactory {
     return this.title;
   }
   get TypeMedia() {
-    return this._image ? this._image : this._video;
+    return this.image ? this.image : this.video;
   }
-  getFormDom() {
+  getFormMediaDom() {
     const formBloc = document.createElement("form");
     const formulaire = `
-        
-            <label for="trie">Trier par </label>
-            <select name="choice" id="trie">
-                <option value="popularite">Popularité</option>
-                <option value="date">Date</option>
-                <option value="titre">Titre</option>
-            </select>
-    
+      <label for="trie" class="form-label">Trier par </label>
+        <select class="form-select" name="choice" id="trie">
+          <option value="" selected disabled hidden >-- Trier par --</option>
+
+          <option class="form-options" value="popularite">Popularité</option>
+          
+          <option class="form-options" value="date">Date</option>
+          
+          <option class="form-options" value="titre">Titre</option>
+          
+        </select> 
     `;
-    formBloc.classList.add("from-block");
+    formBloc.classList.add("form-block");
     formBloc.innerHTML = formulaire;
     return formBloc;
   }
 
-  getMediaDom() {
+  getCardMediaDom() {
     const mediaBox = document.createElement("article");
     const media = this.isImgOrVid(this.TypeMedia);
     mediaBox.classList.add("media-box");
+    // TODO ouverture de la lightbox
+
+    // icone => jonglé avec fas(plein) et far(creux)
     mediaBox.innerHTML = `
-    <figure class="card_media"> 
+    <figure class="card_media >
+        <a href="#lightbox" onclick="displayLightbox(${this.id})"> 
           ${media}
-        <p class="card_media--title">${this.title} <span>${this.likes} ❤</span></p>
+        </a>
+        <p class="card_media--title">${this.title} <span>${this.likes} <i class="fas fa-heart"></i></span></p>
     </figure>
      `;
     return mediaBox;
@@ -62,7 +70,9 @@ class MediaFactory {
     const assets = "../../public/assets/images/";
     // console.log("-- __", element);
     if (element.includes(".jpg")) {
-      return `<div class="card_media--img"><img src=${assets}${element} alt="${element}"}></div>`;
+      return `<div class="card_media--img">
+      <img src=${assets}${element} alt="photo">
+      </div>`;
     } else if (element.includes(".mp4")) {
       return `<video  controls class="card_media--vid">
       <source src="${assets}${element}" type="video/mp4">

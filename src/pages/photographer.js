@@ -32,27 +32,64 @@ class Photographer {
     photographHeader.appendChild(cardPhotographer);
   }
 
-  async displayForm() {
-    const photogHeader = document.querySelector(".photograph-header");
-    const div = document.createElement("div");
-    div.className.add("form_content");
-    // TODO injecter le formulaire
-    return photogHeader.after(div);
-  }
   async displayMedia(datas) {
+    // TODO injecter les données selon le tri du formulaire
     const photographHeader = document.querySelector(".photograph-header");
     const section = document.createElement("section");
     section.classList.add("media_content");
     photographHeader.after(section);
+    let formulaire;
     // instanciation des medias
     const cardMedia = datas.map((data) => {
       const values = new MediaFactory(data);
-      return values.getMediaDom();
+      formulaire = new MediaFactory(data);
+
+      return values.getCardMediaDom();
+    });
+    const formaData = formulaire.getFormMediaDom();
+
+    // je recupere le select du form
+    const elementTri = formaData.querySelector(".form-select");
+
+    // je capte la valeur de retour du formulaire
+    elementTri.addEventListener("input", (evt) => {
+      const value = evt.target.value;
+      if (value === "popularite") {
+        this.getDataByPop(datas);
+      } else if (value === "date") {
+        this.getDataByDate(datas);
+      } else if (value === "titre") {
+        this.getDataByTitle(datas);
+      } else {
+        throw "OOPS !";
+      }
     });
     // rendu des medias
     cardMedia.forEach((card) => {
       return section.appendChild(card);
     });
+
+    // ajoute un noeud à une position précise
+    return section.insertAdjacentElement("afterbegin", formaData);
+  }
+
+  getDataByPop(datas) {
+    const likes = datas.map((e, p) => {
+      if (e.likes > datas[p + 1].likes) {
+        console.log(e);
+        return e;
+      }
+    });
+
+    console.log(likes);
+  }
+
+  getDataByTitle(datas) {
+    console.log(datas);
+  }
+
+  getDataByDate(datas) {
+    console.log(datas);
   }
 
   getDatasByPhotographId(id, medias) {
@@ -75,7 +112,6 @@ class Photographer {
     const datas = await this.getDatasByPhotographId(this.id, media);
     const photographer = await this.getPhotographer(this.id, photographers);
     this.displayPhotographer(photographer);
-    this.displayForm();
     this.displayMedia(datas);
   }
 }

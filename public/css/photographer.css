@@ -74,17 +74,54 @@
   align-items: center;
   gap: 50px;
 }
-/* liste des medias*/
+/* conteneur des medias & formulaire */
 .media_content {
-  margin-top: 100px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 95px;
+  flex-direction: row;
+  gap: 55px;
+  margin: 6.2rem 0 2rem 0;
+  padding: 0 3rem;
 }
-.media-box {
+/* formulaire */
+.form-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.form-label {
+  font-weight: 700;
+  font-size: 18px;
+  display: block;
+}
+.form-select {
+  display: block;
+  background: #901c1c;
+  color: #fff;
+  border: none;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-left: 2rem;
+  outline: none;
+  /* appearance: none; */
+}
+
+option.form-options {
+  position: relative;
+  min-height: 2rem;
+  text-decoration: underline;
+  border: 5px solid #fff;
+  padding: 1rem 1rem;
+}
+
+/* box des medias */
+article.media-box {
   margin: 0;
   padding: 0;
+}
+figure {
+  margin: 0;
 }
 .card_media--img img {
   border-radius: 5px;
@@ -102,8 +139,14 @@
   color: #901c1c;
   display: flex;
   justify-content: space-between;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 400;
+  width: 350px;
+}
+.card_media--title > span {
+  width: 5rem;
+  display: inline-block;
+  text-align: center;
 }
 
 /* Modale */

@@ -1,5 +1,5 @@
 class PhotographerFactory {
-  constructor(id, name, portrait, city, country, price, tagline,datas) {
+  constructor(id, name, portrait, city, country, price, tagline, datas) {
     this.id = id;
     this.name = name;
     this.portrait = portrait;
@@ -7,7 +7,7 @@ class PhotographerFactory {
     this.country = country;
     this.price = price;
     this.tagline = tagline;
-    this.datas = datas
+    this.datas = datas;
   }
 
   getUserCardDOM() {
@@ -16,12 +16,12 @@ class PhotographerFactory {
     article.classList.add("article");
     const cardPhotographer = `
     <a href="${baseUrl}?id=${this.id}" aria-label="voir le travail du photographe ${this.name}">
-    <div class="face-box">
-      <div class="box_img">
-        <img src="../../public/assets/photographers/${this.portrait}" alt="photographe ${this.name}">
+      <div class="face-box">
+        <div class="box_img">
+          <img src="../../public/assets/photographers/${this.portrait}" alt="photographe ${this.name}">
+        </div>
+        <h2 role="heading">${this.name}</h2>
       </div>
-      <h2 role="heading">${this.name}</h2>
-    </div>
     </a>
     <div class="box_desc">
       <h3 class="box_desc__localite" ">${this.city}, ${this.country}</h3>
@@ -29,7 +29,7 @@ class PhotographerFactory {
       <p class="box_desc__price">${this.price}€/jour</p>
     </div>
     `;
-    article.innerHTML = cardPhotographer
+    article.innerHTML = cardPhotographer;
 
     return article;
   }
@@ -37,7 +37,7 @@ class PhotographerFactory {
   getPhotographerDOM() {
     const headerBlock = document.createElement("section");
     headerBlock.classList.add("header__block");
-    
+    // TODO ajouter le nombre de likes
     headerBlock.innerHTML = `
     <div class="header__block-left">  
       <h1 class="header__block-name" >${this.name}</h1>
@@ -47,11 +47,10 @@ class PhotographerFactory {
     <div class="header__block-right">
       <img class="photographer" alt="" src="../../public/assets/photographers/${this.portrait}">
     </div> 
-    <div class="like-price"><span>❤</span><span>${this.price}€ / jour</span></div>
+    <div class="like-price"><span>pleins de ❤</span><span>${this.price}€ / jour</span></div>
     `;
 
     return headerBlock;
   }
 }
 export { PhotographerFactory };
-

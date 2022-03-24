@@ -71,7 +71,7 @@ class MediaFactory {
     // console.log("-- __", element);
     if (element.includes(".jpg")) {
       return `<div class="card_media--img">
-      <img src=${assets}${element} alt="photo">
+      <img src=${assets}${element} alt="photo faite le ${this.date}">
       </div>`;
     } else if (element.includes(".mp4")) {
       return `<video  controls class="card_media--vid">

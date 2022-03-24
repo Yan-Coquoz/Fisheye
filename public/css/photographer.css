@@ -76,15 +76,10 @@
 }
 /* conteneur des medias & formulaire */
 .media_content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  flex-direction: row;
-  gap: 55px;
   margin: 6.2rem 0 2rem 0;
   padding: 0 3rem;
 }
-/* formulaire */
+/* formulaire de tri */
 .form-block {
   display: flex;
   flex-direction: row;
@@ -104,7 +99,6 @@
   border-radius: 5px;
   margin-left: 2rem;
   outline: none;
-  /* appearance: none; */
 }
 
 option.form-options {
@@ -116,6 +110,14 @@ option.form-options {
 }
 
 /* box des medias */
+.media-container {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 55px;
+}
 article.media-box {
   margin: 0;
   padding: 0;

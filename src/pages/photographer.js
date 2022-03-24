@@ -6,6 +6,8 @@ class Photographer {
   constructor() {
     this.photographers = new Api("../../data/photographers.json");
     this.id = this.extractUrlParam();
+    this.divMediaBlock = document.createElement("div");
+    this.section = document.createElement("section");
   }
 
   extractUrlParam() {
@@ -34,16 +36,18 @@ class Photographer {
 
   async displayMedia(datas) {
     // TODO injecter les données selon le tri du formulaire
+    let formulaire, cardMedia;
     const photographHeader = document.querySelector(".photograph-header");
-    const section = document.createElement("section");
-    section.classList.add("media_content");
-    photographHeader.after(section);
-    let formulaire, newDatas;
+
+    this.section.classList.add("media_content");
+    this.divMediaBlock.classList.add("media-container");
+    this.section.appendChild(this.divMediaBlock);
+
+    photographHeader.after(this.section);
     // instanciation des medias
-    const cardMedia = datas.map((data) => {
+    cardMedia = datas.map((data) => {
       const values = new MediaFactory(data);
       formulaire = new MediaFactory(data);
-
       return values.getCardMediaDom();
     });
     const formaData = formulaire.getFormMediaDom();
@@ -56,34 +60,51 @@ class Photographer {
     elementTri.addEventListener("input", (evt) => {
       const value = evt.target.value;
       if (value === "popularite") {
-        newDatas = this.getDataByPop(datas);
-        console.log(newDatas);
-        return newDatas;
+        // retourne un tableau trier par popularité
+        cardMedia = this.getDataByPop(datas);
+        // on créé une nouvelle instance
+        const cardMediaByPop = cardMedia.map((data) => {
+          return new MediaFactory(data);
+        });
+        return this.getRenderMedia(cardMediaByPop);
       } else if (value === "date") {
-        newDatas = this.getDataByDate(datas);
-        console.log(newDatas);
-        return newDatas;
+        console.log("-- datas -- ", datas);
+        cardMedia = this.getDataByDate(datas);
+        const cardMediaByDate = cardMedia.map((data) => {
+          return new MediaFactory(data);
+        });
+        return this.getRenderMedia(cardMediaByDate);
       } else if (value === "titre") {
-        newDatas = this.getDataByTitle(datas);
-        console.log(newDatas);
-        return newDatas;
-      } else {
-        throw "OOPS !";
+        cardMedia = this.getDataByTitle(datas);
+        console.table(cardMedia);
+        const cardMediaByTitle = cardMedia.map((data) => {
+          return new MediaFactory(data);
+        });
+        return this.getRenderMedia(cardMediaByTitle);
       }
     });
 
     // rendu des medias
     cardMedia.forEach((card) => {
-      return section.appendChild(card);
+      return this.divMediaBlock.appendChild(card);
     });
 
     // ajoute un noeud à une position précise
-    return section.insertAdjacentElement("afterbegin", formaData);
+    return this.section.insertAdjacentElement("afterbegin", formaData);
+  }
+  // nouveau rendu après le tri
+  getRenderMedia(mediaOrderedBy) {
+    this.divMediaBlock.innerHTML = "";
+    return mediaOrderedBy.forEach((card) => {
+      return this.divMediaBlock.appendChild(card.getCardMediaDom());
+    });
   }
 
   getDataByPop(datas) {
     return datas.sort((a, b) => {
-      return a.likes - b.likes;
+      // 'b'(par sa position) sera la reference et sera comparé à 'a', qui sera l'élément suivant
+      // b > a
+      return b.likes - a.likes;
     });
   }
 
@@ -94,7 +115,14 @@ class Photographer {
   }
 
   getDataByDate(datas) {
-    console.log(datas);
+    const date = datas.slice().sort((a, b) => {
+      // a < b
+      const valueA = new Date(a.date);
+      const valueB = new Date(b.date);
+      return valueB - valueA;
+    });
+    console.table(date);
+    return date;
   }
 
   getDatasByPhotographId(id, medias) {

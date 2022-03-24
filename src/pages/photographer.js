@@ -35,7 +35,6 @@ class Photographer {
   }
 
   async displayMedia(datas) {
-    // TODO injecter les données selon le tri du formulaire
     let formulaire, cardMedia;
     const photographHeader = document.querySelector(".photograph-header");
 
@@ -68,7 +67,6 @@ class Photographer {
         });
         return this.getRenderMedia(cardMediaByPop);
       } else if (value === "date") {
-        console.log("-- datas -- ", datas);
         cardMedia = this.getDataByDate(datas);
         const cardMediaByDate = cardMedia.map((data) => {
           return new MediaFactory(data);
@@ -76,7 +74,7 @@ class Photographer {
         return this.getRenderMedia(cardMediaByDate);
       } else if (value === "titre") {
         cardMedia = this.getDataByTitle(datas);
-        console.table(cardMedia);
+
         const cardMediaByTitle = cardMedia.map((data) => {
           return new MediaFactory(data);
         });
@@ -121,22 +119,30 @@ class Photographer {
       const valueB = new Date(b.date);
       return valueB - valueA;
     });
-    console.table(date);
     return date;
   }
+  // touts les likes d'un photographe
+  getAllLike(datas) {
+    let initValue = 0;
+    const likes = datas.reduce((previous, current) => {
+      return previous + current.likes;
+    }, initValue);
+    console.log(likes);
+    localStorage.setItem("likes", likes);
+  }
 
+  // réccup les medias d'1 photographe
   getDatasByPhotographId(id, medias) {
     const datas = medias.filter((media) => {
       return media.photographerId === id;
     });
     return datas;
   }
-
+  // réccup 1 photographe
   getPhotographer(id, users) {
     const datas = users.filter((user) => {
       return user.id === id;
     });
-    // console.log(datas);
     return datas[0];
   }
 
@@ -144,6 +150,7 @@ class Photographer {
     const { photographers, media } = await this.photographers.getData();
     const datas = await this.getDatasByPhotographId(this.id, media);
     const photographer = await this.getPhotographer(this.id, photographers);
+    this.getAllLike(datas);
     this.displayPhotographer(photographer);
     this.displayMedia(datas);
   }

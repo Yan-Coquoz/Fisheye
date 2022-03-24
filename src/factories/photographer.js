@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 class PhotographerFactory {
   constructor(id, name, portrait, city, country, price, tagline, datas) {
     this.id = id;
@@ -37,7 +38,7 @@ class PhotographerFactory {
   getPhotographerDOM() {
     const headerBlock = document.createElement("section");
     headerBlock.classList.add("header__block");
-    // TODO ajouter le nombre de likes
+
     headerBlock.innerHTML = `
     <div class="header__block-left">  
       <h1 class="header__block-name" >${this.name}</h1>
@@ -45,9 +46,13 @@ class PhotographerFactory {
       <p class="tagline">${this.tagline}</p>
     </div>
     <div class="header__block-right">
-      <img class="photographer" alt="" src="../../public/assets/photographers/${this.portrait}">
+      <img class="photographer" alt="" src="../../public/assets/photographers/${
+        this.portrait
+      }"> 
     </div> 
-    <div class="like-price"><span>pleins de ❤</span><span>${this.price}€ / jour</span></div>
+    <div class="like-price"><span>${localStorage.getItem(
+      "likes"
+    )} ❤</span><span>${this.price}€ / jour</span></div>
     `;
 
     return headerBlock;

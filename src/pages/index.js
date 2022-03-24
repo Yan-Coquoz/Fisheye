@@ -1,4 +1,3 @@
-
 import { Api } from "../api/api.js";
 import { PhotographerFactory } from "../factories/photographer.js";
 
@@ -31,4 +30,3 @@ class App {
 
 const app = new App();
 app.init();
-

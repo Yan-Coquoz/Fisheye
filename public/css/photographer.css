@@ -52,6 +52,11 @@
   border-radius: 5px;
   cursor: pointer;
 }
+.contact_button:hover,
+.contact_button:focus {
+  color: #312e2e;
+  background: #d3573c;
+}
 .header__block-right img {
   object-fit: cover;
   height: 200px;

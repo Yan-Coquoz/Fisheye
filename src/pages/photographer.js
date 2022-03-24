@@ -38,7 +38,7 @@ class Photographer {
     const section = document.createElement("section");
     section.classList.add("media_content");
     photographHeader.after(section);
-    let formulaire;
+    let formulaire, newDatas;
     // instanciation des medias
     const cardMedia = datas.map((data) => {
       const values = new MediaFactory(data);
@@ -52,18 +52,26 @@ class Photographer {
     const elementTri = formaData.querySelector(".form-select");
 
     // je capte la valeur de retour du formulaire
+
     elementTri.addEventListener("input", (evt) => {
       const value = evt.target.value;
       if (value === "popularite") {
-        this.getDataByPop(datas);
+        newDatas = this.getDataByPop(datas);
+        console.log(newDatas);
+        return newDatas;
       } else if (value === "date") {
-        this.getDataByDate(datas);
+        newDatas = this.getDataByDate(datas);
+        console.log(newDatas);
+        return newDatas;
       } else if (value === "titre") {
-        this.getDataByTitle(datas);
+        newDatas = this.getDataByTitle(datas);
+        console.log(newDatas);
+        return newDatas;
       } else {
         throw "OOPS !";
       }
     });
+
     // rendu des medias
     cardMedia.forEach((card) => {
       return section.appendChild(card);
@@ -74,18 +82,15 @@ class Photographer {
   }
 
   getDataByPop(datas) {
-    const likes = datas.map((e, p) => {
-      if (e.likes > datas[p + 1].likes) {
-        console.log(e);
-        return e;
-      }
+    return datas.sort((a, b) => {
+      return a.likes - b.likes;
     });
-
-    console.log(likes);
   }
 
   getDataByTitle(datas) {
-    console.log(datas);
+    return datas.sort((a, b) => {
+      return a.title.localeCompare(b.title);
+    });
   }
 
   getDataByDate(datas) {

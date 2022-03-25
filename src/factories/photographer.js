@@ -12,7 +12,7 @@ class PhotographerFactory {
   }
 
   getUserCardDOM() {
-    const baseUrl = "photographer.html";
+    const baseUrl = "../../public/photographer.html";
     const article = document.createElement("article");
     article.classList.add("article");
     const cardPhotographer = `
@@ -38,7 +38,6 @@ class PhotographerFactory {
   getPhotographerDOM() {
     const headerBlock = document.createElement("section");
     headerBlock.classList.add("header__block");
-
     headerBlock.innerHTML = `
     <div class="header__block-left">  
       <h1 class="header__block-name" >${this.name}</h1>

@@ -37,9 +37,9 @@ class Photographer {
   async displayMedia(datas) {
     let formulaire, cardMedia;
     const photographHeader = document.querySelector(".photograph-header");
-
     this.section.classList.add("media_content");
     this.divMediaBlock.classList.add("media-container");
+    this.divMediaBlock.id = "media-container";
     this.section.appendChild(this.divMediaBlock);
 
     photographHeader.after(this.section);
@@ -57,6 +57,7 @@ class Photographer {
     // je capte la valeur de retour du formulaire
 
     elementTri.addEventListener("input", (evt) => {
+      // TODO switch
       const value = evt.target.value;
       if (value === "popularite") {
         // retourne un tableau trier par popularité
@@ -90,6 +91,9 @@ class Photographer {
     // ajoute un noeud à une position précise
     return this.section.insertAdjacentElement("afterbegin", formaData);
   }
+  displayLightbox(data) {
+    console.log(localStorage.getItem("id"));
+  }
   // nouveau rendu après le tri
   getRenderMedia(mediaOrderedBy) {
     this.divMediaBlock.innerHTML = "";
@@ -121,13 +125,12 @@ class Photographer {
     });
     return date;
   }
-  // touts les likes d'un photographe
+  // toutes les likes d'un photographe
   getAllLike(datas) {
     let initValue = 0;
     const likes = datas.reduce((previous, current) => {
       return previous + current.likes;
     }, initValue);
-    console.log(likes);
     localStorage.setItem("likes", likes);
   }
 
@@ -147,10 +150,12 @@ class Photographer {
   }
 
   async rendu() {
+    // reccup les donnée de l'api
     const { photographers, media } = await this.photographers.getData();
     const datas = await this.getDatasByPhotographId(this.id, media);
     const photographer = await this.getPhotographer(this.id, photographers);
     this.getAllLike(datas);
+    this.displayLightbox(datas);
     this.displayPhotographer(photographer);
     this.displayMedia(datas);
   }

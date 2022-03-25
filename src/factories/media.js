@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 // Factory pour les medias
 // gerer les cas ou c'est une image ou une video
 class MediaFactory {
@@ -10,21 +11,7 @@ class MediaFactory {
     this.image = media.image;
     this.video = media.video;
   }
-  getId() {
-    return this.id;
-  }
-  getDate() {
-    return this.date;
-  }
-  getLikes() {
-    return this.likes;
-  }
-  getPrice() {
-    return this.price;
-  }
-  getTitle() {
-    return this.title;
-  }
+
   get TypeMedia() {
     return this.image ? this.image : this.video;
   }
@@ -44,6 +31,7 @@ class MediaFactory {
         </select> 
     `;
     formBloc.classList.add("form-block");
+    formBloc.setAttribute("aria-labelledby", "media-container");
     formBloc.innerHTML = formulaire;
     return formBloc;
   }
@@ -52,29 +40,27 @@ class MediaFactory {
     const mediaBox = document.createElement("article");
     const media = this.isImgOrVid(this.TypeMedia);
     mediaBox.classList.add("media-box");
-    // TODO ouverture de la lightbox
-
-    // icone => jonglé avec fas(plein) et far(creux)
     mediaBox.innerHTML = `
-    <figure class="card_media >
-        <a href="#lightbox" onclick="displayLightbox(${this.id})"> 
+    <figure class="card_media" aria-label="media ${this.title}" onclick="openLBModal(${this.id})" >
+     <div aria-label="agrandir le media" > 
           ${media}
-        </a>
+        </div>
         <p class="card_media--title">${this.title} <span>${this.likes} <i class="fas fa-heart"></i></span></p>
     </figure>
      `;
+
     return mediaBox;
   }
+
   isImgOrVid(element) {
-    // TODO ajouter l'accessibilité
     const assets = "../../public/assets/images/";
-    // console.log("-- __", element);
+
     if (element.includes(".jpg")) {
       return `<div class="card_media--img">
       <img src=${assets}${element} alt="photo faite le ${this.date}">
       </div>`;
     } else if (element.includes(".mp4")) {
-      return `<video  controls class="card_media--vid">
+      return `<video  controls class="card_media--vid" aria-label="video ${this.title} ">
       <source src="${assets}${element}" type="video/mp4">
       </video>`;
     }

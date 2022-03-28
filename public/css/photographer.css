@@ -81,7 +81,7 @@
 }
 /* conteneur des medias & formulaire */
 .media_content {
-  margin: 6.2rem 0 2rem 0;
+  margin: 6.2rem 0 3.6rem 0;
   padding: 0 3rem;
 }
 /* formulaire de tri */
@@ -230,6 +230,16 @@ form textarea {
   border-radius: 5px;
   height: 10rem;
 }
+
+.formError {
+  display: none;
+  color: red;
+  background: #fff;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
 /* lightbox */
 #lightbox {
   display: none;

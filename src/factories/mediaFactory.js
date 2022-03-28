@@ -3,7 +3,7 @@
 class MediaFactory {
   constructor(media) {
     this.id = media.id;
-    this.date = media.date; //yyyy-mm-dd
+    this.date = media.date; // yyyy-mm-dd
     this.likes = media.likes;
     this.price = media.price;
     this.title = media.title;

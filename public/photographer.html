@@ -48,18 +48,24 @@
       </header>
       <form>
         <div id="coordonnees">
-          <label tabindex="0" for="prenom">Prénom</label>
-          <input id="prenom" name="prenom" />
-
-          <label for="nom">Nom</label>
-          <input id="nom" name="nom" />
-
-          <label for="email">Email</label>
-          <input id="email" name="email" />
+          <div><label tabindex="0" for="prenom">Prénom</label>
+            <input id="prenom" name="prenom" />
+            <span class="formError">Erreur</span>
+          </div>
+          <div>
+            <label for="nom">Nom</label>
+            <input id="nom" name="nom" />
+            <span class="formError"></span>
+          </div>
+          <div> <label for="email">Email</label>
+            <input id="email" name="email" />
+            <span class="formError"></span>
+          </div>
         </div>
         <div>
           <label for="message">Votre message</label>
           <textarea id="message" name="message" placeholder="Écrivez votre message"></textarea>
+          <span class="formError"></span>
         </div>
         <button class="contact_button" aria-label="Envoyer le formulaire">Envoyer</button>
       </form>

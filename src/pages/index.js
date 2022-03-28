@@ -1,5 +1,5 @@
 import { Api } from "../api/api.js";
-import { PhotographerFactory } from "../factories/photographer.js";
+import { PhotographerFactory } from "../factories/photographerFactory.js";
 
 class App {
   constructor() {

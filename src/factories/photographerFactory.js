@@ -1,5 +1,6 @@
 /* eslint-disable indent */
 import { getAllLike } from "../utils/likes.js";
+
 class PhotographerFactory {
   constructor(id, name, portrait, city, country, price, tagline, datas) {
     this.id = id;

@@ -1,6 +1,6 @@
 import { Api } from "../api/api.js";
-import { MediaFactory } from "../factories/media.js";
-import { PhotographerFactory } from "../factories/photographer.js";
+import { MediaFactory } from "../factories/mediaFactory.js";
+import { PhotographerFactory } from "../factories/photographerFactory.js";
 import {
   getDataByPop,
   getDataByTitle,

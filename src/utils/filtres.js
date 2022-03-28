@@ -1,3 +1,4 @@
+// tri les données par popularité
 export function getDataByPop(datas) {
   return datas.sort((a, b) => {
     // 'b'(par sa position) sera la reference et sera comparé à 'a', qui sera l'élément suivant
@@ -5,11 +6,15 @@ export function getDataByPop(datas) {
     return b.likes - a.likes;
   });
 }
+
+// tri les données par titre
 export function getDataByTitle(datas) {
   return datas.sort((a, b) => {
     return a.title.localeCompare(b.title);
   });
 }
+
+// tri les données par date
 export function getDataByDate(datas) {
   const date = datas.slice().sort((a, b) => {
     // a < b
@@ -19,6 +24,7 @@ export function getDataByDate(datas) {
   });
   return date;
 }
+
 // réccup 1 photographe
 export function getPhotographer(id, users) {
   const datas = users.filter((user) => {
@@ -26,6 +32,7 @@ export function getPhotographer(id, users) {
   });
   return datas[0];
 }
+
 // réccup les medias d'1 photographe
 export function getDatasByPhotographId(id, medias) {
   const datas = medias.filter((media) => {

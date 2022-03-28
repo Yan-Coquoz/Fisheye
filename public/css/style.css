@@ -34,9 +34,7 @@ a {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 70px;
   margin-top: 100px;
-
   margin-bottom: 3rem;
-
 }
 
 .photographer_section article {
@@ -55,7 +53,7 @@ a {
 .photographer_section article img {
   border-radius: 50%;
   font-size: 36px;
-  height: 200px;  
+  height: 200px;
   object-fit: cover;
   width: 200px;
 }
@@ -82,10 +80,10 @@ a {
   margin: 0;
 }
 .box_desc__desc {
-font-size: .7rem;
+  font-size: 0.7rem;
 }
 .box_desc__price {
   color: #757575;
-  font-size: .7rem;
+  font-size: 0.7rem;
   margin: 0;
 }

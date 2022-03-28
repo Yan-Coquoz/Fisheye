@@ -26,7 +26,7 @@
   <main id="main">
     <div class="photograph-header">
       <div class="box__btn">
-        <button class="contact_button" tabindex="0" onclick="displayModal()"
+        <button class="contact_button" onclick="displayModal()"
           aria-label="Formulaire de contact">Contactez-moi</button>
       </div>
     </div>
@@ -39,25 +39,26 @@
   </div>
 
   <!-- modale formulaire -->
-  <div tabindex="0" id="contact_modal" role="dialog" aria-hidden="true" aria-describedby="Modale de contact">
+  <div id="contact_modal" role="dialog" aria-describedby="Modale de contact" tabindex="0">
     <div class="modal" role="group" aria-labelledby="coordonnees">
       <header>
-        <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" tabindex="1" alt="Fermeture de la modale" />
+        <h2 class="contact_modal-title" tabindex="0">Contactez-moi</h2>
+
+        <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermeture de la modale" tabindex="0" />
       </header>
       <form>
         <div id="coordonnees">
-          <label for="prenom" tabindex="1">Prénom</label>
+          <label tabindex="0" for="prenom">Prénom</label>
           <input id="prenom" name="prenom" />
 
-          <label for="nom" tabindex="1">Nom</label>
+          <label for="nom">Nom</label>
           <input id="nom" name="nom" />
 
-          <label for="email" tabindex="1">Email</label>
+          <label for="email">Email</label>
           <input id="email" name="email" />
         </div>
         <div>
-          <label for="message" tabindex="1">Votre message</label>
+          <label for="message">Votre message</label>
           <textarea id="message" name="message" placeholder="Écrivez votre message"></textarea>
         </div>
         <button class="contact_button" aria-label="Envoyer le formulaire">Envoyer</button>

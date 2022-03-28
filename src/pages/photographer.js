@@ -26,7 +26,7 @@ class Photographer {
     return Number(getId[2]);
   }
 
-  async displayPhotographer(user) {
+  async displayPhotographer(user, datas) {
     const photographHeader = document.querySelector(".photograph-header");
     const photographer = new PhotographerFactory(
       user.id,
@@ -35,7 +35,8 @@ class Photographer {
       user.city,
       user.country,
       user.price,
-      user.tagline
+      user.tagline,
+      datas
     );
     const cardPhotographer = photographer.getPhotographerDOM();
     photographHeader.appendChild(cardPhotographer);
@@ -48,6 +49,7 @@ class Photographer {
     this.divMediaBlock.classList.add("media-container");
     this.divMediaBlock.id = "media-container";
     this.section.appendChild(this.divMediaBlock);
+    this.section.setAttribute("aria-hidden", "false");
 
     photographHeader.after(this.section);
     // instanciation des medias
@@ -56,13 +58,12 @@ class Photographer {
       formulaire = new MediaFactory(data);
       return values.getCardMediaDom();
     });
-    const formaData = formulaire.getFormMediaDom();
+    const formaData = formulaire.getSortMediaDom();
 
     // je recupere le select du form
     const elementTri = formaData.querySelector(".form-select");
 
     // je capte la valeur de retour du formulaire
-
     elementTri.addEventListener("input", (evt) => {
       switch (evt.target.value) {
         case "popularite":
@@ -96,6 +97,7 @@ class Photographer {
     // ajoute un noeud à une position précise
     return this.section.insertAdjacentElement("afterbegin", formaData);
   }
+
   // rendu de la lightbox
   displayLightbox(data) {
     console.log(localStorage.getItem("id"));
@@ -109,23 +111,14 @@ class Photographer {
     });
   }
 
-  // toutes les likes d'un photographe
-  getAllLike(datas) {
-    let initValue = 0;
-    const likes = datas.reduce((previous, current) => {
-      return previous + current.likes;
-    }, initValue);
-    localStorage.setItem("likes", likes);
-  }
-
   async rendu() {
     // reccup les donnée de l'api
     const { photographers, media } = await this.photographers.getData();
     const datas = await getDatasByPhotographId(this.id, media);
     const photographer = await getPhotographer(this.id, photographers);
-    this.getAllLike(datas);
+
     this.displayLightbox(datas);
-    this.displayPhotographer(photographer);
+    this.displayPhotographer(photographer, datas);
     this.displayMedia(datas);
   }
 }

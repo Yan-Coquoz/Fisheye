@@ -105,6 +105,11 @@
   margin-left: 2rem;
   outline: none;
 }
+.form-select:focus,
+.form-select:focus {
+  color: #312e2e;
+  background: #d3573c;
+}
 
 option.form-options {
   position: relative;

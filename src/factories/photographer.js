@@ -1,4 +1,5 @@
 /* eslint-disable indent */
+import { getAllLike } from "../utils/likes.js";
 class PhotographerFactory {
   constructor(id, name, portrait, city, country, price, tagline, datas) {
     this.id = id;
@@ -10,7 +11,7 @@ class PhotographerFactory {
     this.tagline = tagline;
     this.datas = datas;
   }
-
+  // page d'accueil, carte des photographes
   getUserCardDOM() {
     const baseUrl = "../../public/photographer.html";
     const article = document.createElement("article");
@@ -34,24 +35,23 @@ class PhotographerFactory {
 
     return article;
   }
-
+  // Page d'un photographe
   getPhotographerDOM() {
     const headerBlock = document.createElement("section");
     headerBlock.classList.add("header__block");
+    const likes = getAllLike(this.datas);
     headerBlock.innerHTML = `
     <div class="header__block-left">  
-      <h1 class="header__block-name" >${this.name}</h1>
-      <h2 class="city">${this.city}, ${this.country}</h2>
-      <p class="tagline">${this.tagline}</p>
+      <h1 class="header__block-name" tabindex="0" aria-label="Photographe ${this.name}">${this.name}</h1>
+      <h2 class="city" tabindex="0" aria-label="localisation ${this.city},${this.country}">
+     ${this.city}, ${this.country}</h2>
+      <p class="tagline" tabindex="0" aria-label="Devise : ${this.tagline}"
+      >${this.tagline}</p>
     </div>
     <div class="header__block-right">
-      <img class="photographer" alt="" src="../../public/assets/photographers/${
-        this.portrait
-      }"> 
+      <img class="photographer" alt="" src="../../public/assets/photographers/${this.portrait}"> 
     </div> 
-    <div class="like-price"><span>${localStorage.getItem(
-      "likes"
-    )} ❤</span><span>${this.price}€ / jour</span></div>
+    <div class="like-price"  role="content-info" tabindex="0" ><span  aria-label="nombre de j'aime ${likes}">${likes} ❤</span><span  aria-label="tarification par jours ${this.price}€">${this.price}€ / jour</span></div>
     `;
 
     return headerBlock;

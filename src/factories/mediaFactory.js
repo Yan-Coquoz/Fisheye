@@ -1,4 +1,5 @@
-import { TypeMediafactory } from "./TypeMediaFactory.js";
+import { TypeMediaFactory } from "./TypeMediaFactory.js";
+
 // Factory pour les medias
 // gerer les cas ou c'est une image ou une video
 class MediaFactory {
@@ -36,12 +37,10 @@ class MediaFactory {
   // Card media
   getCardMediaDom() {
     const mediaBox = document.createElement("article");
-    // const media = this.isImgOrVid(this.TypeMedia);
-    const media = new TypeMediafactory(this.medias);
-
+    const media = new TypeMediaFactory(this.medias);
     mediaBox.classList.add("media-box");
     mediaBox.innerHTML = `
-    <figure class="card_media" aria-label="media ${this.title}"  onclick="openLBModal(${this.id})" >
+    <figure class="card_media" aria-label="media ${this.title}"  onclick="openLBModal()" >
      <div aria-label="agrandir le media" tabindex="0" > 
           ${media.renderElement}
         </div>

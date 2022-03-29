@@ -1,7 +1,7 @@
 import { Image } from "./imageFactory.js";
 import { Video } from "./videoFactory.js";
 
-export class TypeMediafactory {
+export class TypeMediaFactory {
   constructor(media) {
     // je regarde si la bonne propriété existe
     if (media.hasOwnProperty("image")) {

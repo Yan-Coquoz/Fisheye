@@ -11,8 +11,15 @@ function closeModal() {
 }
 
 // ouverture de la modale de la lightbox
-function openLBModal(id) {
+function openLBModal() {
   const modal = document.getElementById("lightbox");
+  modal.classList.add("active");
+  modal.setAttribute("aria-hidden", "false");
   modal.style.display = "block";
-  localStorage.setItem("idMedia", id);
+}
+function closeLBModal() {
+  const modal = document.getElementById("lightbox");
+  modal.classList.remove("active");
+  modal.setAttribute("aria-hidden", "true");
+  modal.style.display = "none";
 }

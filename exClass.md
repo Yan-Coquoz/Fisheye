@@ -48,7 +48,7 @@ class Vampire extends Person {
 
 const human1 = new Person("Bob", "Dylan", 45);
 const vampire1 = new Vampire("Mickael", "Jackson", 167);
-const vampire2 = new Vampire("Jon", "Bonjovi", 130);
+const vampire2 = new Vampire("Jimi", "Hendrix", 130);
 
 console.log(human1.toString());
 console.log(vampire1.toString());

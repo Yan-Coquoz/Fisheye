@@ -1,4 +1,5 @@
 import { Api } from "../api/api.js";
+import { LightboxFactory } from "../factories/lightboxFactory.js";
 import { MediaFactory } from "../factories/mediaFactory.js";
 import { PhotographerFactory } from "../factories/photographerFactory.js";
 import {
@@ -45,6 +46,8 @@ class Photographer {
   async displayMedia(datas) {
     let formulaire, cardMedia;
     const photographHeader = document.querySelector(".photograph-header");
+    const main = document.getElementById("main");
+    const lightbox = document.getElementById("lightbox");
     this.section.classList.add("media_content");
     this.divMediaBlock.classList.add("media-container");
     this.divMediaBlock.id = "media-container";
@@ -58,11 +61,10 @@ class Photographer {
       formulaire = new MediaFactory(data);
       return values.getCardMediaDom();
     });
+    // formulaire de tri
     const formaData = formulaire.getSortMediaDom();
-
     // je recupere le select du form
     const elementTri = formaData.querySelector(".form-select");
-
     // je capte la valeur de retour du formulaire
     elementTri.addEventListener("input", (evt) => {
       switch (evt.target.value) {
@@ -93,14 +95,15 @@ class Photographer {
     cardMedia.forEach((card) => {
       return this.divMediaBlock.appendChild(card);
     });
-
-    // ajoute un noeud à une position précise
-    return this.section.insertAdjacentElement("afterbegin", formaData);
-  }
-
-  // rendu de la lightbox
-  displayLightbox(data) {
-    // console.log(localStorage.getItem("id"));
+    // lb
+    const displayLBox = new LightboxFactory();
+    console.log(displayLBox.getLightboxDOM());
+    if (lightbox.classList.contains("active")) {
+      return section.appendChild(displayLBox.getLightboxDOM());
+    } else {
+      // ajoute un noeud à une position précise
+      return this.section.insertAdjacentElement("afterbegin", formaData);
+    }
   }
 
   // nouveau rendu après le tri
@@ -117,7 +120,7 @@ class Photographer {
     const datas = await getDatasByPhotographId(this.id, media);
     const photographer = await getPhotographer(this.id, photographers);
 
-    this.displayLightbox(datas);
+    // this.displayLightbox(datas);
     this.displayPhotographer(photographer, datas);
     this.displayMedia(datas);
   }

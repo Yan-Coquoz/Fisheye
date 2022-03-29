@@ -26,9 +26,11 @@ p {
   height: 50px;
   margin-left: 100px;
 }
+
 a {
   text-decoration: none;
 }
+
 .photographer_section {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

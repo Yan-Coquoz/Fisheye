@@ -100,7 +100,7 @@ class Photographer {
 
   // rendu de la lightbox
   displayLightbox(data) {
-    console.log(localStorage.getItem("id"));
+    // console.log(localStorage.getItem("id"));
   }
 
   // nouveau rendu après le tri

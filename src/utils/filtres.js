@@ -16,13 +16,12 @@ export function getDataByTitle(datas) {
 
 // tri les données par date
 export function getDataByDate(datas) {
-  const date = datas.slice().sort((a, b) => {
+  return datas.slice().sort((a, b) => {
     // a < b
     const valueA = new Date(a.date);
     const valueB = new Date(b.date);
     return valueB - valueA;
   });
-  return date;
 }
 
 // réccup 1 photographe
@@ -35,8 +34,11 @@ export function getPhotographer(id, users) {
 
 // réccup les medias d'1 photographe
 export function getDatasByPhotographId(id, medias) {
-  const datas = medias.filter((media) => {
+  return medias.filter((media) => {
     return media.photographerId === id;
   });
-  return datas;
+}
+
+export function getSelectedMedia(id, datas) {
+  return datas.filter((value) => value.id === id);
 }

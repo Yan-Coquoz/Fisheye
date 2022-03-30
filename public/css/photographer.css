@@ -280,17 +280,33 @@ form textarea {
 .lightbox-btn.close:hover {
   transform: scale(1.3);
 }
-
 .ligthbox__container-img {
-  margin: 6rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 6rem;
+  margin-bottom: 3rem;
+}
+.ligthbox__container-img .card_media--img {
+  margin: 0 6rem;
   z-index: 11;
-  border: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 .ligthbox__container-img img {
-  max-width: 100%;
+  object-fit: cover;
+  width: auto;
+  height: 100%;
+}
+.ligthbox__container-img video {
+  width: 80%;
   height: auto;
+}
+.lightbox__title {
+  color: #901c1c;
+  margin-top: 1rem;
+  font-size: 1.5rem;
 }

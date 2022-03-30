@@ -8,6 +8,7 @@ import {
   getDataByDate,
   getPhotographer,
   getDatasByPhotographId,
+  getSelectedMedia,
 } from "../utils/filtres.js";
 
 class Photographer {
@@ -26,7 +27,7 @@ class Photographer {
     const getId = regex.exec(url);
     return Number(getId[2]);
   }
-
+  // rendu du photographe
   async displayPhotographer(user, datas) {
     const photographHeader = document.querySelector(".photograph-header");
     const photographer = new PhotographerFactory(
@@ -42,12 +43,10 @@ class Photographer {
     const cardPhotographer = photographer.getPhotographerDOM();
     photographHeader.appendChild(cardPhotographer);
   }
-
+  // rendu des médias
   async displayMedia(datas) {
     let formulaire, cardMedia;
     const photographHeader = document.querySelector(".photograph-header");
-    const main = document.getElementById("main");
-    const lightbox = document.getElementById("lightbox");
     this.section.classList.add("media_content");
     this.divMediaBlock.classList.add("media-container");
     this.divMediaBlock.id = "media-container";
@@ -55,6 +54,7 @@ class Photographer {
     this.section.setAttribute("aria-hidden", "false");
 
     photographHeader.after(this.section);
+
     // instanciation des medias
     cardMedia = datas.map((data) => {
       const values = new MediaFactory(data);
@@ -91,25 +91,39 @@ class Photographer {
       }
     });
 
-    // rendu des medias
     cardMedia.forEach((card) => {
       return this.divMediaBlock.appendChild(card);
     });
-    // lb
-    const displayLBox = new LightboxFactory();
-    console.log(displayLBox.getLightboxDOM());
-    if (lightbox.classList.contains("active")) {
-      return section.appendChild(displayLBox.getLightboxDOM());
-    } else {
-      // ajoute un noeud à une position précise
-      return this.section.insertAdjacentElement("afterbegin", formaData);
-    }
+
+    return this.section.insertAdjacentElement("afterbegin", formaData);
+  }
+
+  // rendu de la lightbox
+  async displayLightbox(datas) {
+    const lightbox = document.body.querySelector("#lightbox");
+    const mediaItem = await document.body
+      .querySelectorAll(".media-item")
+      .forEach((elt) => {
+        elt.addEventListener("click", (evt) => {
+          const currentId = evt.currentTarget.getAttribute("id");
+          const medias = getSelectedMedia(+currentId, datas);
+          try {
+            new LightboxFactory(currentId, medias[0]);
+          } catch (error) {
+            console.log(error);
+          }
+        });
+      });
+
+    lightbox.appendChild(mediaItem);
+    return this.section.appendChild(lightbox);
   }
 
   // nouveau rendu après le tri
   getRenderMedia(mediaOrderedBy) {
     this.divMediaBlock.innerHTML = "";
     return mediaOrderedBy.forEach((card) => {
+      console.log(card);
       return this.divMediaBlock.appendChild(card.getCardMediaDom());
     });
   }
@@ -120,9 +134,9 @@ class Photographer {
     const datas = await getDatasByPhotographId(this.id, media);
     const photographer = await getPhotographer(this.id, photographers);
 
-    // this.displayLightbox(datas);
     this.displayPhotographer(photographer, datas);
     this.displayMedia(datas);
+    this.displayLightbox(datas);
   }
 }
 const user = new Photographer();

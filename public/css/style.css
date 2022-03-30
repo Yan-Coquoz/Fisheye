@@ -5,7 +5,9 @@ body {
   margin: 0;
   font-weight: 400;
 }
-
+video {
+  object-fit: cover;
+}
 header {
   display: flex;
   flex-direction: row;

@@ -126,7 +126,7 @@ option.form-options {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 55px;
+  gap: 50px;
 }
 article.media-box {
   margin: 0;

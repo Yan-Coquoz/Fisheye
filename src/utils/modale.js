@@ -19,6 +19,7 @@ function openLBModal() {
   modal.setAttribute("aria-hidden", "false");
   modal.style.display = "block";
 }
+// fermeture de la lightbox
 function closeLBModal() {
   const modal = document.getElementById("lightbox");
   const cardMedia = document.querySelector(".card_media--img");

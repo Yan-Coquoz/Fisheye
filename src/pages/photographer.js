@@ -64,9 +64,8 @@ class Photographer {
     // formulaire de tri
     const formaData = formulaire.getSortMediaDom();
     // je recupere le select du form
-    const elementTri = formaData.querySelector(".form-select");
-    // je capte la valeur de retour du formulaire
-    elementTri.addEventListener("input", (evt) => {
+    formaData.querySelector(".form-select").addEventListener("input", (evt) => {
+      // je capte la valeur de retour du formulaire
       switch (evt.target.value) {
         case "popularite":
           cardMedia = getDataByPop(datas);
@@ -99,31 +98,34 @@ class Photographer {
   }
 
   // rendu de la lightbox
-  async displayLightbox(datas) {
-    const lightbox = document.body.querySelector("#lightbox");
-    const mediaItem = await document.body
+  displayLightbox(datas) {
+    const lightbox = document.querySelector("#lightbox");
+    const mediaItem = document
       .querySelectorAll(".media-item")
       .forEach((elt) => {
         elt.addEventListener("click", (evt) => {
           const currentId = evt.currentTarget.getAttribute("id");
           const medias = getSelectedMedia(+currentId, datas);
           try {
-            new LightboxFactory(currentId, medias[0]);
+            new LightboxFactory(currentId, medias[0], datas);
           } catch (error) {
             console.log(error);
           }
         });
       });
 
-    lightbox.appendChild(mediaItem);
-    return this.section.appendChild(lightbox);
+    lightbox.innerHTML = mediaItem;
+    return this.section.insertAdjacentElement("afterbegin", lightbox);
   }
 
   // nouveau rendu après le tri
+  /**
+   * @param {array} mediaOrderedBy tableau des données réorganisé
+   * @returns HTMLElement
+   */
   getRenderMedia(mediaOrderedBy) {
     this.divMediaBlock.innerHTML = "";
     return mediaOrderedBy.forEach((card) => {
-      console.log(card);
       return this.divMediaBlock.appendChild(card.getCardMediaDom());
     });
   }

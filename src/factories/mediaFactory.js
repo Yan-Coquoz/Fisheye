@@ -1,5 +1,4 @@
 // Factory pour les medias
-
 import { TypeMediaFactory } from "./TypeMediaFactory.js";
 class MediaFactory {
   constructor(media) {

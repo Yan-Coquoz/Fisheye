@@ -2,8 +2,13 @@ import { Image } from "./imageFactory.js";
 import { Video } from "./videoFactory.js";
 
 export class TypeMediaFactory {
+  /**
+   *
+   * @param {objet} media - propiétés d'un media
+   * @returns
+   */
   constructor(media) {
-    console.log(media);
+    // console.log(media);
     // je regarde si la bonne propriété existe
     if (media.hasOwnProperty("image")) {
       const img = new Image(media.image, media.date, media.id);

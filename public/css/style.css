@@ -1,5 +1,9 @@
 @import url("photographer.css");
-
+*:focus {
+  border: 5px solid #901c1c;
+  outline: none;
+  border-radius: 1 0px;
+}
 body {
   font-family: "DM Sans", sans-serif;
   margin: 0;

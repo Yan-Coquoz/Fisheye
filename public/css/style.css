@@ -4,6 +4,20 @@
   outline: none;
   border-radius: 1 0px;
 }
+
+/* scroll-bar */
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+::-webkit-scrollbar-track {
+  background: #fff;
+  padding: 1px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: #901c1c;
+}
+
 body {
   font-family: "DM Sans", sans-serif;
   margin: 0;

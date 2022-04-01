@@ -12,8 +12,7 @@ class LightboxFactory {
     this.currentId = +id;
     this.currentMedia = media;
     this.datas = datas;
-    this.typeMedia = new TypeMediaFactory(this.currentMedia);
-
+    this.typeMedia = new TypeMediaFactory(this.getCurrentMedia());
     // injecte le HTML à la création de la LB
     this.lbox = this.getLightboxDOM();
     document.body.appendChild(this.lbox);
@@ -33,7 +32,6 @@ class LightboxFactory {
 
   // passage au média suivant
   nextMedia() {
-    console.log("media suivant");
     const currentMediaId = getIndexCurrentMedia(this.currentId, this.datas);
     if (this.datas.length - 1 === currentMediaId) {
       return this.setCurrentMedia(this.datas[0]);
@@ -44,9 +42,7 @@ class LightboxFactory {
 
   // passage au média précédent
   prevMedia() {
-    console.log("media précédent");
     const currentMediaId = getIndexCurrentMedia(this.currentId, this.datas);
-    console.log(currentMediaId);
     if (currentMediaId === 0) {
       const i = this.datas.length - 1;
       return this.setCurrentMedia(this.datas[i]);
@@ -61,7 +57,7 @@ class LightboxFactory {
   getLightboxDOM() {
     const lbContainer = document.querySelector("#lightbox");
     const div = document.createElement("div");
-    div.innerHTML = "";
+
     div.innerHTML = `<button class="lightbox-btn close" onclick="closeLBModal()" aria-label="Bouton de fermeture"><i class="fa fa-times"></i></button>
         <button class="lightbox-btn right" aria-label="media suivant"><i class="fa fa-angle-right"></i>
         </button>
@@ -70,13 +66,9 @@ class LightboxFactory {
         <div class="ligthbox__container-img">${this.typeMedia.renderElement}
         <p class="lightbox__title">${this.currentMedia.title}</p>
         </div>`;
-    div
-      .querySelector(".right")
-      .addEventListener("click", this.nextMedia.bind(this));
-    div
-      .querySelector(".left")
-      .addEventListener("click", this.prevMedia.bind(this));
+
     lbContainer.appendChild(div);
+
     return lbContainer;
   }
 }

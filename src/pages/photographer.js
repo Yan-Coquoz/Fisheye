@@ -98,24 +98,37 @@ class Photographer {
   }
 
   // rendu de la lightbox
-  displayLightbox(datas) {
+  async displayLightbox(datas) {
     const lightbox = document.querySelector("#lightbox");
-    const mediaItem = document
-      .querySelectorAll(".media-item")
-      .forEach((elt) => {
-        elt.addEventListener("click", (evt) => {
-          const currentId = evt.currentTarget.getAttribute("id");
-          const medias = getSelectedMedia(+currentId, datas);
-          try {
-            new LightboxFactory(currentId, medias[0], datas);
-          } catch (error) {
-            console.log(error);
-          }
-        });
-      });
+    const mediaItem = document.querySelectorAll(".media-item");
+    mediaItem.forEach((elt) => {
+      elt.addEventListener("click", (evt) => {
+        const currentId = evt.currentTarget.getAttribute("id");
+        const medias = getSelectedMedia(+currentId, datas);
 
-    lightbox.innerHTML = mediaItem;
-    return this.section.insertAdjacentElement("afterbegin", lightbox);
+        // try {
+        const currentMedia = new LightboxFactory(currentId, medias[0], datas);
+
+        currentMedia.lbox
+          .querySelector(".left")
+          .addEventListener("click", () => {
+            currentMedia.lbox.innerHTML = "";
+            const prevM = currentMedia.prevMedia();
+            console.log(prevM);
+            new LightboxFactory(prevM.id, prevM, datas);
+            return currentMedia.lbox;
+          });
+        currentMedia.lbox
+          .querySelector(".right")
+          .addEventListener("click", () => {
+            currentMedia.lbox.innerHTML = "";
+            const nextM = currentMedia.nextMedia();
+            new LightboxFactory(nextM.id, nextM, datas);
+          });
+      });
+    });
+
+    lightbox.insertAdjacentHTML("afterbegin", mediaItem);
   }
 
   // nouveau rendu après le tri

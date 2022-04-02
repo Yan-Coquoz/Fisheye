@@ -9,13 +9,14 @@ class LightboxFactory {
    * @retrun HTMLElement
    */
   constructor(id, media, datas) {
-    this.currentId = +id;
+    this.currentId = Number(id);
     this.currentMedia = media;
     this.datas = datas;
     this.typeMedia = new TypeMediaFactory(this.getCurrentMedia());
+
     // injecte le HTML à la création de la LB
-    this.lbox = this.getLightboxDOM();
-    document.body.appendChild(this.lbox);
+    // this.lbox = this.getLightboxDOM();
+    // document.body.appendChild(this.lbox);
   }
 
   /**
@@ -23,7 +24,6 @@ class LightboxFactory {
    * @returns
    */
   setCurrentMedia(media) {
-    console.log(media);
     return (this.currentMedia = media);
   }
   getCurrentMedia() {
@@ -57,7 +57,7 @@ class LightboxFactory {
   getLightboxDOM() {
     const lbContainer = document.querySelector("#lightbox");
     const div = document.createElement("div");
-
+    div.classList.add("lightbox-container");
     div.innerHTML = `<button class="lightbox-btn close" onclick="closeLBModal()" aria-label="Bouton de fermeture"><i class="fa fa-times"></i></button>
         <button class="lightbox-btn right" aria-label="media suivant"><i class="fa fa-angle-right"></i>
         </button>

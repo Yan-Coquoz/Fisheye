@@ -1,13 +1,12 @@
-import { getIndexCurrentMedia } from "./filtres.js";
-// passage au média précédent
-export function prevMedia(currentId, datas) {
-  console.log("media précédent");
-  const currentMediaId = getIndexCurrentMedia(currentId, datas);
-  console.log(currentMediaId);
-  if (currentMediaId === 0) {
-    const i = datas.length - 1;
-    return this.setCurrentMedia(datas[i]);
-  } else {
-    return this.setCurrentMedia(datas[currentMediaId - 1]);
+export function onLoadMedia(side) {
+  const rightSide = document.querySelectorAll(".right");
+  const leftSide = document.querySelectorAll(".left");
+
+  if (side === "right") {
+    rightSide.forEach((elt) => {
+      console.log(elt);
+    });
+  } else if (side === "left") {
+    console.log("left");
   }
 }

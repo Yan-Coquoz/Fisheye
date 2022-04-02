@@ -41,7 +41,7 @@ class MediaFactory {
 
     mediaBox.innerHTML = `
     <figure class="card_media"  aria-label="media ${this.title}"  onclick="openLBModal()" >
-     <div aria-label="agrandir le media" tabindex="0" > 
+     <div aria-label="agrandir le media" class="card_media-container" tabindex="0" > 
      <a onclick="${this.id}">
      ${media.renderElement}
      </a>

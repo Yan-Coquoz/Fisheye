@@ -42,6 +42,12 @@ class Photographer {
     );
     const cardPhotographer = photographer.getPhotographerDOM();
     photographHeader.appendChild(cardPhotographer);
+    // mise en place du nom dans la modale de formulaire
+    const titleForm = document.querySelector(".contact_modal-title");
+    const span = document.createElement("span");
+    span.style.display = "block";
+    span.textContent = user.name;
+    titleForm.appendChild(span);
   }
   // rendu des médias
   async displayMedia(datas) {
@@ -106,25 +112,25 @@ class Photographer {
         const currentId = evt.currentTarget.getAttribute("id");
         const medias = getSelectedMedia(+currentId, datas);
 
-        // try {
-        const currentMedia = new LightboxFactory(currentId, medias[0], datas);
-
-        currentMedia.lbox
-          .querySelector(".left")
-          .addEventListener("click", () => {
-            currentMedia.lbox.innerHTML = "";
-            const prevM = currentMedia.prevMedia();
-            console.log(prevM);
-            new LightboxFactory(prevM.id, prevM, datas);
-            return currentMedia.lbox;
-          });
-        currentMedia.lbox
-          .querySelector(".right")
-          .addEventListener("click", () => {
-            currentMedia.lbox.innerHTML = "";
-            const nextM = currentMedia.nextMedia();
-            new LightboxFactory(nextM.id, nextM, datas);
-          });
+        new LightboxFactory(currentId, medias[0], datas).getLightboxDOM();
+        // FIXME
+        // const currentMedia = new LightboxFactory(currentId, medias[0], datas);
+        // currentMedia
+        //   .getLightboxDOM()
+        //   .querySelector(".left")
+        //   .addEventListener("click", () => {
+        //     const prevM = currentMedia.prevMedia();
+        //     console.log(prevM);
+        //     this.lightboxRender(prevM.id, prevM, datas);
+        //   });
+        // currentMedia
+        //   .getLightboxDOM()
+        //   .querySelector(".right")
+        //   .addEventListener("click", () => {
+        //     const nextM = currentMedia.nextMedia();
+        //     console.log(nextM);
+        //     this.lightboxRender(nextM.id, nextM, datas);
+        //   });
       });
     });
 
@@ -151,7 +157,7 @@ class Photographer {
 
     this.displayPhotographer(photographer, datas);
     this.displayMedia(datas);
-    this.displayLightbox(datas);
+    await this.displayLightbox(datas);
   }
 }
 const user = new Photographer();

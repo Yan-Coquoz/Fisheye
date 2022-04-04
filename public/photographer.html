@@ -39,15 +39,16 @@
   </div>
 
   <!-- modale formulaire -->
-  <div id="contact_modal" role="dialog" aria-describedby="Modale de contact" tabindex="0">
-    <div class="modal" role="group" aria-labelledby="coordonnees">
+  <div id="contact_modal" role="dialog" aria-describedby="Modale de contact">
+    <div class="modal">
       <header>
-        <h2 class="contact_modal-title" tabindex="0">Contactez-moi</h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermeture de la modale" tabindex="0" />
+        <h2 class="contact_modal-title">Contactez-moi</h2>
+        <button onclick="closeModal()" tabindex="0" class="contact_modal-close" aria-label="fermeture de la modale"><img
+            src="assets/icons/close.svg" alt="Fermeture de la modale" aria-hidden="false" /></button>
       </header>
-      <form id="coordonnees">
+      <form>
         <div class="form-inputs">
-          <label tabindex="0" for="prenom">Prénom</label>
+          <label for="prenom">Prénom</label>
           <input id="prenom" name="prenom" />
           <span class="form__error"></span>
         </div>
@@ -66,7 +67,7 @@
 
         <div class="form-inputs">
           <label for="message">Votre message</label>
-          <textarea id="message" name="message" placeholder="Écrivez votre message"></textarea>
+          <textarea id="message" name="message" placeholder="Écrivez votre message" cols="30" rows="5"></textarea>
           <span class="form__error"></span>
         </div>
 

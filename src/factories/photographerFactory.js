@@ -43,8 +43,8 @@ class PhotographerFactory {
     const likes = getAllLike(this.datas);
     headerBlock.innerHTML = `
     <div class="header__block-left">  
-      <h1 class="header__block-name" tabindex="0" aria-label="Photographe ${this.name}">${this.name}</h1>
-      <h2 class="city" tabindex="0" aria-label="localisation ${this.city},${this.country}">
+      <h1 class="header__block-name" tabindex="0" aria-hidden="false" aria-label="Photographe ${this.name}">${this.name}</h1>
+      <h2 class="city" tabindex="0" aria-label="localisation aria-hidden="false" ${this.city},${this.country}">
      ${this.city}, ${this.country}</h2>
       <p class="tagline" tabindex="0" aria-label="Devise : ${this.tagline}"
       >${this.tagline}</p>

@@ -29,6 +29,7 @@ class MediaFactory {
     `;
     formBloc.classList.add("form-block");
     formBloc.setAttribute("aria-labelledby", "media-container");
+    formBloc.setAttribute("aria-hidden", "false");
     formBloc.innerHTML = formulaire;
     return formBloc;
   }
@@ -40,7 +41,7 @@ class MediaFactory {
     mediaBox.classList.add("media-box");
 
     mediaBox.innerHTML = `
-    <figure class="card_media"  aria-label="media ${this.title}"  onclick="openLBModal()" >
+    <figure class="card_media"  aria-label="media ${this.title}" aria-hidden="false" onclick="openLBModal()" >
      <div aria-label="agrandir le media" class="card_media-container" tabindex="0" > 
      <a onclick="${this.id}">
      ${media.renderElement}

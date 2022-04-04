@@ -5,9 +5,7 @@ const formValidations = [];
 const btnFormValidation = document.querySelector("form .contact_button");
 
 formulaire.addEventListener("submit", checkFormValidation);
-//fermeture de la modale
-// const modal = document.getElementById("contact_modal");
-// modal.style.display = "none";
+
 const inputs = {
   prenom: document.querySelector("#prenom"),
   nom: document.querySelector("#nom"),
@@ -113,6 +111,19 @@ function checkFormValidation(evt) {
   const isEmail = formValidations.includes("email");
   const isMsg = formValidations.includes("message");
 
+  if (formValidations.length === 0) {
+    const noValues = document.createElement("div");
+    noValues.textContent =
+      "Le formulaire est vide , vous ne pouvez pas l'envoyer !";
+
+    noValues.style.backgroundColor = "white";
+    noValues.style.display = "block";
+    btnFormValidation.insertAdjacentElement("afterend", noValues);
+    setTimeout(() => {
+      noValues.style.display = "none";
+    }, 3000);
+  }
+
   if (isPrenom && isNom && isEmail && isMsg) {
     console.log("Validation du formulaire");
     setTimeout(() => {
@@ -145,4 +156,5 @@ function closeModale() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "none";
 }
+
 formValidation();

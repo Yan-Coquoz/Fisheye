@@ -157,7 +157,7 @@ class Photographer {
 
     this.displayPhotographer(photographer, datas);
     this.displayMedia(datas);
-    await this.displayLightbox(datas);
+    this.displayLightbox(datas);
   }
 }
 const user = new Photographer();

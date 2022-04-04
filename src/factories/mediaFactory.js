@@ -1,5 +1,6 @@
 // Factory pour les medias
 import { TypeMediaFactory } from "./TypeMediaFactory.js";
+
 class MediaFactory {
   constructor(media) {
     this.id = media.id;
@@ -38,18 +39,31 @@ class MediaFactory {
   getCardMediaDom() {
     const mediaBox = document.createElement("article");
     const media = new TypeMediaFactory(this.medias);
+    const cardMedia = document.createElement("div");
+    const cardMediaContainer = document.createElement("div");
+    const para = document.createElement("p");
+    const span = document.createElement("span");
+
+    cardMedia.classList.add("card_media");
+    cardMedia.setAttribute("aria-label", `media ${this.title}`);
+    cardMedia.setAttribute("aria-hidden", "false");
+
+    cardMediaContainer.classList.add("card_media-container");
+    cardMediaContainer.setAttribute("tabindex", `0`);
+
+    para.classList.add("card_media--title");
+    para.textContent = this.title;
+
+    span.classList.add("likes");
+    span.innerHTML = `${this.likes} <i class="fas fa-heart"></i>`;
+    // placement dans le DOM
+    cardMedia.appendChild(cardMediaContainer);
+    cardMediaContainer.appendChild(media);
+    para.appendChild(span);
     mediaBox.classList.add("media-box");
 
-    mediaBox.innerHTML = `
-    <figure class="card_media"  aria-label="media ${this.title}" aria-hidden="false" onclick="openLBModal()" >
-     <div aria-label="agrandir le media" class="card_media-container" tabindex="0" > 
-     <a onclick="${this.id}">
-     ${media.renderElement}
-     </a>
-        </div>
-        <figcation class="card_media--title">${this.title} <span>${this.likes} <i class="fas fa-heart"></i></span></figcation>
-    </figure>
-     `;
+    mediaBox.appendChild(cardMedia);
+    mediaBox.appendChild(para);
 
     return mediaBox;
   }

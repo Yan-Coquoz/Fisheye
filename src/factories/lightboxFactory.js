@@ -13,10 +13,6 @@ class LightboxFactory {
     this.currentMedia = media;
     this.datas = datas;
     this.typeMedia = new TypeMediaFactory(this.getCurrentMedia());
-
-    // injecte le HTML à la création de la LB
-    // this.lbox = this.getLightboxDOM();
-    // document.body.appendChild(this.lbox);
   }
 
   /**
@@ -58,12 +54,13 @@ class LightboxFactory {
     const lbContainer = document.querySelector("#lightbox");
     const div = document.createElement("div");
     div.classList.add("lightbox-container");
-    div.innerHTML = `<button class="lightbox-btn close" onclick="closeLBModal()" aria-label="Bouton de fermeture"><i class="fa fa-times"></i></button>
-        <button class="lightbox-btn right" aria-label="media suivant"><i class="fa fa-angle-right"></i>
+    console.log(this.typeMedia);
+    div.innerHTML = `<button class="lightbox-btn close" onclick="closeLBModal()" tabindex="0" aria-label="Bouton de fermeture"><i class="fa fa-times"></i></button>
+        <button class="lightbox-btn right" tabindex="0" aria-label="media suivant"><i class="fa fa-angle-right"></i>
         </button>
-        <button class="lightbox-btn left" aria-label="media précédent"><i class="fa fa-angle-left"></i>
+        <button class="lightbox-btn left" tabindex="0" aria-label="media précédent"><i class="fa fa-angle-left"></i>
         </button>
-        <div class="ligthbox__container-img">${this.typeMedia.renderElement}
+        <div class="ligthbox__container-img">${this.typeMedia}
         <p class="lightbox__title">${this.currentMedia.title}</p>
         </div>`;
 

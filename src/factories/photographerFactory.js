@@ -52,7 +52,7 @@ class PhotographerFactory {
     <div class="header__block-right">
       <img class="photographer" alt="" src="../../public/assets/photographers/${this.portrait}"> 
     </div> 
-    <div class="like-price"  role="content-info" tabindex="0" ><span  aria-label="nombre de j'aime ${likes}">${likes} ❤</span><span  aria-label="tarification par jours ${this.price}€">${this.price}€ / jour</span></div>
+    <div class="like-price"  role="content-info" tabindex="0" ><span aria-label="nombre de j'aime ${likes}" tabindex="0">${likes} ❤</span><span  aria-label="tarification par jours ${this.price}€">${this.price}€ / jour</span></div>
     `;
 
     return headerBlock;

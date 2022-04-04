@@ -95,7 +95,7 @@ class Photographer {
           return this.getRenderMedia(cardMediaByTitle);
       }
     });
-
+    console.log(cardMedia);
     cardMedia.forEach((card) => {
       return this.divMediaBlock.appendChild(card);
     });
@@ -104,37 +104,45 @@ class Photographer {
   }
 
   // rendu de la lightbox
-  async displayLightbox(datas) {
+  displayLightbox(datas) {
     const lightbox = document.querySelector("#lightbox");
     const mediaItem = document.querySelectorAll(".media-item");
+    let currentMedia;
+
     mediaItem.forEach((elt) => {
       elt.addEventListener("click", (evt) => {
         const currentId = evt.currentTarget.getAttribute("id");
         const medias = getSelectedMedia(+currentId, datas);
 
-        new LightboxFactory(currentId, medias[0], datas).getLightboxDOM();
-        // FIXME
-        // const currentMedia = new LightboxFactory(currentId, medias[0], datas);
-        // currentMedia
-        //   .getLightboxDOM()
-        //   .querySelector(".left")
-        //   .addEventListener("click", () => {
-        //     const prevM = currentMedia.prevMedia();
-        //     console.log(prevM);
-        //     this.lightboxRender(prevM.id, prevM, datas);
-        //   });
-        // currentMedia
-        //   .getLightboxDOM()
-        //   .querySelector(".right")
-        //   .addEventListener("click", () => {
-        //     const nextM = currentMedia.nextMedia();
-        //     console.log(nextM);
-        //     this.lightboxRender(nextM.id, nextM, datas);
-        //   });
+        let mediaSelected = new LightboxFactory(
+          +currentId,
+          medias[0],
+          datas
+        ).getLightboxDOM();
+        // 1er rendu
+        currentMedia = new LightboxFactory(currentId, medias[0], datas);
+        // rendu apres le clic
+        document
+          .querySelector(".lightbox-btn.left")
+          .addEventListener("click", () => {
+            const prevM = currentMedia.prevMedia();
+            console.log(prevM);
+            mediaSelected.innerHTML = "";
+            return new LightboxFactory(prevM.id, prevM, datas).getLightboxDOM();
+          });
+
+        document
+          .querySelector(".lightbox-btn.right")
+          .addEventListener("click", () => {
+            const nextM = currentMedia.nextMedia();
+            console.log(nextM);
+            mediaSelected.innerHTML = "";
+            return new LightboxFactory(nextM.id, nextM, datas).getLightboxDOM();
+          });
       });
     });
 
-    lightbox.insertAdjacentHTML("afterbegin", mediaItem);
+    lightbox.innerHTML = mediaItem;
   }
 
   // nouveau rendu après le tri
@@ -145,6 +153,7 @@ class Photographer {
   getRenderMedia(mediaOrderedBy) {
     this.divMediaBlock.innerHTML = "";
     return mediaOrderedBy.forEach((card) => {
+      console.log(card.getCardMediaDom());
       return this.divMediaBlock.appendChild(card.getCardMediaDom());
     });
   }

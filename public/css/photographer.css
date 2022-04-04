@@ -290,6 +290,7 @@ form button.contact_button:disabled {
   border: none;
   cursor: pointer;
   position: fixed;
+  top: 50%;
   z-index: 11;
 }
 
@@ -299,11 +300,9 @@ form button.contact_button:disabled {
   z-index: 12;
 }
 .lightbox-btn.right {
-  height: 75%;
   right: 2rem;
 }
 .lightbox-btn.left {
-  height: 75%;
   left: 2rem;
 }
 .lightbox-btn.left:hover,

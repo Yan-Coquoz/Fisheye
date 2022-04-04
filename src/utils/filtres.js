@@ -38,7 +38,7 @@ export function getDatasByPhotographId(id, medias) {
     return media.photographerId === id;
   });
 }
-// reccupère le media selectionné
+// Lightbox => reccupère le media selectionné
 export function getSelectedMedia(id, datas) {
   return datas.filter((value) => value.id === id);
 }

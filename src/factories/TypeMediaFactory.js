@@ -11,13 +11,9 @@ export class TypeMediaFactory {
     // console.log(media);
     // je regarde si la bonne propriété existe
     if (media.hasOwnProperty("image")) {
-      const img = new Image(media.image, media.date, media.id);
-      this.renderElement = img.displayImage();
-      return this.renderElement;
+      return new Image(media.image, media.date, media.id).displayImage();
     } else if (media.hasOwnProperty("video")) {
-      const vid = new Video(media.video, media.id);
-      this.renderElement = vid.displayVideo();
-      return this.renderElement;
+      return new Video(media.video, media.id).displayVideo();
     } else {
       throw new Error("Type de format inconnu.");
     }

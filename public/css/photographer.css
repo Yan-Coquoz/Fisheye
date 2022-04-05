@@ -104,6 +104,8 @@
   border-radius: 5px;
   margin-left: 2rem;
   outline: none;
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 .form-select:hover,
 .form-select:focus {

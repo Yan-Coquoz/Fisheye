@@ -1,5 +1,6 @@
 // Factory pour les medias
 import { TypeMediaFactory } from "./TypeMediaFactory.js";
+import { onLikes } from "../utils/likes.js";
 
 class MediaFactory {
   constructor(media) {
@@ -11,6 +12,17 @@ class MediaFactory {
     this.image = media.image;
     this.video = media.video;
     this.medias = media;
+  }
+  /**
+   * @param {number} likes les likes courant
+   * @returns
+   */
+  setLikes(likes) {
+    this.likes = likes;
+    return this.likes;
+  }
+  getLikes() {
+    return this.likes;
   }
 
   // Stucture des filtres
@@ -43,6 +55,8 @@ class MediaFactory {
     const cardMediaContainer = document.createElement("div");
     const para = document.createElement("p");
     const span = document.createElement("span");
+    const spanIcon = document.createElement("span");
+    const containtSpan = document.createElement("div");
 
     cardMedia.classList.add("card_media");
     cardMedia.setAttribute("aria-label", `media ${this.title}`);
@@ -54,17 +68,26 @@ class MediaFactory {
     para.classList.add("card_media--title");
     para.textContent = this.title;
 
+    containtSpan.classList.add("likes_container");
+    containtSpan.setAttribute("tabindex", "0");
+    mediaBox.classList.add("media-box");
+
     span.classList.add("likes");
-    span.innerHTML = `${this.likes} <i class="fas fa-heart"></i>`;
+    span.textContent = this.getLikes();
+    spanIcon.setAttribute("class", "fas fa-heart");
+    spanIcon.setAttribute("aria-label", "likes");
+
     // placement dans le DOM
     cardMedia.appendChild(cardMediaContainer);
     cardMediaContainer.appendChild(media);
-    para.appendChild(span);
-    mediaBox.classList.add("media-box");
+    containtSpan.appendChild(span);
+    containtSpan.appendChild(spanIcon);
+    para.appendChild(containtSpan);
 
     mediaBox.appendChild(cardMedia);
     mediaBox.appendChild(para);
 
+    containtSpan.addEventListener("click", onLikes);
     return mediaBox;
   }
 }

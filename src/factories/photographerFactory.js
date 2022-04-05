@@ -1,5 +1,6 @@
 /* eslint-disable indent */
 import { getAllLike } from "../utils/likes.js";
+import { MediaFactory } from "./mediaFactory.js";
 
 class PhotographerFactory {
   constructor(id, name, portrait, city, country, price, tagline, datas) {
@@ -40,7 +41,9 @@ class PhotographerFactory {
   getPhotographerDOM() {
     const headerBlock = document.createElement("section");
     headerBlock.classList.add("header__block");
-    const likes = getAllLike(this.datas);
+    const dataHeart = new MediaFactory(this.datas);
+    // console.log("dataHeart ", dataHeart.medias);
+    const likes = getAllLike(dataHeart.medias); // TODO mettre les likes des medias pas de la datas
     headerBlock.innerHTML = `
     <div class="header__block-left">  
       <h1 class="header__block-name" tabindex="0" aria-hidden="false" aria-label="Photographe ${this.name}">${this.name}</h1>
@@ -52,7 +55,8 @@ class PhotographerFactory {
     <div class="header__block-right">
       <img class="photographer" alt="" src="../../public/assets/photographers/${this.portrait}"> 
     </div> 
-    <div class="like-price"  role="content-info" tabindex="0" ><span aria-label="nombre de j'aime ${likes}" tabindex="0">${likes} ❤</span><span  aria-label="tarification par jours ${this.price}€">${this.price}€ / jour</span></div>
+
+    <div class="like-price"  role="content-info" tabindex="0" ><div class="likes_container-footer"><span aria-label="nombre de j'aime" tabindex="0">${likes}</span><span>❤</span></div><span  aria-label="tarification par jours ${this.price}€">${this.price}€ / jour</span></div>
     `;
 
     return headerBlock;

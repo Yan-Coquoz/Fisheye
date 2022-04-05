@@ -95,7 +95,7 @@ class Photographer {
           return this.getRenderMedia(cardMediaByTitle);
       }
     });
-    console.log(cardMedia);
+
     cardMedia.forEach((card) => {
       return this.divMediaBlock.appendChild(card);
     });

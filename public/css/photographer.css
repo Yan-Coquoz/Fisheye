@@ -321,14 +321,7 @@ form button.contact_button:disabled {
   flex-direction: column;
   align-items: center;
 }
-.ligthbox__container-img {
-  /* display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 6rem;
-  margin-bottom: 3rem; */
-}
+
 .ligthbox__container-img .card_media--img {
   height: 100vh;
 }

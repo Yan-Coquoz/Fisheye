@@ -12,7 +12,10 @@ class LightboxFactory {
     this.currentId = Number(id);
     this.currentMedia = media;
     this.datas = datas;
+    this.onKeyUp = this.onKeyUp.bind(this);
+    this.boxContentMedia = document.createElement("div");
     this.typeMedia = new TypeMediaFactory(this.getCurrentMedia());
+    document.addEventListener("keyup", this.onKeyUp);
   }
 
   /**
@@ -26,6 +29,27 @@ class LightboxFactory {
     return this.currentMedia;
   }
 
+  onKeyUp(evt) {
+    console.log("keyup");
+    if (evt.key === "Escape") {
+      this.closeLb(evt);
+    }
+  }
+
+  /**
+   * @param {MouseEvent} e
+   */
+  closeLb(evt) {
+    evt.preventDefault();
+    console.log("close modal");
+    const modal = document.getElementById("lightbox");
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+    modal.style.display = "none";
+    // on le supprime de la mémoire
+    document.removeEventListener("keyup", this.onKeyUp);
+  }
+
   // passage au média suivant
   nextMedia() {
     const currentMediaId = getIndexCurrentMedia(this.currentId, this.datas);
@@ -37,8 +61,15 @@ class LightboxFactory {
   }
 
   // passage au média précédent
-  prevMedia() {
-    const currentMediaId = getIndexCurrentMedia(this.currentId, this.datas);
+  prevMedia(evt) {
+    evt.preventDefault();
+
+    const currentMediaId = getIndexCurrentMedia.bind(
+      this,
+      this.currentId,
+      this.datas
+    );
+    console.log(currentMediaId);
     if (currentMediaId === 0) {
       const i = this.datas.length - 1;
       return this.setCurrentMedia(this.datas[i]);
@@ -52,7 +83,6 @@ class LightboxFactory {
    */
   getLightboxDOM() {
     const div = document.createElement("div");
-
     const btnClose = document.createElement("button");
     const spanCloseIcon = document.createElement("span");
 
@@ -62,18 +92,18 @@ class LightboxFactory {
     const btnRight = document.createElement("button");
     const spanRightIcon = document.createElement("span");
 
-    const boxContentMedia = document.createElement("div");
     const contentMedia = document.createElement("div");
     const title = document.createElement("p");
 
     div.classList.add("lightbox-container");
-    boxContentMedia.classList.add("lightbox-media");
-    contentMedia.classList.add("ligthbox__container-img");
-    title.classList.add("lightbox__title");
+
+    this.boxContentMedia.classList.add("lightbox-media");
+    this.boxContentMedia.id = this.currentId;
 
     btnLeft.classList.add("lightbox-btn", "left");
     btnLeft.setAttribute("tabindex", "0");
     btnLeft.setAttribute("aria-label", "média précédent");
+    btnLeft.addEventListener("click", this.prevMedia);
 
     btnRight.classList.add("lightbox-btn", "right");
     btnRight.setAttribute("tabindex", "0");
@@ -84,15 +114,18 @@ class LightboxFactory {
     spanRightIcon.classList.add("fa", "fa-angle-right");
 
     btnClose.classList.add("lightbox-btn", "close");
-    btnClose.setAttribute("onclick", "closeLBModal()");
+    // btnClose.setAttribute("onclick", "closeLBModal()");
     btnClose.setAttribute("tabindex", "0");
     btnClose.setAttribute("aria-label", "Bouton de fermeture");
 
+    title.classList.add("lightbox__title");
     title.textContent = this.currentMedia.title;
+
+    contentMedia.classList.add("ligthbox__container-img");
     contentMedia.appendChild(this.typeMedia);
     // DOM
-    boxContentMedia.appendChild(contentMedia);
-    boxContentMedia.appendChild(title);
+    this.boxContentMedia.appendChild(contentMedia);
+    this.boxContentMedia.appendChild(title);
 
     btnClose.appendChild(spanCloseIcon);
     btnLeft.appendChild(spanLeftIcon);
@@ -101,23 +134,18 @@ class LightboxFactory {
     div.appendChild(btnClose);
     div.appendChild(btnLeft);
     div.appendChild(btnRight);
-    div.appendChild(boxContentMedia);
-
-    // console.log("-- lbn-- ", div);
+    div.appendChild(this.boxContentMedia);
+    // ecouteur sur la fermeture
+    div
+      .querySelector(".lightbox-btn.close")
+      .addEventListener("click", this.closeLb.bind(this));
 
     return div;
   }
+
+  onLoad() {
+    const media = this.getCurrentMedia();
+    console.log("onLoad m-- ", media);
+  }
 }
 export { LightboxFactory };
-// div.innerHTML = `
-// <button class="lightbox-btn close" onclick="closeLBModal()" tabindex="0" aria-label="Bouton de fermeture"><i class="fa fa-times"></i></button>
-
-//     <button class="lightbox-btn right" tabindex="0" aria-label="media suivant"><i class="fa fa-angle-right"></i>
-//     </button>
-
-//     <button class="lightbox-btn left" tabindex="0" aria-label="media précédent"><i class="fa fa-angle-left"></i>
-//     </button>
-
-//     <div class="ligthbox__container-img">${this.typeMedia}
-//     <p class="lightbox__title">${this.currentMedia.title}</p>
-//     </div>`;

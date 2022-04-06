@@ -90,7 +90,7 @@ class MediaFactory {
     mediaBox.appendChild(para);
 
     containtSpan.addEventListener("click", onLikes);
-    console.log("--", mediaBox);
+    // console.log("getCardMediaDom -- ", mediaBox);
     return mediaBox;
   }
 }

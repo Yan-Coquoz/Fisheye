@@ -49,7 +49,12 @@ export function getSelectedMedia(id, datas) {
   return datas.filter((value) => value.id === id);
 }
 
-// trouve l'index d'un objet dans un tableau
+/**
+ * trouve l'index d'un objet dans un tableau
+ * @param {number} index à rechercher
+ * @param {array} tab
+ * @returns number
+ */
 export function getIndexCurrentMedia(index, tab) {
   return tab.findIndex((eltIndex) => {
     return eltIndex.id === index;

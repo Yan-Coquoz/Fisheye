@@ -70,6 +70,7 @@ class Photographer {
     // formulaire de tri
     const formaData = formulaire.getSortMediaDom();
     // je recupere le select du form
+
     formaData.querySelector(".form-select").addEventListener("input", (evt) => {
       // je capte la valeur de retour du formulaire
       switch (evt.target.value) {
@@ -103,35 +104,38 @@ class Photographer {
     return this.section.insertAdjacentElement("afterbegin", formaData);
   }
 
-  // rendu de la lightbox
+  /**
+   *  rendu de la lightbox
+   * @param {array} datas - toutes les datas
+   * @returns HTMLElement
+   */
   async displayLightbox(datas) {
-    let id, obj;
-
     const lightbox = document.querySelector("#lightbox");
+    const divDom = document.createElement("div");
 
     const selectedArticle = document.querySelectorAll("article");
     selectedArticle.forEach((elt) => {
       elt.addEventListener("click", (evt) => {
         const currentId = Number(evt.target.id);
-        const currentObj = getSelectedMedia(currentId, datas);
-        id = currentId;
-        obj = currentObj[0];
-        console.log(id);
-        console.log(obj);
+        const object = getSelectedMedia(currentId, datas)[0];
+        // supprime l'élément précédent si il y a.
+        divDom.innerHTML = "";
         try {
-          lightbox.appendChild(
-            new LightboxFactory(id, obj, datas).getLightboxDOM()
+          divDom.appendChild(
+            new LightboxFactory(currentId, object, datas).getLightboxDOM()
           );
         } catch (error) {
-          console.log(error);
+          throw new Error("Oops !", error);
         }
       });
     });
+
+    return lightbox.appendChild(divDom);
   }
 
   // nouveau rendu après le tri
   /**
-   * @param {array} mediaOrderedBy tableau des données réorganisé
+   * @param {array} mediaOrderedBy - tableau des données réorganisé
    * @returns HTMLElement
    */
   getRenderMedia(mediaOrderedBy) {

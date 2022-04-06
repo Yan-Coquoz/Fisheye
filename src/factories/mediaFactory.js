@@ -65,6 +65,8 @@ class MediaFactory {
     cardMediaContainer.classList.add("card_media-container");
     cardMediaContainer.setAttribute("tabindex", `0`);
 
+    mediaBox.id = this.id;
+
     para.classList.add("card_media--title");
     para.textContent = this.title;
 
@@ -88,6 +90,7 @@ class MediaFactory {
     mediaBox.appendChild(para);
 
     containtSpan.addEventListener("click", onLikes);
+    console.log("--", mediaBox);
     return mediaBox;
   }
 }

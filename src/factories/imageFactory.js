@@ -16,7 +16,7 @@ export class Image {
     image.setAttribute("alt", `photo faite le ${this.date}`);
 
     div.appendChild(image);
-
+    // console.log(div);
     return div;
   }
 }

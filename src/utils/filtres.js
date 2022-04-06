@@ -38,10 +38,17 @@ export function getDatasByPhotographId(id, medias) {
     return media.photographerId === id;
   });
 }
-// Lightbox => reccupère le media selectionné
+
+/**
+ * Lightbox => reccupère le media selectionné
+ * @param { number } id courant
+ * @param { array } datas tableau d'objet
+ * @returns Object
+ */
 export function getSelectedMedia(id, datas) {
   return datas.filter((value) => value.id === id);
 }
+
 // trouve l'index d'un objet dans un tableau
 export function getIndexCurrentMedia(index, tab) {
   return tab.findIndex((eltIndex) => {

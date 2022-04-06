@@ -51,22 +51,73 @@ class LightboxFactory {
    * @returns HTMLElement
    */
   getLightboxDOM() {
-    const lbContainer = document.querySelector("#lightbox");
     const div = document.createElement("div");
+
+    const btnClose = document.createElement("button");
+    const spanCloseIcon = document.createElement("span");
+
+    const btnLeft = document.createElement("button");
+    const spanLeftIcon = document.createElement("span");
+
+    const btnRight = document.createElement("button");
+    const spanRightIcon = document.createElement("span");
+
+    const boxContentMedia = document.createElement("div");
+    const contentMedia = document.createElement("div");
+    const title = document.createElement("p");
+
     div.classList.add("lightbox-container");
-    console.log(this.typeMedia);
-    div.innerHTML = `<button class="lightbox-btn close" onclick="closeLBModal()" tabindex="0" aria-label="Bouton de fermeture"><i class="fa fa-times"></i></button>
-        <button class="lightbox-btn right" tabindex="0" aria-label="media suivant"><i class="fa fa-angle-right"></i>
-        </button>
-        <button class="lightbox-btn left" tabindex="0" aria-label="media précédent"><i class="fa fa-angle-left"></i>
-        </button>
-        <div class="ligthbox__container-img">${this.typeMedia}
-        <p class="lightbox__title">${this.currentMedia.title}</p>
-        </div>`;
+    boxContentMedia.classList.add("lightbox-media");
+    contentMedia.classList.add("ligthbox__container-img");
+    title.classList.add("lightbox__title");
 
-    lbContainer.appendChild(div);
+    btnLeft.classList.add("lightbox-btn", "left");
+    btnLeft.setAttribute("tabindex", "0");
+    btnLeft.setAttribute("aria-label", "média précédent");
 
-    return lbContainer;
+    btnRight.classList.add("lightbox-btn", "right");
+    btnRight.setAttribute("tabindex", "0");
+    btnRight.setAttribute("aria-label", "média suivant");
+
+    spanCloseIcon.classList.add("fa", "fa-times");
+    spanLeftIcon.classList.add("fa", "fa-angle-left");
+    spanRightIcon.classList.add("fa", "fa-angle-right");
+
+    btnClose.classList.add("lightbox-btn", "close");
+    btnClose.setAttribute("onclick", "closeLBModal()");
+    btnClose.setAttribute("tabindex", "0");
+    btnClose.setAttribute("aria-label", "Bouton de fermeture");
+
+    title.textContent = this.currentMedia.title;
+    contentMedia.appendChild(this.typeMedia);
+    // DOM
+    boxContentMedia.appendChild(contentMedia);
+    boxContentMedia.appendChild(title);
+
+    btnClose.appendChild(spanCloseIcon);
+    btnLeft.appendChild(spanLeftIcon);
+    btnRight.appendChild(spanRightIcon);
+
+    div.appendChild(btnClose);
+    div.appendChild(btnLeft);
+    div.appendChild(btnRight);
+    div.appendChild(boxContentMedia);
+
+    // console.log("-- lbn-- ", div);
+
+    return div;
   }
 }
 export { LightboxFactory };
+// div.innerHTML = `
+// <button class="lightbox-btn close" onclick="closeLBModal()" tabindex="0" aria-label="Bouton de fermeture"><i class="fa fa-times"></i></button>
+
+//     <button class="lightbox-btn right" tabindex="0" aria-label="media suivant"><i class="fa fa-angle-right"></i>
+//     </button>
+
+//     <button class="lightbox-btn left" tabindex="0" aria-label="media précédent"><i class="fa fa-angle-left"></i>
+//     </button>
+
+//     <div class="ligthbox__container-img">${this.typeMedia}
+//     <p class="lightbox__title">${this.currentMedia.title}</p>
+//     </div>`;

@@ -104,45 +104,29 @@ class Photographer {
   }
 
   // rendu de la lightbox
-  displayLightbox(datas) {
+  async displayLightbox(datas) {
+    let id, obj;
+
     const lightbox = document.querySelector("#lightbox");
-    const mediaItem = document.querySelectorAll(".media-item");
-    let currentMedia;
 
-    mediaItem.forEach((elt) => {
+    const selectedArticle = document.querySelectorAll("article");
+    selectedArticle.forEach((elt) => {
       elt.addEventListener("click", (evt) => {
-        const currentId = evt.currentTarget.getAttribute("id");
-        const medias = getSelectedMedia(+currentId, datas);
-
-        let mediaSelected = new LightboxFactory(
-          +currentId,
-          medias[0],
-          datas
-        ).getLightboxDOM();
-        // 1er rendu
-        currentMedia = new LightboxFactory(currentId, medias[0], datas);
-        // rendu apres le clic
-        document
-          .querySelector(".lightbox-btn.left")
-          .addEventListener("click", () => {
-            const prevM = currentMedia.prevMedia();
-            console.log(prevM);
-            mediaSelected.innerHTML = "";
-            return new LightboxFactory(prevM.id, prevM, datas).getLightboxDOM();
-          });
-
-        document
-          .querySelector(".lightbox-btn.right")
-          .addEventListener("click", () => {
-            const nextM = currentMedia.nextMedia();
-            console.log(nextM);
-            mediaSelected.innerHTML = "";
-            return new LightboxFactory(nextM.id, nextM, datas).getLightboxDOM();
-          });
+        const currentId = Number(evt.target.id);
+        const currentObj = getSelectedMedia(currentId, datas);
+        id = currentId;
+        obj = currentObj[0];
+        console.log(id);
+        console.log(obj);
+        try {
+          lightbox.appendChild(
+            new LightboxFactory(id, obj, datas).getLightboxDOM()
+          );
+        } catch (error) {
+          console.log(error);
+        }
       });
     });
-
-    lightbox.innerHTML = mediaItem;
   }
 
   // nouveau rendu après le tri

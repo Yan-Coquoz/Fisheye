@@ -9,7 +9,7 @@ export class Video {
     const video = document.createElement("video");
     const source = document.createElement("source");
 
-    video.classList.add("class", "card_media--vid");
+    video.classList.add("card_media--vid");
     div.setAttribute("onclick", "openLBModal()");
 
     video.classList.add = "media-item";
@@ -21,7 +21,7 @@ export class Video {
 
     video.appendChild(source);
     div.appendChild(video);
-
+    // console.log(div);
     return div;
   }
 }

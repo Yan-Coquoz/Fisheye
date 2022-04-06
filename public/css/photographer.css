@@ -312,20 +312,24 @@ form button.contact_button:disabled {
 .lightbox-btn.close:hover {
   transform: scale(1.3);
 }
-.ligthbox__container-img {
+.lightbox-media {
+  width: 100%;
+  margin: 3rem auto;
+  z-index: 11;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+.ligthbox__container-img {
+  /* display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 6rem;
-  margin-bottom: 3rem;
+  margin-bottom: 3rem; */
 }
 .ligthbox__container-img .card_media--img {
-  margin: 0 6rem;
-  z-index: 11;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
 }
 .ligthbox__container-img img {
@@ -341,4 +345,6 @@ form button.contact_button:disabled {
   color: #901c1c;
   margin-top: 1rem;
   font-size: 1.5rem;
+  align-self: flex-start;
+  margin-left: 5rem;
 }

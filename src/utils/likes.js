@@ -1,3 +1,15 @@
+// toutes les likes d'un photographe
+/**
+ * @param {array} datas d'un photographe
+ * @returns number
+ */
+export function getAllLike(datas) {
+  let initValue = 0; // indice
+  return datas.reduce((previous, current) => {
+    return previous + current.likes;
+  }, initValue);
+}
+
 export function onLikes() {
   //le footer contenant le nbr de likes
   const footerLikes = document.querySelector(".likes_container-footer > span");
@@ -59,16 +71,4 @@ export function onLikes() {
       }
     });
   });
-}
-
-// toutes les likes d'un photographe
-/**
- * @param {array} datas d'un photographe
- * @returns
- */
-export function getAllLike(datas) {
-  let initValue = 0; // indice
-  return datas.reduce((previous, current) => {
-    return previous + current.likes;
-  }, initValue);
 }

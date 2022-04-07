@@ -322,15 +322,19 @@ form button.contact_button:disabled {
   align-items: center;
 }
 
-.ligthbox__container-img .card_media--img {
+.ligthbox__container-box .card_media--img {
   height: 100vh;
 }
-.ligthbox__container-img img {
+.ligthbox__container-box img {
   object-fit: cover;
   width: auto;
   height: 100%;
 }
-.ligthbox__container-img video {
+.ligthbox__container-box > div > video {
+  display: flex;
+}
+.ligthbox__container-box div video {
+  margin: 0 auto;
   width: 80%;
   height: auto;
 }
@@ -339,5 +343,5 @@ form button.contact_button:disabled {
   margin-top: 1rem;
   font-size: 1.5rem;
   align-self: flex-start;
-  margin-left: 5rem;
+  margin-left: 8rem;
 }

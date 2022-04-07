@@ -16,27 +16,34 @@ class LightboxFactory {
     this.boxContentMedia = document.createElement("div");
     this.typeMedia = new TypeMediaFactory(this.getCurrentMedia());
     document.addEventListener("keyup", this.onKeyUp);
+    // this.onLoad();
   }
 
   /**
-   * @param {object} media - le media selectioné
-   * @returns
+   * @param {object} media le nouveau media courant
+   * @returns object
    */
   setCurrentMedia(media) {
-    return (this.currentMedia = media);
+    this.currentMedia = media;
+    return this.currentMedia;
   }
   getCurrentMedia() {
+    // console.log("-_- ", this.currentMedia);
     return this.currentMedia;
   }
 
+  /**
+   * gestion des evenements au clavier
+   * @param {MouseEvent} e
+   */
   onKeyUp(evt) {
-    console.log("keyup");
     if (evt.key === "Escape") {
       this.closeLb(evt);
     }
   }
 
   /**
+   * Fermeture de la modale (Lightbox)
    * @param {MouseEvent} e
    */
   closeLb(evt) {
@@ -51,33 +58,57 @@ class LightboxFactory {
   }
 
   // passage au média suivant
-  nextMedia() {
+  nextMedia(evt) {
+    evt.preventDefault();
     const currentMediaId = getIndexCurrentMedia(this.currentId, this.datas);
+
     if (this.datas.length - 1 === currentMediaId) {
-      return this.setCurrentMedia(this.datas[0]);
+      this.setCurrentMedia(this.datas[0]);
+      this.typeMedia = new TypeMediaFactory(this.getCurrentMedia());
+      this.onLoad();
     } else {
-      return this.setCurrentMedia(this.datas[currentMediaId + 1]);
+      this.setCurrentMedia(this.datas[currentMediaId + 1]);
+      this.typeMedia = new TypeMediaFactory(this.getCurrentMedia());
+      this.onLoad();
     }
   }
 
-  // passage au média précédent
+  /**
+   * passage au média précédent
+   * @param {MouseEvent} evt
+   * @returns object
+   */
   prevMedia(evt) {
     evt.preventDefault();
+    const currentMediaId = getIndexCurrentMedia(this.currentId, this.datas);
 
-    const currentMediaId = getIndexCurrentMedia.bind(
-      this,
-      this.currentId,
-      this.datas
-    );
-    console.log(currentMediaId);
     if (currentMediaId === 0) {
       const i = this.datas.length - 1;
-      return this.setCurrentMedia(this.datas[i]);
+      this.setCurrentMedia(this.datas[i]);
+      this.typeMedia = new TypeMediaFactory(this.getCurrentMedia());
+      this.onLoad();
     } else {
-      return this.setCurrentMedia(this.datas[currentMediaId - 1]);
+      this.setCurrentMedia(this.datas[currentMediaId - 1]);
+      this.typeMedia = new TypeMediaFactory(this.getCurrentMedia());
+      this.onLoad();
     }
   }
+  /**
+   * Affiche le nouveau contenu de la modale Lightbox (précédent / suivant)
+   */
+  async onLoad() {
+    const containerBox = document.querySelector(".ligthbox__container-box");
+    const title = this.typeMedia.getAttribute("data-title");
 
+    const lbTitle = document.querySelector(".lightbox__title");
+    lbTitle.textContent = title;
+
+    containerBox.innerHTML = "";
+
+    containerBox.appendChild(this.typeMedia);
+    this.boxContentMedia.appendChild(containerBox);
+    this.boxContentMedia.appendChild(lbTitle);
+  }
   /**
    * @returns HTMLElement
    */
@@ -103,25 +134,25 @@ class LightboxFactory {
     btnLeft.classList.add("lightbox-btn", "left");
     btnLeft.setAttribute("tabindex", "0");
     btnLeft.setAttribute("aria-label", "média précédent");
-    btnLeft.addEventListener("click", this.prevMedia);
+    btnLeft.addEventListener("click", this.prevMedia.bind(this));
 
     btnRight.classList.add("lightbox-btn", "right");
     btnRight.setAttribute("tabindex", "0");
     btnRight.setAttribute("aria-label", "média suivant");
+    btnRight.addEventListener("click", this.nextMedia.bind(this));
 
     spanCloseIcon.classList.add("fa", "fa-times");
     spanLeftIcon.classList.add("fa", "fa-angle-left");
     spanRightIcon.classList.add("fa", "fa-angle-right");
 
     btnClose.classList.add("lightbox-btn", "close");
-    // btnClose.setAttribute("onclick", "closeLBModal()");
     btnClose.setAttribute("tabindex", "0");
     btnClose.setAttribute("aria-label", "Bouton de fermeture");
 
     title.classList.add("lightbox__title");
     title.textContent = this.currentMedia.title;
 
-    contentMedia.classList.add("ligthbox__container-img");
+    contentMedia.classList.add("ligthbox__container-box");
     contentMedia.appendChild(this.typeMedia);
     // DOM
     this.boxContentMedia.appendChild(contentMedia);
@@ -141,11 +172,6 @@ class LightboxFactory {
       .addEventListener("click", this.closeLb.bind(this));
 
     return div;
-  }
-
-  onLoad() {
-    const media = this.getCurrentMedia();
-    console.log("onLoad m-- ", media);
   }
 }
 export { LightboxFactory };

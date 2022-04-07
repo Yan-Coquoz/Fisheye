@@ -112,6 +112,7 @@ class Photographer {
   async displayLightbox(datas) {
     const lightbox = document.querySelector("#lightbox");
     const divDom = document.createElement("div");
+    divDom.classList.add("Lightbox_Bloc");
 
     const selectedArticle = document.querySelectorAll("article");
     selectedArticle.forEach((elt) => {
@@ -120,28 +121,27 @@ class Photographer {
         const object = getSelectedMedia(currentId, datas)[0];
         // supprime l'élément précédent si il y a.
         divDom.innerHTML = "";
-        try {
-          divDom.appendChild(
-            new LightboxFactory(currentId, object, datas).getLightboxDOM()
-          );
-        } catch (error) {
-          throw new Error("Oops !", error);
-        }
+        // try {
+        divDom.appendChild(
+          new LightboxFactory(currentId, object, datas).getLightboxDOM()
+        );
+        // } catch (error) {
+        //   throw new Error("Oops !", error);
+        // }
       });
     });
 
     return lightbox.appendChild(divDom);
   }
 
-  // nouveau rendu après le tri
   /**
+   * Le nouveau rendu après le tri
    * @param {array} mediaOrderedBy - tableau des données réorganisé
    * @returns HTMLElement
    */
   getRenderMedia(mediaOrderedBy) {
     this.divMediaBlock.innerHTML = "";
     return mediaOrderedBy.forEach((card) => {
-      console.log(card.getCardMediaDom());
       return this.divMediaBlock.appendChild(card.getCardMediaDom());
     });
   }

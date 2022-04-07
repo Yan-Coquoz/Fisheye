@@ -1,7 +1,8 @@
 export class Video {
-  constructor(video, id) {
+  constructor(video, id, title) {
     this.video = video;
     this.id = id;
+    this.title = title;
   }
   displayVideo() {
     const assets = "../../public/assets/images/";
@@ -11,6 +12,7 @@ export class Video {
 
     video.classList.add("card_media--vid");
     div.setAttribute("onclick", "openLBModal()");
+    div.setAttribute("data-title", `${this.title}`);
 
     video.classList.add = "media-item";
     video.setAttribute("controls", "");

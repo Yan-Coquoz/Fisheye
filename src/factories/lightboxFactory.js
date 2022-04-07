@@ -16,7 +16,6 @@ class LightboxFactory {
     this.boxContentMedia = document.createElement("div");
     this.typeMedia = new TypeMediaFactory(this.getCurrentMedia());
     document.addEventListener("keyup", this.onKeyUp);
-    // this.onLoad();
   }
 
   /**
@@ -28,7 +27,6 @@ class LightboxFactory {
     return this.currentMedia;
   }
   getCurrentMedia() {
-    // console.log("-_- ", this.currentMedia);
     return this.currentMedia;
   }
 
@@ -38,7 +36,14 @@ class LightboxFactory {
    */
   onKeyUp(evt) {
     if (evt.key === "Escape") {
+      console.log("je ferme au clavier");
       this.closeLb(evt);
+    }
+    if (evt.Key === "ArrowLeft") {
+      this.prevMedia(evt);
+    }
+    if (evt.Key === "ArrowRight") {
+      this.nextMedia(evt);
     }
   }
 
@@ -54,13 +59,24 @@ class LightboxFactory {
     modal.setAttribute("aria-hidden", "true");
     modal.style.display = "none";
     // on le supprime de la mémoire
+    document
+      .querySelectorAll("article .card_media-container")
+      .forEach((elt) => {
+        elt.setAttribute("tabindex", "0");
+      });
+
     document.removeEventListener("keyup", this.onKeyUp);
   }
 
   // passage au média suivant
   nextMedia(evt) {
     evt.preventDefault();
-    const currentMediaId = getIndexCurrentMedia(this.currentId, this.datas);
+
+    const mediaId = document
+      .querySelector(".ligthbox__container-box > div")
+      .getAttribute("data-id");
+
+    const currentMediaId = getIndexCurrentMedia(Number(mediaId), this.datas);
 
     if (this.datas.length - 1 === currentMediaId) {
       this.setCurrentMedia(this.datas[0]);
@@ -80,7 +96,11 @@ class LightboxFactory {
    */
   prevMedia(evt) {
     evt.preventDefault();
-    const currentMediaId = getIndexCurrentMedia(this.currentId, this.datas);
+    const mediaId = document
+      .querySelector(".ligthbox__container-box > div")
+      .getAttribute("data-id");
+
+    const currentMediaId = getIndexCurrentMedia(Number(mediaId), this.datas);
 
     if (currentMediaId === 0) {
       const i = this.datas.length - 1;
@@ -96,7 +116,7 @@ class LightboxFactory {
   /**
    * Affiche le nouveau contenu de la modale Lightbox (précédent / suivant)
    */
-  async onLoad() {
+  onLoad() {
     const containerBox = document.querySelector(".ligthbox__container-box");
     const title = this.typeMedia.getAttribute("data-title");
 

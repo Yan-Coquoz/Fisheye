@@ -11,8 +11,8 @@ export class Video {
     const source = document.createElement("source");
 
     video.classList.add("card_media--vid");
-    div.setAttribute("onclick", "openLBModal()");
     div.setAttribute("data-title", `${this.title}`);
+    div.setAttribute("data-id", `${this.id}`);
 
     video.classList.add = "media-item";
     video.setAttribute("controls", "");

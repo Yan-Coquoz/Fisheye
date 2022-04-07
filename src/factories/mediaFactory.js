@@ -12,6 +12,12 @@ class MediaFactory {
     this.image = media.image;
     this.video = media.video;
     this.medias = media;
+    this.onOpenModale = this.onOpenModale.bind(this);
+    document
+      .querySelectorAll("article .card_media-container")
+      .forEach((elt) => {
+        elt.addEventListener("keyup", this.onOpenModale);
+      });
   }
   /**
    * @param {number} likes les likes courant
@@ -23,6 +29,33 @@ class MediaFactory {
   }
   getLikes() {
     return this.likes;
+  }
+
+  onOpenModale(evt) {
+    if (evt.key === "Enter") {
+      console.log("j'ouvre au clavier");
+      this.openLightbox(evt);
+    }
+  }
+  /**
+   * ouvre la lightbox
+   * @param {MouseEvent} evt
+   */
+  openLightbox(evt) {
+    evt.preventDefault();
+
+    const modal = document.getElementById("lightbox");
+    // modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+    modal.style.display = "block";
+
+    document
+      .querySelectorAll("article .card_media-container")
+      .forEach((elt) => {
+        elt.setAttribute("tabindex", "-1");
+      });
+
+    document.removeEventListener("keyup", this.onOpenModale);
   }
 
   // Stucture des filtres
@@ -64,8 +97,10 @@ class MediaFactory {
 
     cardMediaContainer.classList.add("card_media-container");
     cardMediaContainer.setAttribute("tabindex", `0`);
+    cardMediaContainer.addEventListener("click", this.openLightbox.bind(this));
+    cardMediaContainer.addEventListener("keyup", this.onOpenModale.bind(this));
 
-    mediaBox.id = this.id;
+    // mediaBox.id = this.id;
 
     para.classList.add("card_media--title");
     para.textContent = this.title;

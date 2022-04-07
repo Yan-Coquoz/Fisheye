@@ -9,8 +9,8 @@ export class Image {
     const assets = "../../public/assets/images/";
     const div = document.createElement("div");
     div.classList.add("card_media--img");
-    div.setAttribute("onclick", "openLBModal()");
     div.setAttribute("data-title", `${this.title}`);
+    div.setAttribute("data-id", `${this.id}`);
 
     const image = document.createElement("img");
     image.src = `${assets}${this.image}`;

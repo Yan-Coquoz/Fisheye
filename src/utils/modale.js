@@ -11,18 +11,3 @@ function closeModal() {
   modal.setAttribute("aria-hidden", "true");
   modal.style.display = "none";
 }
-
-// ouverture de la modale de la lightbox
-function openLBModal() {
-  const modal = document.getElementById("lightbox");
-  modal.classList.add("active");
-  modal.setAttribute("aria-hidden", "false");
-  modal.style.display = "block";
-}
-// fermeture de la lightbox
-function closeLBModal() {
-  const modal = document.getElementById("lightbox");
-  modal.classList.remove("active");
-  modal.setAttribute("aria-hidden", "true");
-  modal.style.display = "none";
-}

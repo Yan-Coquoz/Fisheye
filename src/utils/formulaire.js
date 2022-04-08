@@ -38,7 +38,7 @@ function formValidation() {
 }
 
 /**
- * @param {string} inputValue - valeur envoyer de l'input
+ * @param {InputEvent} inputValue - valeur reçu de l'input
  */
 function checkName(inputValue) {
   if (inputValue.target.id === "prenom") {
@@ -49,8 +49,8 @@ function checkName(inputValue) {
 }
 /**
  *
- * @param {number} index - index du parent de l'input
- * @param {string} inputValue - valeur de l'input
+ * @param {number} index - index de l'input
+ * @param {InputEvent} inputValue - valeur de l'input
  * @returns un msg d'erreur
  */
 function typeName(index, inputValue) {
@@ -126,12 +126,16 @@ function checkFormValidation(evt) {
 
   if (isPrenom && isNom && isEmail && isMsg) {
     console.log("Validation du formulaire");
+    for (let elt in inputs) {
+      console.log(`${elt} : ${inputs[elt].value}`);
+    }
     setTimeout(() => {
       for (const key in inputs) {
         inputs[key].value = "";
       }
       formValidations.length = 0;
       closeModale();
+      window.scrollTo(0, 0);
     }, 2000);
   } else {
     if (!isPrenom || !isNom) {

@@ -13,7 +13,7 @@ export function getAllLike(datas) {
 export function onLikes() {
   //le footer contenant le nbr de likes
   const footerLikes = document.querySelector(".likes_container-footer > span");
-  console.log(footerLikes);
+
   // a la souris
   document.querySelectorAll(".likes_container").forEach((elt) => {
     elt.addEventListener("click", () => {

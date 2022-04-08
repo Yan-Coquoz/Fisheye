@@ -1,8 +1,8 @@
 @import url("photographer.css");
 *:focus {
-  border: 5px solid #901c1c;
-  outline: none;
-  border-radius: 1 0px;
+  outline: 3px solid #901c1c;
+  outline-offset: 3px;
+  border-radius: 10px;
 }
 
 /* scroll-bar */

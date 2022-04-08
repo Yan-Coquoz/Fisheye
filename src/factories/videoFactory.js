@@ -6,16 +6,24 @@ export class Video {
   }
   displayVideo() {
     const assets = "../../public/assets/images/";
+    const play = "../../public/assets/icons/play-button.svg";
+    const lightbox = document.querySelector("#lightbox");
     const div = document.createElement("div");
     const video = document.createElement("video");
     const source = document.createElement("source");
 
+    div.classList.add("card_media--box-video");
     video.classList.add("card_media--vid");
     div.setAttribute("data-title", `${this.title}`);
     div.setAttribute("data-id", `${this.id}`);
 
     video.classList.add = "media-item";
-    video.setAttribute("controls", "");
+    if (lightbox.classList.contains("active")) {
+      video.setAttribute("controls", "");
+    } else {
+      video.removeAttribute("controls");
+    }
+
     video.id = this.id;
 
     source.setAttribute("src", `${assets}${this.video}`);
@@ -23,7 +31,7 @@ export class Video {
 
     video.appendChild(source);
     div.appendChild(video);
-    // console.log(div);
+
     return div;
   }
 }

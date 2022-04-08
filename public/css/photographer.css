@@ -139,6 +139,7 @@ figure {
 }
 .card_media-container {
   cursor: pointer;
+  /* position: relative; */
 }
 .card_media--img img {
   border-radius: 5px;
@@ -146,6 +147,14 @@ figure {
   height: 300px;
   object-fit: cover;
 }
+/* .card_media--box-video {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: url(../assets/icons/play-button.svg) center center / 100% 100%;
+  z-index: 10;
+} */
+
 .card_media--vid {
   border-radius: 5px;
   width: 350px;

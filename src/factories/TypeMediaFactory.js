@@ -3,12 +3,10 @@ import { Video } from "./videoFactory.js";
 
 export class TypeMediaFactory {
   /**
-   *
    * @param {objet} media - propiétés d'un media
    * @returns HTMLElement
    */
   constructor(media) {
-    // console.log(media);
     // je regarde si la bonne propriété existe
     if (media.hasOwnProperty("image")) {
       return new Image(

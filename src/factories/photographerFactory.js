@@ -17,7 +17,9 @@ class PhotographerFactory {
   getUserCardDOM() {
     const baseUrl = "../../public/photographer.html";
     const article = document.createElement("article");
+
     article.classList.add("article");
+
     const cardPhotographer = `
     <a href="${baseUrl}?id=${this.id}" aria-label="voir le travail du photographe ${this.name}">
       <div class="face-box">
@@ -33,6 +35,7 @@ class PhotographerFactory {
       <p class="box_desc__price">${this.price}€/jour</p>
     </div>
     `;
+
     article.innerHTML = cardPhotographer;
 
     return article;
@@ -40,10 +43,11 @@ class PhotographerFactory {
   // Page d'un photographe
   getPhotographerDOM() {
     const headerBlock = document.createElement("section");
-    headerBlock.classList.add("header__block");
     const dataHeart = new MediaFactory(this.datas);
-    // console.log("dataHeart ", dataHeart.medias);
-    const likes = getAllLike(dataHeart.medias); // TODO mettre les likes des medias pas de la datas
+    const likes = getAllLike(dataHeart.medias);
+
+    headerBlock.classList.add("header__block");
+
     headerBlock.innerHTML = `
     <div class="header__block-left">  
       <h1 class="header__block-name" tabindex="0" aria-hidden="false" aria-label="Photographe ${this.name}">${this.name}</h1>
@@ -56,7 +60,13 @@ class PhotographerFactory {
       <img class="photographer" alt="" src="../../public/assets/photographers/${this.portrait}"> 
     </div> 
 
-    <div class="like-price"  role="content-info" tabindex="0" ><div class="likes_container-footer"><span aria-label="nombre de j'aime" tabindex="0">${likes}</span><span>❤</span></div><span  aria-label="tarification par jours ${this.price}€">${this.price}€ / jour</span></div>
+    <div class="like-price"  role="content-info" tabindex="0" >
+      <div class="likes_container-footer">
+        <span aria-label="nombre de j'aime ${likes}" >${likes}</span>
+        <span aria-hidden="true">❤</span>
+      </div>
+      <span  aria-label="tarification par jours ${this.price}€">${this.price}€ / jour</span>
+    </div>
     `;
 
     return headerBlock;

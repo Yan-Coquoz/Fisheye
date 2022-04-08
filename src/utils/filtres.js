@@ -40,7 +40,7 @@ export function getDatasByPhotographId(id, medias) {
 }
 
 /**
- * Lightbox => reccupère le media selectionné
+ * réccupère le media selectionné
  * @param { number } id courant
  * @param { array } datas tableau d'objet
  * @returns Object

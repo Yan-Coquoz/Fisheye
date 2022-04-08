@@ -33,7 +33,6 @@ class MediaFactory {
 
   onOpenModale(evt) {
     if (evt.key === "Enter") {
-      console.log("j'ouvre au clavier");
       this.openLightbox(evt);
     }
   }
@@ -43,9 +42,8 @@ class MediaFactory {
    */
   openLightbox(evt) {
     evt.preventDefault();
-
     const modal = document.getElementById("lightbox");
-    // modal.classList.add("active");
+    modal.classList.add("active");
     modal.setAttribute("aria-hidden", "false");
     modal.style.display = "block";
 
@@ -54,7 +52,7 @@ class MediaFactory {
       .forEach((elt) => {
         elt.setAttribute("tabindex", "-1");
       });
-
+    document.querySelector("#lightbox .close").focus();
     document.removeEventListener("keyup", this.onOpenModale);
   }
 
@@ -100,8 +98,6 @@ class MediaFactory {
     cardMediaContainer.addEventListener("click", this.openLightbox.bind(this));
     cardMediaContainer.addEventListener("keyup", this.onOpenModale.bind(this));
 
-    // mediaBox.id = this.id;
-
     para.classList.add("card_media--title");
     para.textContent = this.title;
 
@@ -125,7 +121,7 @@ class MediaFactory {
     mediaBox.appendChild(para);
 
     containtSpan.addEventListener("click", onLikes);
-    // console.log("getCardMediaDom -- ", mediaBox);
+
     return mediaBox;
   }
 }

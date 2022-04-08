@@ -7,6 +7,7 @@ export class Image {
   }
   displayImage() {
     const assets = "../../public/assets/images/";
+
     const div = document.createElement("div");
     div.classList.add("card_media--img");
     div.setAttribute("data-title", `${this.title}`);
@@ -15,10 +16,10 @@ export class Image {
     const image = document.createElement("img");
     image.src = `${assets}${this.image}`;
     image.id = this.id;
-    image.setAttribute("alt", `photo faite le ${this.date}`);
+    image.setAttribute("alt", `${this.title}, fait le ${this.date}`);
 
     div.appendChild(image);
-    // console.log(div);
+
     return div;
   }
 }

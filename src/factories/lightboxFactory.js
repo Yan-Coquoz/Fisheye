@@ -36,7 +36,6 @@ class LightboxFactory {
    */
   onKeyUp(evt) {
     if (evt.key === "Escape") {
-      console.log("je ferme au clavier");
       this.closeLb(evt);
     }
     if (evt.Key === "ArrowLeft") {
@@ -53,7 +52,8 @@ class LightboxFactory {
    */
   closeLb(evt) {
     evt.preventDefault();
-    console.log("close modal");
+    const lightbox = document.querySelector("#lightbox");
+    lightbox.classList.remove("active");
     const modal = document.getElementById("lightbox");
     modal.classList.remove("active");
     modal.setAttribute("aria-hidden", "true");
@@ -64,7 +64,7 @@ class LightboxFactory {
       .forEach((elt) => {
         elt.setAttribute("tabindex", "0");
       });
-
+    window.scrollTo(0, 0);
     document.removeEventListener("keyup", this.onKeyUp);
   }
 

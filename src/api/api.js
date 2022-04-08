@@ -1,4 +1,3 @@
-
 class Api {
   constructor(url) {
     this.url = url;
@@ -7,14 +6,12 @@ class Api {
     return fetch(this.url)
       .then((res) => res.json())
       .then((res) => {
-        // console.log("Api / response : ", res);
         return res;
       })
       .catch((err) => {
-        console.log("OOPS ! ", err);
+        throw new Error("OOPS ! ", err);
       });
   }
 }
 
 export { Api };
-

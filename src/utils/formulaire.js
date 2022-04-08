@@ -117,10 +117,14 @@ function checkFormValidation(evt) {
       "Le formulaire est vide , vous ne pouvez pas l'envoyer !";
 
     noValues.style.backgroundColor = "white";
-    noValues.style.display = "block";
+    noValues.style.fontWeight = "bold";
+    noValues.style.padding = ".5rem";
+    noValues.style.color = "red";
+    noValues.style.borderRadius = "5px";
+
     btnFormValidation.insertAdjacentElement("afterend", noValues);
     setTimeout(() => {
-      noValues.style.display = "none";
+      noValues.remove();
     }, 3000);
   }
 

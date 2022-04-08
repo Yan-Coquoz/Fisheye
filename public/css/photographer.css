@@ -139,7 +139,6 @@ figure {
 }
 .card_media-container {
   cursor: pointer;
-  /* position: relative; */
 }
 .card_media--img img {
   border-radius: 5px;
@@ -147,13 +146,6 @@ figure {
   height: 300px;
   object-fit: cover;
 }
-/* .card_media--box-video {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  background: url(../assets/icons/play-button.svg) center center / 100% 100%;
-  z-index: 10;
-} */
 
 .card_media--vid {
   border-radius: 5px;
@@ -177,6 +169,85 @@ figure {
 
 /* Modale de Formulaire*/
 #contact_modal {
+  box-sizing: border-box;
+  display: none;
+  background: #c4c4c466;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  min-height: 100%;
+  height: 200%;
+}
+.modal {
+  display: flex;
+  flex-direction: column;
+  margin: 4rem auto;
+  border-radius: 5px;
+  background: #db8876;
+  width: 30%;
+  min-width: 40%;
+  padding: 3rem 2rem;
+  box-shadow: 0 4px 14px 1px #312e2e;
+  justify-content: space-between;
+}
+.modal header {
+  margin-bottom: 1rem;
+}
+.contact_modal-title {
+  font-size: 2em;
+}
+button.contact_modal-close {
+  outline: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 42px;
+  height: 42px;
+}
+button.contact_modal-close img {
+  object-fit: cover;
+}
+form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.form-inputs {
+  display: flex;
+  flex-direction: column;
+}
+input,
+textarea {
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  padding: 0.7rem 1rem;
+  font-weight: bold;
+}
+label {
+  font-size: 24px;
+  margin-bottom: 0.2rem;
+}
+form button.contact_button:disabled {
+  background: #db8876;
+  border: 2px solid black;
+  box-shadow: 0 4px 14px 1px #312e2e;
+}
+.form__error {
+  display: none;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+.form__error.visible {
+  display: block;
+  color: red;
+  font-weight: bold;
+  background: #fff;
+}
+/* #contact_modal {
   display: none;
   background-color: #c4c4c466;
   position: absolute;
@@ -186,9 +257,9 @@ figure {
 }
 .modal {
   align-items: center;
+  box-shadow: 0 4px 14px 1px #312e2e;
   background-color: #db8876;
   border-radius: 5px;
-  box-shadow: 0 4px 14px 1px #312e2e;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -279,8 +350,8 @@ form button.contact_button:disabled {
 .form__error.visible {
   display: block;
   color: red;
-  background: #fff;
-}
+  background: #fff; 
+}*/
 /* lightbox */
 #lightbox {
   display: none;

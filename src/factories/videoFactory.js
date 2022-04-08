@@ -6,7 +6,7 @@ export class Video {
   }
   displayVideo() {
     const assets = "../../public/assets/images/";
-    const play = "../../public/assets/icons/play-button.svg";
+
     const lightbox = document.querySelector("#lightbox");
     const div = document.createElement("div");
     const video = document.createElement("video");

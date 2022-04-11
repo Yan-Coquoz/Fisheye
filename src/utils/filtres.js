@@ -24,7 +24,11 @@ export function getDataByDate(datas) {
   });
 }
 
-// réccup 1 photographe
+/**
+ * @param {number} id du photographe
+ * @param {array} users les données des photographes
+ * @returns {array} données d'un photographe
+ */
 export function getPhotographer(id, users) {
   const datas = users.filter((user) => {
     return user.id === id;
@@ -32,7 +36,11 @@ export function getPhotographer(id, users) {
   return datas[0];
 }
 
-// réccup les medias d'1 photographe
+/**
+ * @param {number} id du photographe
+ * @param {array} medias les médias des photographes
+ * @returns Array
+ */
 export function getDatasByPhotographId(id, medias) {
   return medias.filter((media) => {
     return media.photographerId === id;

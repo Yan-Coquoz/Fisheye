@@ -48,6 +48,7 @@ class MediaFactory {
     modal.setAttribute("aria-hidden", "false");
     modal.style.display = "block";
 
+    // accessibilité
     document
       .querySelectorAll("article .card_media-container")
       .forEach((elt) => {
@@ -61,7 +62,7 @@ class MediaFactory {
     document.querySelectorAll(".likes_container").forEach((elt) => {
       elt.setAttribute("tabindex", "-1");
     });
-
+    // suppression de l'écouteur
     document.removeEventListener("keyup", this.onOpenModale);
   }
 

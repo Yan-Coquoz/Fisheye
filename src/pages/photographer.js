@@ -38,7 +38,7 @@ class Photographer {
   // rendu du photographe
   async displayPhotographer(userPhotograph, datas) {
     const photographHeader = document.querySelector(".photograph-header");
-    console.log("Display photo ", datas);
+
     const photographer = new PhotographerFactory(
       userPhotograph.id,
       userPhotograph.name,
@@ -136,20 +136,19 @@ class Photographer {
 
   /**
    *  rendu de la lightbox
-   * @param {array} datas - toutes les datas
    * @returns HTMLElement
    */
-  async displayLightbox(datas) {
+  async displayLightbox() {
     const lightbox = document.querySelector("#lightbox");
-
     const divDom = document.createElement("div");
     divDom.classList.add("lightbox_bloc");
-
+    // creation de la LB au click
     const selectedArticle = document.querySelectorAll("article");
     selectedArticle.forEach((elt) => {
       elt.addEventListener("click", (evt) => {
         const currentId = Number(evt.target.id);
-        const object = getSelectedMedia(currentId, datas)[0];
+        console.log("id", currentId);
+        const object = getSelectedMedia(currentId, this.getDatas())[0];
         // supprime l'élément précédent si il y a.
         divDom.innerHTML = "";
 
@@ -163,6 +162,26 @@ class Photographer {
         );
       });
     });
+
+    selectedArticle.forEach((elt) => {
+      elt.addEventListener("keyup", (evt) => {
+        const currentId = Number(evt.target.id);
+        const object = getSelectedMedia(currentId, this.getDatas())[0];
+        // supprime l'élément précédent si il y a.
+        divDom.innerHTML = "";
+        if (evt.key === "Enter") {
+          // try {
+          divDom.appendChild(
+            new LightboxFactory(
+              currentId,
+              object,
+              this.getDatas()
+            ).getLightboxDOM()
+          );
+        }
+      });
+    });
+
     document.querySelector("button.lightbox-btn.close");
     return lightbox.appendChild(divDom);
   }
@@ -177,7 +196,7 @@ class Photographer {
 
     this.displayPhotographer(photographer, this.getDatas());
     this.displayMedia();
-    this.displayLightbox(this.getDatas());
+    this.displayLightbox();
   }
 }
 const user = new Photographer();

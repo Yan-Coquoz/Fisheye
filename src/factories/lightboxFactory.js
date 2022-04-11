@@ -43,15 +43,6 @@ class LightboxFactory {
     if (evt.key === "Escape") {
       this.closeLb(evt);
     }
-    if (evt.Key === "ArrowLeft") {
-      this.prevMedia(evt);
-    }
-    if (evt.Key === "ArrowRight") {
-      this.nextMedia(evt);
-    }
-    if (evt.Key === "Enter") {
-      this.getLightboxDOM();
-    }
   }
 
   /**
@@ -60,19 +51,21 @@ class LightboxFactory {
    */
   closeLb(evt) {
     evt.preventDefault();
-    const lightbox = document.querySelector("#lightbox");
-    lightbox.classList.remove("active");
 
     const modal = document.getElementById("lightbox");
     modal.classList.remove("active");
     modal.setAttribute("aria-hidden", "true");
     modal.style.display = "none";
-    // on le supprime de la mémoire
+
     document
       .querySelectorAll("article .card_media-container")
       .forEach((elt) => {
         elt.setAttribute("tabindex", "0");
       });
+    // Je supprime le contenu de la LB
+    document
+      .querySelector("div.lightbox_bloc")
+      .removeChild(document.querySelector(".lightbox-container"));
 
     const section = document.querySelector("section.media_content");
     section.setAttribute("tabindex", "0");

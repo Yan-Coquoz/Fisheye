@@ -17,6 +17,14 @@ class Photographer {
     this.id = this.extractUrlParam();
     this.divMediaBlock = document.createElement("div");
     this.section = document.createElement("section");
+    this.photographersMedias = this.getDatas();
+  }
+  // Getter & Setter
+  getDatas() {
+    return this.photographersMedias;
+  }
+  setDatas(datas) {
+    this.photographersMedias = datas;
   }
 
   extractUrlParam() {
@@ -28,21 +36,22 @@ class Photographer {
     return Number(getId[2]);
   }
   // rendu du photographe
-  async displayPhotographer(user, datas) {
+  async displayPhotographer(userPhotograph, datas) {
     const photographHeader = document.querySelector(".photograph-header");
+    console.log("Display photo ", datas);
     const photographer = new PhotographerFactory(
-      user.id,
-      user.name,
-      user.portrait,
-      user.city,
-      user.country,
-      user.price,
-      user.tagline,
+      userPhotograph.id,
+      userPhotograph.name,
+      userPhotograph.portrait,
+      userPhotograph.city,
+      userPhotograph.country,
+      userPhotograph.price,
+      userPhotograph.tagline,
       datas
     );
     const cardPhotographer = photographer.getPhotographerDOM();
     photographHeader.appendChild(cardPhotographer);
-    // mise en place du nom dans la modale de formulaire
+    // mise en place du nom dans la modale de usefiltres
     const titleForm = document.querySelector(".contact_modal-title");
     const span = document.createElement("span");
     span.style.display = "block";
@@ -50,8 +59,9 @@ class Photographer {
     titleForm.appendChild(span);
   }
   // rendu des médias
-  async displayMedia(datas) {
-    let formulaire, cardMedia;
+  async displayMedia() {
+    console.log("display Medias ");
+    let usefiltres, cardMedia;
     const photographHeader = document.querySelector(".photograph-header");
     this.section.classList.add("media_content");
     this.divMediaBlock.classList.add("media-container");
@@ -62,76 +72,54 @@ class Photographer {
     photographHeader.after(this.section);
 
     // instanciation des medias
-    cardMedia = datas.map((data) => {
+    cardMedia = this.getDatas().map((data) => {
       const values = new MediaFactory(data);
-      formulaire = new MediaFactory(data);
+      usefiltres = new MediaFactory(data);
       return values.getCardMediaDom();
     });
-    // formulaire de tri
-    const formaData = formulaire.getSortMediaDom();
-    // je recupere le select du form
-
-    formaData.querySelector(".form-select").addEventListener("input", (evt) => {
-      // je capte la valeur de retour du formulaire
-      switch (evt.target.value) {
-        case "popularite":
-          cardMedia = getDataByPop(datas);
-          // on créé une nouvelle instance
-          const cardMediaByPop = cardMedia.map((data) => {
-            return new MediaFactory(data);
-          });
-          return this.getRenderMedia(cardMediaByPop);
-        case "date":
-          cardMedia = getDataByDate(datas);
-          const cardMediaByDate = cardMedia.map((data) => {
-            return new MediaFactory(data);
-          });
-          return this.getRenderMedia(cardMediaByDate);
-        case "titre":
-          cardMedia = getDataByTitle(datas);
-
-          const cardMediaByTitle = cardMedia.map((data) => {
-            return new MediaFactory(data);
-          });
-          return this.getRenderMedia(cardMediaByTitle);
-      }
-    });
-
+    console.log("cardMedia ", cardMedia);
+    // 1er rendu des médias
     cardMedia.forEach((card) => {
       return this.divMediaBlock.appendChild(card);
     });
 
-    return this.section.insertAdjacentElement("afterbegin", formaData);
-  }
+    // usefiltres de tri
+    const filtredDatas = usefiltres.getSortMediaDom();
+    // je recupere le select du form
 
-  /**
-   *  rendu de la lightbox
-   * @param {array} datas - toutes les datas
-   * @returns HTMLElement
-   */
-  async displayLightbox(datas) {
-    const lightbox = document.querySelector("#lightbox");
-    const divDom = document.createElement("div");
-    divDom.classList.add("Lightbox_Bloc");
+    filtredDatas
+      .querySelector(".form-select")
+      .addEventListener("input", (evt) => {
+        // je capte la valeur de retour du usefiltres
+        switch (evt.target.value) {
+          case "popularite":
+            cardMedia = getDataByPop(this.getDatas());
+            console.log("pop ", cardMedia);
+            // on créé une nouvelle instance
+            const cardMediaByPop = cardMedia.map((data) => {
+              return new MediaFactory(data);
+            });
+            return this.getRenderMedia(cardMediaByPop);
 
-    const selectedArticle = document.querySelectorAll("article");
-    selectedArticle.forEach((elt) => {
-      elt.addEventListener("click", (evt) => {
-        const currentId = Number(evt.target.id);
-        const object = getSelectedMedia(currentId, datas)[0];
-        // supprime l'élément précédent si il y a.
-        divDom.innerHTML = "";
-        // try {
-        divDom.appendChild(
-          new LightboxFactory(currentId, object, datas).getLightboxDOM()
-        );
-        // } catch (error) {
-        //   throw new Error("Oops !", error);
-        // }
+          case "date":
+            cardMedia = getDataByDate(this.getDatas());
+            console.log("date ", cardMedia);
+            const cardMediaByDate = cardMedia.map((data) => {
+              return new MediaFactory(data);
+            });
+            return this.getRenderMedia(cardMediaByDate);
+
+          case "titre":
+            cardMedia = getDataByTitle(this.getDatas());
+            console.log("titre ", cardMedia);
+            this.setDatas(cardMedia);
+            const cardMediaByTitle = cardMedia.map((data) => {
+              return new MediaFactory(data);
+            });
+            return this.getRenderMedia(cardMediaByTitle);
+        }
       });
-    });
-
-    return lightbox.appendChild(divDom);
+    this.section.insertAdjacentElement("afterbegin", filtredDatas);
   }
 
   /**
@@ -146,15 +134,50 @@ class Photographer {
     });
   }
 
+  /**
+   *  rendu de la lightbox
+   * @param {array} datas - toutes les datas
+   * @returns HTMLElement
+   */
+  async displayLightbox(datas) {
+    const lightbox = document.querySelector("#lightbox");
+
+    const divDom = document.createElement("div");
+    divDom.classList.add("lightbox_bloc");
+
+    const selectedArticle = document.querySelectorAll("article");
+    selectedArticle.forEach((elt) => {
+      elt.addEventListener("click", (evt) => {
+        const currentId = Number(evt.target.id);
+        const object = getSelectedMedia(currentId, datas)[0];
+        // supprime l'élément précédent si il y a.
+        divDom.innerHTML = "";
+
+        // try {
+        divDom.appendChild(
+          new LightboxFactory(
+            currentId,
+            object,
+            this.getDatas()
+          ).getLightboxDOM()
+        );
+      });
+    });
+    document.querySelector("button.lightbox-btn.close");
+    return lightbox.appendChild(divDom);
+  }
+
   async rendu() {
     // reccup les donnée de l'api
     const { photographers, media } = await this.photographers.getData();
     const datas = await getDatasByPhotographId(this.id, media);
     const photographer = await getPhotographer(this.id, photographers);
 
-    this.displayPhotographer(photographer, datas);
-    this.displayMedia(datas);
-    this.displayLightbox(datas);
+    this.setDatas(datas);
+
+    this.displayPhotographer(photographer, this.getDatas());
+    this.displayMedia();
+    this.displayLightbox(this.getDatas());
   }
 }
 const user = new Photographer();

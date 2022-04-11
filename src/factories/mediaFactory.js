@@ -1,6 +1,6 @@
 // Factory pour les medias
 import { TypeMediaFactory } from "./TypeMediaFactory.js";
-import { onLikes } from "../utils/likes.js";
+import { onLikes, addLikes } from "../utils/likes.js";
 
 class MediaFactory {
   constructor(media) {
@@ -42,6 +42,7 @@ class MediaFactory {
    */
   openLightbox(evt) {
     evt.preventDefault();
+
     const modal = document.getElementById("lightbox");
     modal.classList.add("active");
     modal.setAttribute("aria-hidden", "false");
@@ -52,13 +53,21 @@ class MediaFactory {
       .forEach((elt) => {
         elt.setAttribute("tabindex", "-1");
       });
-    document.querySelector("#lightbox .close").focus();
+
+    const section = document.querySelector("section.media_content");
+    section.setAttribute("tabindex", "-1");
+    section.setAttribute("aria-hidden", "true");
+
+    document.querySelectorAll(".likes_container").forEach((elt) => {
+      elt.setAttribute("tabindex", "-1");
+    });
+
     document.removeEventListener("keyup", this.onOpenModale);
   }
 
   // Stucture des filtres
   getSortMediaDom() {
-    const formBloc = document.createElement("form");
+    const filtreBloc = document.createElement("form");
     const formulaire = `
       <label for="tri" class="form-label">Trier par </label>
         <select class="form-select" name="choice" id="tri">
@@ -71,14 +80,18 @@ class MediaFactory {
           
         </select> 
     `;
-    formBloc.classList.add("form-block");
-    formBloc.setAttribute("aria-labelledby", "media-container");
-    formBloc.setAttribute("aria-hidden", "false");
-    formBloc.innerHTML = formulaire;
-    return formBloc;
+
+    filtreBloc.classList.add("form-block");
+    filtreBloc.setAttribute("aria-labelledby", "media-container");
+    filtreBloc.setAttribute("aria-hidden", "false");
+    filtreBloc.innerHTML = formulaire;
+    return filtreBloc;
   }
 
-  // Card media
+  /**
+   * Card media
+   * @returns HTMLElement
+   */
   getCardMediaDom() {
     const mediaBox = document.createElement("article");
     const media = new TypeMediaFactory(this.medias);
@@ -110,7 +123,6 @@ class MediaFactory {
     spanIcon.setAttribute("class", "fas fa-heart");
     spanIcon.setAttribute("aria-label", "likes");
 
-    // placement dans le DOM
     cardMedia.appendChild(cardMediaContainer);
     cardMediaContainer.appendChild(media);
     containtSpan.appendChild(span);
@@ -121,6 +133,7 @@ class MediaFactory {
     mediaBox.appendChild(para);
 
     containtSpan.addEventListener("click", onLikes);
+    containtSpan.addEventListener("keyup", addLikes);
 
     return mediaBox;
   }

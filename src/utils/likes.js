@@ -9,7 +9,11 @@ export function getAllLike(datas) {
     return previous + current.likes;
   }, initValue);
 }
-
+export function addLikes(evt) {
+  if (evt.key === "Enter") {
+    onLikes();
+  }
+}
 export function onLikes() {
   //le footer contenant le nbr de likes
   const footerLikes = document.querySelector(".likes_container-footer > span");
@@ -65,7 +69,6 @@ export function onLikes() {
         } else {
           currentHeartIcon.style.color = "#901c1c";
           currentHeartValue.textContent--;
-
           footerLikes.textContent = --currentNbrLike;
         }
       }

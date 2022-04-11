@@ -12,9 +12,10 @@ class LightboxFactory {
     this.currentId = Number(id);
     this.currentMedia = media;
     this.datas = datas;
-    this.onKeyUp = this.onKeyUp.bind(this);
+
     this.boxContentMedia = document.createElement("div");
     this.typeMedia = new TypeMediaFactory(this.getCurrentMedia());
+    this.onKeyUp = this.onKeyUp.bind(this);
     document.addEventListener("keyup", this.onKeyUp);
   }
 
@@ -24,12 +25,16 @@ class LightboxFactory {
    */
   setCurrentMedia(media) {
     this.currentMedia = media;
-    return this.currentMedia;
   }
   getCurrentMedia() {
     return this.currentMedia;
   }
-
+  setCurrentId(id) {
+    this.currentId = id;
+  }
+  getCurrentId() {
+    return Number(this.currentId);
+  }
   /**
    * gestion des evenements au clavier
    * @param {MouseEvent} e
@@ -44,6 +49,9 @@ class LightboxFactory {
     if (evt.Key === "ArrowRight") {
       this.nextMedia(evt);
     }
+    if (evt.Key === "Enter") {
+      this.getLightboxDOM();
+    }
   }
 
   /**
@@ -54,6 +62,7 @@ class LightboxFactory {
     evt.preventDefault();
     const lightbox = document.querySelector("#lightbox");
     lightbox.classList.remove("active");
+
     const modal = document.getElementById("lightbox");
     modal.classList.remove("active");
     modal.setAttribute("aria-hidden", "true");
@@ -64,19 +73,34 @@ class LightboxFactory {
       .forEach((elt) => {
         elt.setAttribute("tabindex", "0");
       });
+
+    const section = document.querySelector("section.media_content");
+    section.setAttribute("tabindex", "0");
+    section.setAttribute("aria-hidden", "false");
+
+    document.querySelectorAll(".likes_container").forEach((elt) => {
+      elt.setAttribute("tabindex", "0");
+    });
+
     window.scrollTo(0, 0);
+
     document.removeEventListener("keyup", this.onKeyUp);
   }
 
   // passage au média suivant
   nextMedia(evt) {
     evt.preventDefault();
+    // faire un setter
+    this.setCurrentId(
+      document
+        .querySelector(".ligthbox__container-box > div")
+        .getAttribute("data-id")
+    );
 
-    const mediaId = document
-      .querySelector(".ligthbox__container-box > div")
-      .getAttribute("data-id");
-
-    const currentMediaId = getIndexCurrentMedia(Number(mediaId), this.datas);
+    const currentMediaId = getIndexCurrentMedia(
+      this.getCurrentId(),
+      this.datas
+    );
 
     if (this.datas.length - 1 === currentMediaId) {
       this.setCurrentMedia(this.datas[0]);
@@ -96,11 +120,16 @@ class LightboxFactory {
    */
   prevMedia(evt) {
     evt.preventDefault();
-    const mediaId = document
-      .querySelector(".ligthbox__container-box > div")
-      .getAttribute("data-id");
+    this.setCurrentId(
+      document
+        .querySelector(".ligthbox__container-box > div")
+        .getAttribute("data-id")
+    );
 
-    const currentMediaId = getIndexCurrentMedia(Number(mediaId), this.datas);
+    const currentMediaId = getIndexCurrentMedia(
+      this.getCurrentId(),
+      this.datas
+    );
 
     if (currentMediaId === 0) {
       const i = this.datas.length - 1;
@@ -149,7 +178,7 @@ class LightboxFactory {
     div.classList.add("lightbox-container");
 
     this.boxContentMedia.classList.add("lightbox-media");
-    this.boxContentMedia.id = this.currentId;
+    this.boxContentMedia.id = this.getCurrentId();
 
     btnLeft.classList.add("lightbox-btn", "left");
     btnLeft.setAttribute("tabindex", "0");
@@ -186,7 +215,7 @@ class LightboxFactory {
     div.appendChild(btnLeft);
     div.appendChild(btnRight);
     div.appendChild(this.boxContentMedia);
-    // ecouteur sur la fermeture
+    // écouteur sur la fermeture
     div
       .querySelector(".lightbox-btn.close")
       .addEventListener("click", this.closeLb.bind(this));

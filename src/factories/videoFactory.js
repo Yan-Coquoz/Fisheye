@@ -13,14 +13,19 @@ export class Video {
     const source = document.createElement("source");
 
     div.classList.add("card_media--box-video");
-    video.classList.add("card_media--vid");
     div.setAttribute("data-title", `${this.title}`);
     div.setAttribute("data-id", `${this.id}`);
+    video.classList.add("card_media--vid");
 
-    video.classList.add = "media-item";
+    // video.classList.add = "media-item";
     if (lightbox.classList.contains("active")) {
       video.setAttribute("controls", "");
+      div.removeAttribute("aria-label");
     } else {
+      div.setAttribute(
+        "aria-label",
+        `Le contrôle de la vidéo est disponible dans la lightbox`
+      );
       video.removeAttribute("controls");
     }
 

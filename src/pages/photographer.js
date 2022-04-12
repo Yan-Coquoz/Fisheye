@@ -2,6 +2,7 @@ import { Api } from "../api/api.js";
 import { LightboxFactory } from "../factories/lightboxFactory.js";
 import { MediaFactory } from "../factories/mediaFactory.js";
 import { PhotographerFactory } from "../factories/photographerFactory.js";
+import { SortFactory } from "../factories/SortFactory.js";
 import {
   getDataByPop,
   getDataByTitle,
@@ -69,14 +70,19 @@ class Photographer {
     const titleForm = document.querySelector(".contact_modal-title");
     const span = document.createElement("span");
     span.style.display = "block";
-    span.textContent = user.name;
+
+    span.textContent = userPhotograph.name;
     titleForm.appendChild(span);
   }
 
   // rendu des médias
   async displayMedia() {
-    let renderSortDom, cardMedia;
     const photographHeader = document.querySelector(".photograph-header");
+
+    const selectedField = new SortFactory().getSortMediaDom();
+
+    this.section.insertAdjacentElement("afterbegin", selectedField);
+
     this.section.classList.add("media_content");
     this.mediaContainer.classList.add("media-container");
     this.mediaContainer.id = "media-container";
@@ -85,68 +91,82 @@ class Photographer {
 
     photographHeader.after(this.section);
 
-    // instanciation des medias
-    cardMedia = this.getDatas().map((data) => {
-      const values = new MediaFactory(data);
-      renderSortDom = new MediaFactory(data).getSortMediaDom();
-      return values.getCardMediaDom();
+    const fieldOptions = document.querySelectorAll(".form-options");
+    console.log(this.getDatas());
+    fieldOptions.forEach(() => {
+      document.addEventListener("input", (evt) =>
+        this.sortRendered(evt, this.getDatas())
+      );
     });
 
-    // 1er rendu des médias
-    cardMedia.forEach((card) => {
-      return this.mediaContainer.appendChild(card);
+    // instanciation des medias 1er rendu
+    this.getDatas().map((data) => {
+      return this.mediaContainer.appendChild(
+        new MediaFactory(data).getCardMediaDom()
+      );
     });
-
-    // tri des médias
-    renderSortDom
-      .querySelector(".form-select")
-      .addEventListener("input", (evt) => {
-        // je capte la valeur de retour du usefiltres
-        switch (evt.target.value) {
-          case "popularite":
-            cardMedia = getDataByPop(this.getDatas());
-            console.log("new tab pop ", cardMedia);
-            this.setDatas(cardMedia);
-            // on créé une nouvelle instance
-            const cardMediaByPop = cardMedia.map((data) => {
-              return new MediaFactory(data);
-            });
-
-            return this.getRenderMedia(cardMediaByPop);
-
-          case "date":
-            cardMedia = getDataByDate(this.getDatas());
-            console.log("new tab date ", cardMedia);
-            this.setDatas(cardMedia);
-            const cardMediaByDate = cardMedia.map((data) => {
-              return new MediaFactory(data);
-            });
-
-            return this.getRenderMedia(cardMediaByDate);
-
-          case "titre":
-            cardMedia = getDataByTitle(this.getDatas());
-            console.log("new tab titre ", cardMedia);
-            this.setDatas(cardMedia);
-            const cardMediaByTitle = cardMedia.map((data) => {
-              return new MediaFactory(data);
-            });
-            return this.getRenderMedia(cardMediaByTitle);
-        }
-      });
-    // rendu des médias au Dom avec le filtre de tri
-    this.section.insertAdjacentElement("afterbegin", renderSortDom);
   }
 
+  sortRendered(evt, datas) {
+    evt.preventDefault();
+
+    console.log("arrivée des datas ", datas);
+    let sortedMedia;
+    switch (evt.target.value) {
+      case "popularite":
+        sortedMedia = getDataByPop(datas);
+        this.setDatas(sortedMedia);
+        const cardMediaByPop = sortedMedia.map((data) => {
+          return new MediaFactory(data);
+        });
+        this.getRenderMedia(cardMediaByPop);
+
+        break;
+      case "titre":
+        console.log("titre");
+        sortedMedia = getDataByTitle(datas);
+        console.log("new tab titre ", sortedMedia);
+        this.setDatas(sortedMedia);
+        const cardMediaByTitle = sortedMedia.map((data) => {
+          return new MediaFactory(data);
+        });
+        return this.getRenderMedia(cardMediaByTitle);
+
+      case "date":
+        console.log("date");
+        sortedMedia = getDataByDate(datas);
+        console.log("new tab date ", sortedMedia);
+        this.setDatas(sortedMedia);
+        this.photographersMedias = sortedMedia;
+
+        const cardMediaByDate = sortedMedia.map((data) => {
+          return new MediaFactory(data);
+        });
+
+        return this.getRenderMedia(cardMediaByDate);
+
+      default:
+        sortedMedia = getDataByPop(this.getDatas());
+        console.log("new tab pop ", sortedMedia);
+        this.setDatas(sortedMedia);
+        console.log("default view");
+        // on créé une nouvelle instance
+        const cardMediadefault = sortedMedia.map((data) => {
+          return new MediaFactory(data);
+        });
+
+        return this.getRenderMedia(cardMediadefault);
+    }
+  }
   /**
    * Le nouveau rendu après le tri
    * @param {array} mediaOrderedBy - tableau des données réorganisé
-   * @returns {HTMLElement}
    */
   getRenderMedia(mediaOrderedBy) {
     this.mediaContainer.innerHTML = "";
-    return mediaOrderedBy.forEach((card) => {
-      this.mediaContainer.appendChild(card.getCardMediaDom());
+    mediaOrderedBy.forEach((card) => {
+      console.log(card);
+      return this.mediaContainer.appendChild(card.getCardMediaDom());
     });
   }
 
@@ -177,9 +197,9 @@ class Photographer {
 
   loadLightbox(evt, eltHTML) {
     const currentId = Number(evt.target.id);
-    console.log(currentId);
+
     const object = getSelectedMedia(currentId, this.getDatas())[0];
-    console.log("objet", object);
+
     // supprime l'élément précédent si il y a.
     eltHTML.innerHTML = "";
     if (evt.key === "Enter" || evt.type === "click") {

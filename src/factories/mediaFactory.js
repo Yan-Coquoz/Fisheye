@@ -66,29 +66,6 @@ class MediaFactory {
     document.removeEventListener("keyup", this.onOpenModale);
   }
 
-  // Stucture des filtres
-  getSortMediaDom() {
-    const filtreBloc = document.createElement("form");
-    const formulaire = `
-      <label for="tri" class="form-label">Trier par </label>
-        <select class="form-select" name="choice" id="tri">
-         
-          <option class="form-options" value="popularite">Popularité</option>
-          
-          <option class="form-options" value="date">Date</option>
-          
-          <option class="form-options" value="titre">Titre</option>
-          
-        </select> 
-    `;
-
-    filtreBloc.classList.add("form-block");
-    filtreBloc.setAttribute("aria-labelledby", "media-container");
-    filtreBloc.setAttribute("aria-hidden", "false");
-    filtreBloc.innerHTML = formulaire;
-    return filtreBloc;
-  }
-
   /**
    * Card media
    * @returns HTMLElement
@@ -122,7 +99,6 @@ class MediaFactory {
     span.classList.add("likes");
     span.textContent = this.getLikes();
     spanIcon.setAttribute("class", "fas fa-heart");
-    spanIcon.setAttribute("aria-label", "likes");
 
     cardMedia.appendChild(cardMediaContainer);
     cardMediaContainer.appendChild(media);

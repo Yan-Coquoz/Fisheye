@@ -17,6 +17,7 @@ export class Image {
     image.src = `${assets}${this.image}`;
     image.id = this.id;
     image.setAttribute("alt", `${this.title}, fait le ${this.date}`);
+    image.setAttribute("loading", `lazy`);
 
     div.appendChild(image);
 

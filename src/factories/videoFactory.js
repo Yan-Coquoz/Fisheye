@@ -17,7 +17,7 @@ export class Video {
     div.setAttribute("data-id", `${this.id}`);
     video.classList.add("card_media--vid");
 
-    // video.classList.add = "media-item";
+    // active => Version LB
     if (lightbox.classList.contains("active")) {
       video.setAttribute("controls", "");
       div.removeAttribute("aria-label");

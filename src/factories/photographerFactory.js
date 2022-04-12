@@ -24,7 +24,7 @@ class PhotographerFactory {
     <a href="${baseUrl}?id=${this.id}" aria-label="voir le travail du photographe ${this.name}">
       <div class="face-box">
         <div class="box_img">
-          <img src="../../public/assets/photographers/${this.portrait}" alt="photographe ${this.name}">
+          <img src="../../public/assets/photographers/${this.portrait}" loading="lazy" alt="photographe ${this.name}">
         </div>
         <h2 role="heading">${this.name}</h2>
       </div>
@@ -53,11 +53,11 @@ class PhotographerFactory {
       <h1 class="header__block-name" tabindex="0" aria-hidden="false" aria-label="Photographe ${this.name}">${this.name}</h1>
       <h2 class="city" tabindex="0" aria-label="localisation ${this.city},${this.country}" aria-hidden="false" >
      ${this.city}, ${this.country}</h2>
-      <p class="tagline" tabindex="0" aria-label="Devise : ${this.tagline}"
-      >${this.tagline}</p>
+      <div class="tagline" tabindex="0" aria-label="Devise : ${this.tagline}"
+      >${this.tagline}</div>
     </div>
     <div class="header__block-right">
-      <img class="photographer" alt="" src="../../public/assets/photographers/${this.portrait}"> 
+      <img class="photographer" loading="lazy" alt="" src="../../public/assets/photographers/${this.portrait}"> 
     </div> 
 
     <div class="like-price"  role="content-info" tabindex="0" >

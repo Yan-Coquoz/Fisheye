@@ -62,6 +62,7 @@ class LightboxFactory {
       .forEach((elt) => {
         elt.setAttribute("tabindex", "0");
       });
+
     // Je supprime le contenu de la LB
     document
       .querySelector("div.lightbox_bloc")

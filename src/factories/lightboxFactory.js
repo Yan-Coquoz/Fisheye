@@ -205,6 +205,7 @@ class LightboxFactory {
 
     contentMedia.classList.add("ligthbox__container-box");
     contentMedia.appendChild(this.typeMedia);
+
     // DOM
     this.boxContentMedia.appendChild(contentMedia);
     this.boxContentMedia.appendChild(title);

@@ -29,9 +29,11 @@ pour décrire ce qu'il fait.
 - Les images doivent présenter un attribut “alt”. Utilisez le titre des photos pour
 remplir cet attribut, et le nom du photographe dans le cas d’une photo de
 profil de photographe.
-- Le code devrait passer les tests [AChecker](https://achecker.achecks.ca/checker/index.php) sans “known issue” (afin qu'il soit
-- 
-conforme aux WCAG).
+- Le code devrait passer les tests [AChecker](https://achecker.achecks.ca/checker/index.php) sans “known issue” (afin qu'il soit conforme aux WCAG).
+
+
+
+
 - Toute la gestion des événements (par exemple, les clics et les pressions au
 clavier) doit être configurée (utilisez KeyboardEvent.key ou
 KeyboardEvent.code.).

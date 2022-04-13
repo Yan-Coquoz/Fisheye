@@ -94,14 +94,12 @@ class Photographer {
     photographHeader.after(this.section);
 
     const fieldOptions = document.querySelectorAll(".form-options");
-    console.log(this.getDatas());
     fieldOptions.forEach(() => {
       document.addEventListener("input", this.sortRendered.bind(this));
     });
 
     // instanciation des medias 1er rendu
     this.getDatas().forEach((data) => {
-      // console.log("data --=>", data);
       return this.mediaContainer.appendChild(
         new MediaFactory(data).getCardMediaDom()
       );
@@ -143,13 +141,14 @@ class Photographer {
         const sortedMediaByPop = getDataByPop(this.getDatas());
         this.setDatas(sortedMediaByPop);
         this.getNewRenderedMedia(sortedMediaByPop);
-
+        this.displayLightbox();
         break;
       case "titre":
         const sortedMediaByTitle = getDataByTitle(this.getDatas());
         console.log("new tab titre ", sortedMediaByTitle);
         this.setDatas(sortedMediaByTitle);
         this.getNewRenderedMedia(sortedMediaByTitle);
+        this.displayLightbox();
         break;
       case "date":
         const sortedMediaByDate = getDataByDate(this.getDatas());
@@ -157,14 +156,10 @@ class Photographer {
         this.setDatas(sortedMediaByDate);
 
         this.getNewRenderedMedia(sortedMediaByDate);
+        this.displayLightbox();
         break;
-
       default:
-        const sortedMediaByDefault = getDataByPop(this.getDatas());
-        console.log("new tab pop ", sortedMediaByDefault);
-        this.setDatas(sortedMediaByDefault);
-        console.log("default view");
-        return this.getNewRenderedMedia(cardMediadefault);
+        throw new Error("Pas de selection de tri valide");
     }
   }
 
@@ -178,7 +173,8 @@ class Photographer {
     divDom.classList.add("lightbox_bloc");
 
     // creation de la LB au click
-    const selectedArticle = document.querySelectorAll("article");
+    const selectedArticle = document.querySelectorAll(".media-box");
+
     selectedArticle.forEach((elt) => {
       elt.addEventListener("click", (evt) => this.loadLightbox(evt, divDom));
     });

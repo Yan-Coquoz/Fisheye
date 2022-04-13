@@ -25,7 +25,6 @@ class MediaFactory {
    */
   setLikes(likes) {
     this.likes = likes;
-    return this.likes;
   }
   getLikes() {
     return this.likes;

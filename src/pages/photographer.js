@@ -75,15 +75,17 @@ class Photographer {
     titleForm.appendChild(span);
   }
 
+  // rendu des filtres
+  displaySortFilter() {
+    this.section.classList.add("media_content");
+    const selectedField = new SortFactory().getSortMediaDom();
+    this.section.insertAdjacentElement("afterbegin", selectedField);
+  }
+
   // rendu des médias
   async displayMedia() {
     const photographHeader = document.querySelector(".photograph-header");
 
-    const selectedField = new SortFactory().getSortMediaDom();
-
-    this.section.insertAdjacentElement("afterbegin", selectedField);
-
-    this.section.classList.add("media_content");
     this.mediaContainer.classList.add("media-container");
     this.mediaContainer.id = "media-container";
     this.section.appendChild(this.mediaContainer);
@@ -94,80 +96,76 @@ class Photographer {
     const fieldOptions = document.querySelectorAll(".form-options");
     console.log(this.getDatas());
     fieldOptions.forEach(() => {
-      document.addEventListener("input", (evt) =>
-        this.sortRendered(evt, this.getDatas())
-      );
+      document.addEventListener("input", this.sortRendered.bind(this));
     });
 
     // instanciation des medias 1er rendu
-    this.getDatas().map((data) => {
+    this.getDatas().forEach((data) => {
+      // console.log("data --=>", data);
       return this.mediaContainer.appendChild(
         new MediaFactory(data).getCardMediaDom()
       );
     });
   }
 
-  sortRendered(evt, datas) {
+  /**
+   * Le nouveau rendu des médias après le tri
+   * @param {array} mediaOrderedBy - tableau des données réorganisé
+   */
+  getNewRenderedMedia(mediaOrderedBy) {
+    document.querySelectorAll(".media-box").forEach((elt) => {
+      elt.remove();
+    });
+
+    const render = mediaOrderedBy.map((card) => {
+      console.log("chaque articles ", card);
+      return this.mediaContainer.appendChild(
+        new MediaFactory(card).getCardMediaDom()
+      );
+    });
+    console.log("getNewRenderedMedia =>", render);
+    return render;
+  }
+
+  /**
+   * @param {keyboardEvent} evt
+   * @param {array} datas
+   * @returns
+   */
+  sortRendered(evt) {
     evt.preventDefault();
 
-    console.log("arrivée des datas ", datas);
-    let sortedMedia;
+    console.log("arrivée des datas ", this.getDatas());
+
     switch (evt.target.value) {
       case "popularite":
-        sortedMedia = getDataByPop(datas);
-        this.setDatas(sortedMedia);
-        const cardMediaByPop = sortedMedia.map((data) => {
-          return new MediaFactory(data);
-        });
-        this.getRenderMedia(cardMediaByPop);
+        console.log("pop");
+        const sortedMediaByPop = getDataByPop(this.getDatas());
+        this.setDatas(sortedMediaByPop);
+        this.getNewRenderedMedia(sortedMediaByPop);
 
         break;
       case "titre":
-        console.log("titre");
-        sortedMedia = getDataByTitle(datas);
-        console.log("new tab titre ", sortedMedia);
-        this.setDatas(sortedMedia);
-        const cardMediaByTitle = sortedMedia.map((data) => {
-          return new MediaFactory(data);
-        });
-        return this.getRenderMedia(cardMediaByTitle);
-
+        const sortedMediaByTitle = getDataByTitle(this.getDatas());
+        console.log("new tab titre ", sortedMediaByTitle);
+        this.setDatas(sortedMediaByTitle);
+        this.getNewRenderedMedia(sortedMediaByTitle);
+        break;
       case "date":
-        console.log("date");
-        sortedMedia = getDataByDate(datas);
-        console.log("new tab date ", sortedMedia);
-        this.setDatas(sortedMedia);
-        this.photographersMedias = sortedMedia;
+        const sortedMediaByDate = getDataByDate(this.getDatas());
+        console.log("new tab date ", sortedMediaByDate);
+        this.setDatas(sortedMediaByDate);
 
-        const cardMediaByDate = sortedMedia.map((data) => {
-          return new MediaFactory(data);
-        });
-
-        return this.getRenderMedia(cardMediaByDate);
+        this.getNewRenderedMedia(sortedMediaByDate);
+        break;
 
       default:
-        sortedMedia = getDataByPop(this.getDatas());
-        console.log("new tab pop ", sortedMedia);
-        this.setDatas(sortedMedia);
+        const sortedMediaByDefault = getDataByPop(this.getDatas());
+        console.log("new tab pop ", sortedMediaByDefault);
+        this.setDatas(sortedMediaByDefault);
         console.log("default view");
-        // on créé une nouvelle instance
-        const cardMediadefault = sortedMedia.map((data) => {
-          return new MediaFactory(data);
-        });
-
-        return this.getRenderMedia(cardMediadefault);
+        return this.getNewRenderedMedia(cardMediadefault);
     }
-  }
-  /**
-   * Le nouveau rendu après le tri
-   * @param {array} mediaOrderedBy - tableau des données réorganisé
-   */
-  getRenderMedia(mediaOrderedBy) {
-    this.mediaContainer.innerHTML = "";
-    mediaOrderedBy.forEach((card) => {
-      console.log(card);
-      return this.mediaContainer.appendChild(card.getCardMediaDom());
-    });
   }
 
   /**
@@ -220,7 +218,7 @@ class Photographer {
     this.setDatas(datas);
 
     this.displayPhotographer(photographer, this.getDatas());
-
+    this.displaySortFilter();
     this.displayMedia();
     this.displayLightbox();
   }

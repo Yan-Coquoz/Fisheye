@@ -48,7 +48,7 @@ export function getDatasByPhotographId(id, medias) {
 }
 
 /**
- * réccupère le media selectionné
+ * réccupère l'objet du media selectionné
  * @param { number } id courant
  * @param { array } datas tableau d'objet
  * @returns Object

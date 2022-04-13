@@ -15,6 +15,7 @@ class LightboxFactory {
 
     this.boxContentMedia = document.createElement("div");
     this.typeMedia = new TypeMediaFactory(this.getCurrentMedia());
+
     this.onKeyUp = this.onKeyUp.bind(this);
     document.addEventListener("keyup", this.onKeyUp);
   }
@@ -29,9 +30,15 @@ class LightboxFactory {
   getCurrentMedia() {
     return this.currentMedia;
   }
+  /**
+   * @param {number} id
+   */
   setCurrentId(id) {
     this.currentId = id;
   }
+  /**
+   * @returns le nouvel id
+   */
   getCurrentId() {
     return Number(this.currentId);
   }
@@ -47,7 +54,7 @@ class LightboxFactory {
 
   /**
    * Fermeture de la modale (Lightbox)
-   * @param {MouseEvent} e
+   * @param {MouseEvent} evt
    */
   closeLb(evt) {
     evt.preventDefault();
@@ -79,6 +86,7 @@ class LightboxFactory {
     window.scrollTo(0, 0);
 
     document.removeEventListener("keyup", this.onKeyUp);
+    document.removeEventListener("click", this.closeLb);
   }
 
   // passage au média suivant

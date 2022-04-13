@@ -115,29 +115,22 @@ class Photographer {
       elt.remove();
     });
 
-    const render = mediaOrderedBy.map((card) => {
-      console.log("chaque articles ", card);
+    mediaOrderedBy.forEach((card) => {
       return this.mediaContainer.appendChild(
         new MediaFactory(card).getCardMediaDom()
       );
     });
-    console.log("getNewRenderedMedia =>", render);
-    return render;
   }
 
   /**
    * @param {keyboardEvent} evt
-   * @param {array} datas
    * @returns
    */
   sortRendered(evt) {
     evt.preventDefault();
 
-    console.log("arrivée des datas ", this.getDatas());
-
     switch (evt.target.value) {
       case "popularite":
-        console.log("pop");
         const sortedMediaByPop = getDataByPop(this.getDatas());
         this.setDatas(sortedMediaByPop);
         this.getNewRenderedMedia(sortedMediaByPop);
@@ -145,16 +138,13 @@ class Photographer {
         break;
       case "titre":
         const sortedMediaByTitle = getDataByTitle(this.getDatas());
-        console.log("new tab titre ", sortedMediaByTitle);
         this.setDatas(sortedMediaByTitle);
         this.getNewRenderedMedia(sortedMediaByTitle);
         this.displayLightbox();
         break;
       case "date":
         const sortedMediaByDate = getDataByDate(this.getDatas());
-        console.log("new tab date ", sortedMediaByDate);
         this.setDatas(sortedMediaByDate);
-
         this.getNewRenderedMedia(sortedMediaByDate);
         this.displayLightbox();
         break;
@@ -171,38 +161,42 @@ class Photographer {
     const lightbox = document.querySelector("#lightbox");
     const divDom = document.createElement("div");
     divDom.classList.add("lightbox_bloc");
-
     // creation de la LB au click
     const selectedArticle = document.querySelectorAll(".media-box");
 
     selectedArticle.forEach((elt) => {
-      elt.addEventListener("click", (evt) => this.loadLightbox(evt, divDom));
-    });
-
-    selectedArticle.forEach((elt) => {
-      elt.addEventListener("keyup", (evt) => {
-        this.loadLightbox(evt, divDom);
-      });
+      elt.addEventListener("keyup", this.getDataForLightboxKb.bind(this));
+      elt.addEventListener("click", this.getDataForLightbox.bind(this));
     });
 
     document.querySelector("button.lightbox-btn.close");
     return lightbox.appendChild(divDom);
   }
+  getDataForLightboxKb(evt) {
+    if (evt.key === "Enter") {
+      this.getDataForLightbox(evt);
+    }
+  }
+  getDataForLightbox(evt) {
+    let currentId;
+    if (evt.key === "Enter") {
+      currentId = Number(evt.target.lastChild.firstChild.id);
+    } else {
+      currentId = Number(evt.target.id);
+    }
 
-  loadLightbox(evt, eltHTML) {
-    const currentId = Number(evt.target.id);
-
+    const divDom = document.querySelector(".lightbox_bloc");
     const object = getSelectedMedia(currentId, this.getDatas())[0];
 
     // supprime l'élément précédent si il y a.
-    eltHTML.innerHTML = "";
-    if (evt.key === "Enter" || evt.type === "click") {
-      eltHTML.appendChild(
-        new LightboxFactory(currentId, object, this.getDatas()).getLightboxDOM()
-      );
-    } else {
-      console.warn("pas de valeurs d'entrée");
-    }
+    divDom.innerHTML = "";
+
+    divDom.appendChild(
+      new LightboxFactory(currentId, object, this.getDatas()).getLightboxDOM()
+    );
+
+    document.removeEventListener("click", this.getDataForLightbox.bind(this));
+    document.removeEventListener("keyup", this.getDataForLightboxKb.bind(this));
   }
 
   async rendu() {

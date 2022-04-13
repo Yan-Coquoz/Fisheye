@@ -62,7 +62,8 @@ class MediaFactory {
       elt.setAttribute("tabindex", "-1");
     });
     // suppression de l'écouteur
-    document.removeEventListener("keyup", this.onOpenModale);
+    document.removeEventListener("keyup", this.onOpenModale.bind(this));
+    document.removeEventListener("click", this.openLightbox.bind(this));
   }
 
   /**
@@ -96,8 +97,8 @@ class MediaFactory {
     mediaBox.classList.add("media-box");
 
     span.classList.add("likes");
+    spanIcon.classList.add("fas", "fa-heart");
     span.textContent = this.getLikes();
-    spanIcon.setAttribute("class", "fas fa-heart");
 
     cardMedia.appendChild(cardMediaContainer);
     cardMediaContainer.appendChild(media);

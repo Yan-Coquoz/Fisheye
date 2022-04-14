@@ -1,6 +1,6 @@
 // Factory pour les medias
 import { TypeMediaFactory } from "./TypeMediaFactory.js";
-import { onLikes, addLikes } from "../utils/likes.js";
+import { onLikes } from "../utils/likes.js";
 
 class MediaFactory {
   constructor(media) {
@@ -110,7 +110,7 @@ class MediaFactory {
     mediaBox.appendChild(para);
 
     containtSpan.addEventListener("click", onLikes);
-    containtSpan.addEventListener("keyup", addLikes);
+    containtSpan.addEventListener("keyup", onLikes);
 
     return mediaBox;
   }

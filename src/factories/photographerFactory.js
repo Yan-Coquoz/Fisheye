@@ -60,13 +60,13 @@ class PhotographerFactory {
       <img class="photographer" loading="lazy" alt="" src="../../public/assets/photographers/${this.portrait}"> 
     </div> 
 
-    <div class="like-price"  role="content-info" tabindex="0" >
+    <footer class="like-price"  role="contentinfo" tabindex="0" >
       <div class="likes_container-footer">
         <span aria-label="nombre de j'aime ${likes}" >${likes}</span>
         <span aria-hidden="true">❤</span>
       </div>
       <span  aria-label="tarification par jours ${this.price}€">${this.price}€ / jour</span>
-    </div>
+    </footer>
     `;
 
     return headerBlock;

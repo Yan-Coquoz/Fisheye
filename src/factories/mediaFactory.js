@@ -94,11 +94,12 @@ class MediaFactory {
 
     containtSpan.classList.add("likes_container");
     containtSpan.setAttribute("tabindex", "0");
+
     mediaBox.classList.add("media-box");
 
     span.classList.add("likes");
-    spanIcon.classList.add("fas", "fa-heart");
     span.textContent = this.getLikes();
+    spanIcon.classList.add("fas", "fa-heart");
 
     cardMedia.appendChild(cardMediaContainer);
     cardMediaContainer.appendChild(media);

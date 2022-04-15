@@ -160,7 +160,7 @@ class Photographer {
     const divDom = document.createElement("div");
     divDom.classList.add("lightbox_bloc");
     // creation de la LB au click
-    const selectedArticle = document.querySelectorAll(".media-box");
+    const selectedArticle = document.querySelectorAll(".card_media");
 
     selectedArticle.forEach((elt) => {
       elt.addEventListener("keyup", this.getDataForLightboxKb.bind(this));
@@ -170,13 +170,20 @@ class Photographer {
     document.querySelector("button.lightbox-btn.close");
     return lightbox.appendChild(divDom);
   }
+  /**
+   * @param {KeyboardEvent} evt
+   */
   getDataForLightboxKb(evt) {
     if (evt.key === "Enter") {
       this.getDataForLightbox(evt);
     }
   }
+  /**
+   * @param {Event} evt
+   */
   getDataForLightbox(evt) {
     let currentId;
+
     if (evt.key === "Enter") {
       currentId = Number(evt.target.lastChild.firstChild.id);
     } else {

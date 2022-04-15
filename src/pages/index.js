@@ -6,6 +6,10 @@ class App {
     this.getAllPhotographers = new Api("../../data/photographers.json");
     this.photographersSection = document.querySelector(".photographer_section");
   }
+  /**
+   * rendu de la page des photographes
+   * @param {array} photographers
+   */
   async displayPhotographers(photographers) {
     photographers.forEach((photographer) => {
       const photographerModel = new PhotographerFactory(

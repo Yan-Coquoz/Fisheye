@@ -18,6 +18,8 @@ class LightboxFactory {
 
     this.onKeyUp = this.onKeyUp.bind(this);
     document.addEventListener("keyup", this.onKeyUp);
+    document.addEventListener("keyup", this.navToLeft.bind(this));
+    document.addEventListener("keyup", this.navToRight.bind(this));
   }
 
   /**
@@ -42,6 +44,7 @@ class LightboxFactory {
   getCurrentId() {
     return Number(this.currentId);
   }
+
   /**
    * gestion des evenements au clavier
    * @param {MouseEvent} e
@@ -88,7 +91,14 @@ class LightboxFactory {
     document.removeEventListener("keyup", this.onKeyUp);
     document.removeEventListener("click", this.closeLb);
   }
-
+  /**
+   * @param {KeyboardEvent} evt
+   */
+  navToRight(evt) {
+    if (evt.key === "ArrowRight") {
+      this.nextMedia(evt);
+    }
+  }
   // passage au média suivant
   nextMedia(evt) {
     evt.preventDefault();
@@ -113,8 +123,17 @@ class LightboxFactory {
       this.typeMedia = new TypeMediaFactory(this.getCurrentMedia());
       this.onLoad();
     }
+    document.removeEventListener("keyup", this.navToRight);
   }
 
+  /**
+   * @param {KeyboardEvent} evt
+   */
+  navToLeft(evt) {
+    if (evt.key === "ArrowLeft") {
+      this.prevMedia(evt);
+    }
+  }
   /**
    * passage au média précédent
    * @param {MouseEvent} evt
@@ -143,14 +162,15 @@ class LightboxFactory {
       this.typeMedia = new TypeMediaFactory(this.getCurrentMedia());
       this.onLoad();
     }
+    document.removeEventListener("keyup", this.navToLeft);
   }
+
   /**
    * Affiche le nouveau contenu de la modale Lightbox (précédent / suivant)
    */
   onLoad() {
     const containerBox = document.querySelector(".ligthbox__container-box");
     const title = this.typeMedia.getAttribute("data-title");
-
     const lbTitle = document.querySelector(".lightbox__title");
     lbTitle.textContent = title;
 
@@ -160,6 +180,7 @@ class LightboxFactory {
     this.boxContentMedia.appendChild(containerBox);
     this.boxContentMedia.appendChild(lbTitle);
   }
+
   /**
    * @returns HTMLElement
    */

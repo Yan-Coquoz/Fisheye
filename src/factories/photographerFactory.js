@@ -13,7 +13,11 @@ class PhotographerFactory {
     this.tagline = tagline;
     this.datas = datas;
   }
-  // page d'accueil, carte des photographes
+
+  /**
+   * page d'accueil, carte des photographes
+   * @returns HTMLElement
+   */
   getUserCardDOM() {
     const baseUrl = "../../public/photographer.html";
     const article = document.createElement("article");
@@ -40,13 +44,28 @@ class PhotographerFactory {
 
     return article;
   }
-  // Page d'un photographe
+
+  /**
+   * Page d'un photographe
+   * @returns HTMLElement
+   */
   getPhotographerDOM() {
     const headerBlock = document.createElement("section");
     const dataHeart = new MediaFactory(this.datas);
     const likes = getAllLike(dataHeart.medias);
-
+    const body = document.querySelector("body");
+    const footer = document.createElement("footer");
     headerBlock.classList.add("header__block");
+    footer.setAttribute("role", "contentinfo");
+    footer.setAttribute("tabindex", "0");
+    footer.classList.add("like-price");
+    footer.innerHTML = `
+      <div class="likes_container-footer">
+        <span aria-label="nombre de j'aime ${likes}" >${likes}</span>
+        <span aria-hidden="true">❤</span>
+      </div>
+      <span  aria-label="tarification par jours ${this.price}€">${this.price}€ / jour</span>
+    `;
 
     headerBlock.innerHTML = `
     <div class="header__block-left">  
@@ -60,15 +79,9 @@ class PhotographerFactory {
       <img class="photographer" loading="lazy" alt="" src="../../public/assets/photographers/${this.portrait}"> 
     </div> 
 
-    <footer class="like-price"  role="contentinfo" tabindex="0" >
-      <div class="likes_container-footer">
-        <span aria-label="nombre de j'aime ${likes}" >${likes}</span>
-        <span aria-hidden="true">❤</span>
-      </div>
-      <span  aria-label="tarification par jours ${this.price}€">${this.price}€ / jour</span>
-    </footer>
+    
     `;
-
+    body.appendChild(footer);
     return headerBlock;
   }
 }

@@ -23,7 +23,7 @@ export function onLikes() {
   // au clavier
   document.querySelectorAll(".likes_container").forEach((elt) => {
     elt.addEventListener("keyup", (evt) => {
-      if (evt.key === "+") {
+      if (evt.key === "+" || evt.key === "Enter") {
         MoreOrLess(elt);
       }
     });

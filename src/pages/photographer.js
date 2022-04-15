@@ -148,8 +148,6 @@ class Photographer {
         this.getNewRenderedMedia(sortedMediaByDate);
         this.displayLightbox();
         break;
-      default:
-        throw new Error("Pas de selection de tri valide");
     }
   }
 

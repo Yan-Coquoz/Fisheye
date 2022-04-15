@@ -298,36 +298,45 @@ button.lightbox-btn.close:focus {
 .lightbox-btn.close:hover {
   transform: scale(1.3);
 }
+/* container de l'image */
 .lightbox-media {
-  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin: 3rem auto;
   z-index: 11;
+}
+.ligthbox__container-box {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  align-items: center;
 }
 
 .ligthbox__container-box .card_media--img {
-  height: 100vh;
+  width: 80%;
+  margin: 0 auto;
 }
-.ligthbox__container-box img {
+.ligthbox__container-box .card_media--img img {
   object-fit: cover;
-  width: auto;
+  width: 100%;
   height: 100%;
 }
-.ligthbox__container-box > div > video {
-  display: flex;
+
+.ligthbox__container-box .card_media--box-video {
+  width: 80%;
+  margin: 0 auto;
 }
 .ligthbox__container-box div video {
+  object-fit: cover;
   margin: 0 auto;
-  width: 80%;
-  height: auto;
+  width: 100%;
+  height: 100%;
 }
 .lightbox__title {
   color: #901c1c;
   margin-top: 1rem;
   font-size: 1.5rem;
-  align-self: flex-start;
-  margin-left: 8rem;
+  align-self: start;
+  margin-left: 10%;
 }

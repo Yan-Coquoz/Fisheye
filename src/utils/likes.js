@@ -60,6 +60,7 @@ function MoreOrLess(elt) {
       `${currentHeartValue.textContent} likes`
     );
     footerLikes.textContent = ++currentNbrLike;
+    footerLikes.setAttribute("aria-label", `${footerLikes.textContent} likes`);
   } else {
     currentHeartIcon.style.color = "#901c1c";
     currentHeartValue.textContent--;
@@ -68,5 +69,6 @@ function MoreOrLess(elt) {
       `${currentHeartValue.textContent} likes`
     );
     footerLikes.textContent = --currentNbrLike;
+    footerLikes.setAttribute("aria-label", `${footerLikes.textContent} likes`);
   }
 }

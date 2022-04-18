@@ -169,6 +169,9 @@ figure {
   display: inline-block;
   text-align: center;
 }
+.likes {
+  margin-right: 0.5rem;
+}
 
 /* Modale de Formulaire */
 #contact_modal {

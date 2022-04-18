@@ -52,11 +52,13 @@ a {
 }
 
 .photographer_section {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 70px;
-  margin-top: 100px;
-  margin-bottom: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row;
+  gap: 50px;
+  margin: 100px auto 3rem auto;
+  align-content: center;
 }
 
 .photographer_section article {
@@ -65,6 +67,7 @@ a {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 350px;
 }
 
 .photographer_section article h2 {
@@ -89,6 +92,7 @@ a {
   margin-top: 0.8rem;
   margin-bottom: 0;
   font-size: 2.5rem;
+  text-align: center;
 }
 .box_desc {
   display: flex;

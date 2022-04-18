@@ -10,7 +10,7 @@ export function getAllLike(datas) {
 }
 
 export function onLikes() {
-  // a la souris
+  // à la souris
   document.removeEventListener("keyup", onLikes);
   document.removeEventListener("click", onLikes);
 
@@ -47,10 +47,10 @@ function MoreOrLess(elt) {
   ) {
     currentHeartIcon.style.color = "#db8876";
     currentHeartValue.textContent++;
-    footerLikes.textContent = ++currentNbrLike;
+    footerLikes.textContent = currentNbrLike++;
   } else {
     currentHeartIcon.style.color = "#901c1c";
     currentHeartValue.textContent--;
-    footerLikes.textContent = --currentNbrLike;
+    footerLikes.textContent = currentNbrLike--;
   }
 }

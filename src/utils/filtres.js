@@ -1,4 +1,8 @@
-// tri les données par popularité
+/**
+ * tri les données par popularité
+ * @param {array} datas
+ * @returns {array}
+ */
 export function getDataByPop(datas) {
   return datas.sort((a, b) => {
     // 'b'(par sa position) sera la reference et sera comparé à 'a', qui sera l'élément suivant
@@ -7,14 +11,22 @@ export function getDataByPop(datas) {
   });
 }
 
-// tri les données par titre
+/**
+ * tri les données par titre
+ * @param {array} datas
+ * @returns {array}
+ */
 export function getDataByTitle(datas) {
   return datas.sort((a, b) => {
     return a.title.localeCompare(b.title);
   });
 }
 
-// tri les données par date
+/**
+ * tri les données par date
+ * @param {array} datas
+ * @returns {array}
+ */
 export function getDataByDate(datas) {
   return datas.slice().sort((a, b) => {
     // a < b
@@ -39,7 +51,7 @@ export function getPhotographer(id, users) {
 /**
  * @param {number} id du photographe
  * @param {array} medias les médias des photographes
- * @returns Array
+ * @returns {array}
  */
 export function getDatasByPhotographId(id, medias) {
   return medias.filter((media) => {
@@ -51,7 +63,7 @@ export function getDatasByPhotographId(id, medias) {
  * réccupère l'objet du media selectionné
  * @param { number } id courant
  * @param { array } datas tableau d'objet
- * @returns Object
+ * @returns {arrayOfObject}
  */
 export function getSelectedMedia(id, datas) {
   return datas.filter((value) => value.id === id);
@@ -61,7 +73,7 @@ export function getSelectedMedia(id, datas) {
  * trouve l'index d'un objet dans un tableau
  * @param {number} index à rechercher
  * @param {array} tab
- * @returns number
+ * @returns {number}
  */
 export function getIndexCurrentMedia(index, tab) {
   return tab.findIndex((eltIndex) => {

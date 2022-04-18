@@ -20,13 +20,14 @@ class Photographer {
     this.section = document.createElement("section");
     this.photographersMedias = this.getDatas();
   }
+
   /**
-   *
    * @returns {ArrayOfObject}
    */
   getDatas() {
     return this.photographersMedias;
   }
+
   /**
    * setter
    * @param {ArrayOfObject} datas
@@ -34,8 +35,9 @@ class Photographer {
   setDatas(datas) {
     this.photographersMedias = datas;
   }
+
   /**
-   * reccuperation de l'url courante.
+   * reccuperation de l'id via l'url courante.
    * @returns {number} l'id du photographe
    */
   extractUrlParam() {
@@ -75,14 +77,20 @@ class Photographer {
     titleForm.appendChild(span);
   }
 
-  // rendu des filtres
+  /**
+   * rendu des filtres
+   * @returns {HTMLElement}
+   */
   displaySortFilter() {
     this.section.classList.add("media_content");
     const selectedField = new SortFactory().getSortMediaDom();
     this.section.insertAdjacentElement("afterbegin", selectedField);
   }
 
-  // rendu des médias
+  /**
+   *  rendu des médias
+   * @returns {HTMLElement}
+   */
   async displayMedia() {
     const photographHeader = document.querySelector(".photograph-header");
 
@@ -109,6 +117,7 @@ class Photographer {
   /**
    * Le nouveau rendu des médias après le tri
    * @param {array} mediaOrderedBy - tableau des données réorganisé
+   * @returns {HTMLElement}
    */
   getNewRenderedMedia(mediaOrderedBy) {
     document.querySelectorAll(".media-box").forEach((elt) => {
@@ -124,7 +133,6 @@ class Photographer {
 
   /**
    * @param {keyboardEvent} evt
-   * @returns
    */
   sortRendered(evt) {
     evt.preventDefault();
@@ -153,7 +161,7 @@ class Photographer {
 
   /**
    *  rendu de la lightbox
-   * @returns HTMLElement
+   * @returns {HTMLElement}
    */
   async displayLightbox() {
     const lightbox = document.querySelector("#lightbox");
@@ -170,6 +178,7 @@ class Photographer {
     document.querySelector("button.lightbox-btn.close");
     return lightbox.appendChild(divDom);
   }
+
   /**
    * @param {KeyboardEvent} evt
    */
@@ -178,6 +187,7 @@ class Photographer {
       this.getDataForLightbox(evt);
     }
   }
+
   /**
    * @param {Event} evt
    */
@@ -204,7 +214,7 @@ class Photographer {
     document.removeEventListener("keyup", this.getDataForLightboxKb.bind(this));
   }
 
-  async rendu() {
+  async init() {
     // reccup les donnée de l'api
     const { photographers, media } = await this.photographers.getData();
     const datas = await getDatasByPhotographId(this.id, media);
@@ -219,4 +229,4 @@ class Photographer {
   }
 }
 const user = new Photographer();
-user.rendu();
+user.init();

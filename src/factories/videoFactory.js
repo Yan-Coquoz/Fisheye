@@ -12,6 +12,10 @@ export class Video {
     const video = document.createElement("video");
     const source = document.createElement("source");
 
+    const warningSpan = document.createElement("span");
+    warningSpan.classList.add("warning_span");
+    warningSpan.textContent = "Vidéo";
+
     div.classList.add("card_media--box-video");
     div.setAttribute("data-title", `${this.title}`);
     div.setAttribute("data-id", `${this.id}`);
@@ -21,12 +25,14 @@ export class Video {
     if (lightbox.classList.contains("active")) {
       video.setAttribute("controls", "");
       div.removeAttribute("aria-label");
+      warningSpan.style.display = "none";
     } else {
       div.setAttribute(
         "aria-label",
         `Le contrôle de la vidéo est disponible dans la lightbox`
       );
       video.removeAttribute("controls");
+      warningSpan.style.display = "block";
     }
 
     video.id = this.id;
@@ -35,6 +41,7 @@ export class Video {
     source.setAttribute("type", `video/mp4`);
 
     video.appendChild(source);
+    div.appendChild(warningSpan);
     div.appendChild(video);
 
     return div;

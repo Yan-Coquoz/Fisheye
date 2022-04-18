@@ -326,6 +326,7 @@ button.lightbox-btn.close:focus {
 .ligthbox__container-box .card_media--box-video {
   width: 80%;
   margin: 0 auto;
+  position: relative;
 }
 .ligthbox__container-box div video {
   object-fit: cover;
@@ -339,4 +340,13 @@ button.lightbox-btn.close:focus {
   font-size: 1.5rem;
   align-self: start;
   margin-left: 10%;
+}
+/* span d'avertissement */
+.warning_span {
+  position: absolute;
+  background-color: #901c1c;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px 0 5px 0;
+  font-weight: bold;
 }

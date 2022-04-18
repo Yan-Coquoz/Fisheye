@@ -13,6 +13,7 @@ export class Image {
     div.classList.add("card_media--img");
     div.setAttribute("data-title", `${this.title}`);
     div.setAttribute("data-id", `${this.id}`);
+
     if (onLb.classList.contains("active")) {
       div.setAttribute("tabindex", `0`);
       div.setAttribute("aria-label", `${this.title}`);

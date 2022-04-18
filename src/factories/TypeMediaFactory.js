@@ -3,8 +3,9 @@ import { Video } from "./videoFactory.js";
 
 export class TypeMediaFactory {
   /**
+   * Dispache la donnée en fonction de son type.
    * @param {objet} media - propiétés d'un media
-   * @returns HTMLElement
+   * @returns {HTMLElement}
    */
   constructor(media) {
     // je regarde si la bonne propriété existe

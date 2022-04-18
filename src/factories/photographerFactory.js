@@ -61,7 +61,7 @@ class PhotographerFactory {
     footer.classList.add("like-price");
     footer.innerHTML = `
       <div class="likes_container-footer">
-        <span aria-label="nombre de j'aime ${likes}" >${likes}</span>
+        <span aria-label="nombre de j'aime ${likes} likes" >${likes}</span>
         <span aria-hidden="true">❤</span>
       </div>
       <span  aria-label="tarification par jours ${this.price}€">${this.price}€ / jour</span>

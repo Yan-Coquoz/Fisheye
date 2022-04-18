@@ -1,4 +1,5 @@
 /**
+ * calcul le nombre total de like
  * @param {array} datas d'un photographe
  * @returns number
  */
@@ -9,6 +10,9 @@ export function getAllLike(datas) {
   }, initValue);
 }
 
+/**
+ * dispache l'évenement selon son type (souris / clavier)
+ */
 export function onLikes() {
   // à la souris
   document.removeEventListener("keyup", onLikes);
@@ -29,9 +33,13 @@ export function onLikes() {
     });
   });
 }
-
+/**
+ *  Affect les styles sur les likes et incrément ou décréménte le nombre de like
+ * @param {HTMLElement} elt
+ */
 function MoreOrLess(elt) {
   const footerLikes = document.querySelector(".likes_container-footer > span");
+  const spanLike = elt.querySelector(".likes");
 
   const currentHeartValue = elt.querySelector(".likes_container >.likes");
   const currentHeartIcon = elt.querySelector("span.fas.fa-heart");
@@ -47,10 +55,18 @@ function MoreOrLess(elt) {
   ) {
     currentHeartIcon.style.color = "#db8876";
     currentHeartValue.textContent++;
-    footerLikes.textContent = currentNbrLike++;
+    spanLike.setAttribute(
+      "aria-label",
+      `${currentHeartValue.textContent} likes`
+    );
+    footerLikes.textContent = ++currentNbrLike;
   } else {
     currentHeartIcon.style.color = "#901c1c";
     currentHeartValue.textContent--;
-    footerLikes.textContent = currentNbrLike--;
+    spanLike.setAttribute(
+      "aria-label",
+      `${currentHeartValue.textContent} likes`
+    );
+    footerLikes.textContent = --currentNbrLike;
   }
 }

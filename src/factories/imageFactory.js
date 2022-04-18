@@ -5,6 +5,9 @@ export class Image {
     this.id = id;
     this.title = title;
   }
+  /**
+   * @returns {HTMLElement}
+   */
   displayImage() {
     const assets = "../../public/assets/images/";
     const onLb = document.querySelector("#lightbox");

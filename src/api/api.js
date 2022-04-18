@@ -1,4 +1,8 @@
 class Api {
+  /**
+   * chemin des datas
+   * @param {String} url
+   */
   constructor(url) {
     this.url = url;
   }
@@ -9,7 +13,7 @@ class Api {
         return res;
       })
       .catch((err) => {
-        throw new Error("OOPS ! ", err);
+        throw new Error("OOPS, Il y a une erreur dans le chemin !", err);
       });
   }
 }

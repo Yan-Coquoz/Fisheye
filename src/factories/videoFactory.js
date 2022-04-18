@@ -4,6 +4,9 @@ export class Video {
     this.id = id;
     this.title = title;
   }
+  /**
+   * @returns {HTMLElement}
+   */
   displayVideo() {
     const assets = "../../public/assets/images/";
 

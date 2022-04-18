@@ -13,6 +13,9 @@ const inputs = {
   message: document.querySelector("#message"),
 };
 
+/**
+ * positionne un écouteur sur les inputs et dispache l'évenement dans la fonction correspondante
+ */
 function formValidation() {
   for (const key in inputs) {
     inputs[key].addEventListener("input", (evt) => {
@@ -29,15 +32,13 @@ function formValidation() {
         case "message":
           checkMessage(evt);
           break;
-
-        default:
-          throw new Error("Erreur sur les inputs");
       }
     });
   }
 }
 
 /**
+ * Affect un index selon l'input écouté
  * @param {InputEvent} inputValue - valeur reçu de l'input
  */
 function checkName(inputValue) {
@@ -48,7 +49,7 @@ function checkName(inputValue) {
   }
 }
 /**
- *
+ * Traitement des inputs prénom et nom
  * @param {number} index - index de l'input
  * @param {InputEvent} inputValue - valeur de l'input
  * @returns un msg d'erreur
@@ -70,6 +71,7 @@ function typeName(index, inputValue) {
 }
 
 /**
+ * Traitement de l'email
  * @param {string} inputValue - valeur envoyer de l'input
  * @returns {string} en cas d'erreur
  */
@@ -89,7 +91,11 @@ function checkEmail(inputValue) {
     return formInputs[2].appendChild(errorSpan[2]);
   }
 }
-
+/**
+ * Traitement du textarea
+ * @param {InputEvent} evt
+ * @returns
+ */
 function checkMessage(evt) {
   errorSpan[3].textContent = "Veuillez enter au moins 15 carateres.";
   if (evt.target.value.length > 14) {
@@ -102,7 +108,10 @@ function checkMessage(evt) {
     return formInputs[3].appendChild(errorSpan[3]);
   }
 }
-
+/**
+ * Traitement de la validation des données
+ * @param {MouseEvent} evt
+ */
 function checkFormValidation(evt) {
   evt.preventDefault();
 
@@ -130,9 +139,11 @@ function checkFormValidation(evt) {
 
   if (isPrenom && isNom && isEmail && isMsg) {
     console.log("Validation du formulaire");
+
     for (let elt in inputs) {
       console.log(`${elt} : ${inputs[elt].value}`);
     }
+
     setTimeout(() => {
       for (const key in inputs) {
         inputs[key].value = "";
@@ -151,15 +162,23 @@ function checkFormValidation(evt) {
     }
   }
 }
+/**
+ * désactive le bouton de validation
+ */
 function disabledBtnValidation() {
   btnFormValidation.setAttribute("disabled", "");
-
   btnFormValidation.textContent = "Invalide";
 }
+/**
+ * active le bouton de validation
+ */
 function aviableBtnValidation() {
   btnFormValidation.removeAttribute("disabled");
   btnFormValidation.textContent = "Envoyer";
 }
+/**
+ * ferme la modale
+ */
 function closeModale() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "none";

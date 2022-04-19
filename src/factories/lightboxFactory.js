@@ -18,8 +18,8 @@ class LightboxFactory {
 
     this.onKeyUp = this.onKeyUp.bind(this);
     document.addEventListener("keyup", this.onKeyUp);
-    document.addEventListener("keyup", this.navToLeft.bind(this));
-    document.addEventListener("keyup", this.navToRight.bind(this));
+    document.addEventListener("keyup", this.onKeyUp);
+    document.addEventListener("keyup", this.onKeyUp);
   }
 
   /**
@@ -47,11 +47,15 @@ class LightboxFactory {
 
   /**
    * gestion des evenements au clavier
-   * @param {MouseEvent} e
+   * @param {KeyboardEvent} evt
    */
   onKeyUp(evt) {
     if (evt.key === "Escape") {
       this.closeLb(evt);
+    } else if (evt.key === "ArrowRight") {
+      this.nextMedia(evt);
+    } else if (evt.key === "ArrowLeft") {
+      this.prevMedia(evt);
     }
   }
 
@@ -91,14 +95,7 @@ class LightboxFactory {
     document.removeEventListener("keyup", this.onKeyUp);
     document.removeEventListener("click", this.closeLb);
   }
-  /**
-   * @param {KeyboardEvent} evt
-   */
-  navToRight(evt) {
-    if (evt.key === "ArrowRight") {
-      this.nextMedia(evt);
-    }
-  }
+
   // passage au média suivant
   nextMedia(evt) {
     evt.preventDefault();
@@ -126,14 +123,6 @@ class LightboxFactory {
     document.removeEventListener("keyup", this.navToRight);
   }
 
-  /**
-   * @param {KeyboardEvent} evt
-   */
-  navToLeft(evt) {
-    if (evt.key === "ArrowLeft") {
-      this.prevMedia(evt);
-    }
-  }
   /**
    * passage au média précédent
    * @param {MouseEvent} evt

@@ -99,7 +99,6 @@ class MediaFactory {
 
     span.classList.add("likes");
     span.textContent = `${this.getLikes()}`;
-    span.setAttribute("aria-label", `${this.getLikes()} likes`);
     spanIcon.classList.add("fas", "fa-heart");
 
     cardMedia.appendChild(cardMediaContainer);

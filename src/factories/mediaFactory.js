@@ -81,7 +81,7 @@ class MediaFactory {
     const containtSpan = document.createElement("div");
 
     cardMedia.classList.add("card_media");
-    cardMedia.setAttribute("aria-label", `media ${this.title}`);
+    cardMedia.setAttribute("aria-label", `${this.title}`);
     cardMedia.setAttribute("aria-hidden", "false");
 
     cardMediaContainer.classList.add("card_media-container");

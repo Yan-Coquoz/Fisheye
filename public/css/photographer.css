@@ -1,11 +1,18 @@
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .photograph-header {
   background-color: #fafafa;
   height: 300px;
-  margin: 0 100px;
+  margin: 0 2rem;
   position: relative;
   padding: 0 2rem;
   display: flex;
   justify-content: center;
+  width: 80%;
+  max-width: 1400px;
 }
 .header__block {
   height: 100%;
@@ -80,10 +87,14 @@
   gap: 50px;
 }
 
-/* conteneur des medias & formulaire */
+/* conteneur des medias & filtres */
 .media_content {
   margin: 6.2rem 0 3.6rem 0;
   padding: 0 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
 }
 
 /* formulaire de tri */
@@ -132,6 +143,7 @@ option.form-options {
   flex-wrap: wrap;
   justify-content: center;
   gap: 50px;
+  max-width: 1400px;
 }
 article.media-box {
   margin: 0;
@@ -140,10 +152,13 @@ article.media-box {
 figure {
   margin: 0;
 }
+.card_media {
+}
 .card_media-container {
   cursor: pointer;
 }
 .card_media--img img {
+  box-shadow: 0px 6px 7px 3px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   width: 350px;
   height: 300px;
@@ -151,10 +166,16 @@ figure {
 }
 
 .card_media--vid {
+  box-shadow: 0px 6px 7px 3px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   width: 350px;
   height: 300px;
   object-fit: cover;
+}
+.card_media--img img:hover,
+.card_media--vid:hover {
+  transition: 0.5s;
+  box-shadow: 0px 6px 7px 3px rgba(0, 0, 0, 0.7);
 }
 .card_media--title {
   color: #901c1c;

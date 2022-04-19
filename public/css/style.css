@@ -59,6 +59,7 @@ a {
   gap: 50px;
   margin: 100px auto 3rem auto;
   align-content: center;
+  max-width: 1400px;
 }
 
 .photographer_section article {

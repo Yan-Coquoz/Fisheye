@@ -1,5 +1,6 @@
 /* eslint-disable indent */
 import { getAllLike } from "../utils/likes.js";
+
 import { MediaFactory } from "./mediaFactory.js";
 
 class PhotographerFactory {
@@ -16,7 +17,7 @@ class PhotographerFactory {
 
   /**
    * page d'accueil, carte des photographes
-   * @returns HTMLElement
+   * @returns {HTMLElement}
    */
   getUserCardDOM() {
     const baseUrl = "../../public/photographer.html";

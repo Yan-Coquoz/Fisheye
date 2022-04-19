@@ -21,7 +21,6 @@ class MediaFactory {
   }
   /**
    * @param {number} likes les likes courant
-   * @returns
    */
   setLikes(likes) {
     this.likes = likes;
@@ -29,7 +28,9 @@ class MediaFactory {
   getLikes() {
     return this.likes;
   }
-
+  /**
+   * @param {KeyboardEvent} evt
+   */
   onOpenModale(evt) {
     if (evt.key === "Enter") {
       this.openLightbox(evt);

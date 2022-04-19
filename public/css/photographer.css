@@ -152,13 +152,12 @@ article.media-box {
 figure {
   margin: 0;
 }
-.card_media {
-}
+
 .card_media-container {
   cursor: pointer;
 }
 .card_media--img img {
-  box-shadow: 0px 6px 7px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 6px 7px 3px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   width: 350px;
   height: 300px;
@@ -166,7 +165,7 @@ figure {
 }
 
 .card_media--vid {
-  box-shadow: 0px 6px 7px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 6px 7px 3px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   width: 350px;
   height: 300px;
@@ -174,7 +173,7 @@ figure {
 }
 .card_media--img img:hover,
 .card_media--vid:hover {
-  transition: 0.5s;
+  transition: 0.3s;
   box-shadow: 0px 6px 7px 3px rgba(0, 0, 0, 0.7);
 }
 .card_media--title {

@@ -1,4 +1,7 @@
 export class SortFactory {
+  /**
+   * @returns {HTMLElement} filtre de tri
+   */
   getSortMediaDom() {
     const filtreBloc = document.createElement("form");
     const formulaire = `

@@ -6,8 +6,12 @@ Rien à installer ici, il suffit d'ouvrir le fichier `./public/index.html`.
 
 ## Sommaire
 
-- [ressources](#ressources)
-- [contraintes](#contraintes)
+- [Base de code du projet P6 - Parcours Front-end](#base-de-code-du-projet-p6---parcours-front-end)
+  - [Démarrer le projet](#démarrer-le-projet)
+  - [Sommaire](#sommaire)
+  - [Ressources](#ressources)
+  - [contraintes](#contraintes)
+  - [Installation](#installation)
 
 ## Ressources
 
@@ -31,11 +35,40 @@ remplir cet attribut, et le nom du photographe dans le cas d’une photo de
 profil de photographe.
 - Le code devrait passer les tests [AChecker](https://achecker.achecks.ca/checker/index.php) sans “known issue” (afin qu'il soit conforme aux WCAG).
 
-
-
-
 - Toute la gestion des événements (par exemple, les clics et les pressions au
 clavier) doit être configurée (utilisez KeyboardEvent.key ou
 KeyboardEvent.code.).
 - Utilisez un `lecteur d'écran` gratuit pour vous faire une idée de ce que
 représente l'utilisation du site pour une personne malvoyante. (`NVDA`, extension chrome:`screen reader` )
+
+## Installation
+
+- Mise en place d'`eslint` avec la commande et sa configuration :
+
+```bash
+// installation
+npm install --save-dev eslint 
+
+// configuration
+npm init @eslint/config
+```
+
+- Installation de modules
+
+Dans le **package.json**, ajouter cette ligne :
+
+```json
+{
+"type":"module"
+}
+```
+
+Puis ont exportes les fonctions , les variables... depuis un fichier avec le mot clé `export`, puis on les importes avec `import`  depuis un autre fichier.
+
+```javascript
+// fichier a.js
+export function maFonction(){}
+
+// fichier b.js
+import {maFonction} from "./adresseDuFichier_a.js"
+```

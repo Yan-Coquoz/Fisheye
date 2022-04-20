@@ -8,6 +8,8 @@ export class SortFactory {
     <label for="tri" class="form-label">Trier par </label>
       <select class="form-select" name="choice" id="tri">
        
+        <option class="form-options" value="">-- Filtres --</option>
+
         <option class="form-options" value="popularite">Popularité</option>
         
         <option class="form-options" value="date">Date</option>

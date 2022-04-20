@@ -49,9 +49,10 @@ export function getPhotographer(id, users) {
 }
 
 /**
+ * tout les medias d'un photographe
  * @param {number} id du photographe
  * @param {array} medias les médias des photographes
- * @returns {array}
+ * @returns {arrayOfObject}
  */
 export function getDatasByPhotographId(id, medias) {
   return medias.filter((media) => {

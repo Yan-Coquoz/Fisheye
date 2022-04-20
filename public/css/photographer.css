@@ -192,6 +192,7 @@ figure {
   font-size: 1.2rem;
   font-weight: 400;
   width: 350px;
+  margin-top: 10px;
 }
 .card_media--title > span {
   width: 5rem;

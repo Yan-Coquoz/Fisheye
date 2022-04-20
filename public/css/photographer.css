@@ -38,6 +38,7 @@
   position: absolute;
   align-self: center;
 }
+
 .city {
   color: #901c1c;
   font-size: 1.5rem;
@@ -90,7 +91,7 @@
 /* conteneur des medias & filtres */
 .media_content {
   margin: 6.2rem 0 3.6rem 0;
-  padding: 0 3rem;
+  /* padding: 0 3rem; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -143,8 +144,9 @@ option.form-options {
   flex-wrap: wrap;
   justify-content: center;
   gap: 50px;
-  max-width: 1400px;
+  width: 100%;
 }
+
 article.media-box {
   margin: 0;
   padding: 0;
@@ -156,6 +158,12 @@ figure {
 .card_media-container {
   cursor: pointer;
 }
+.card_media {
+  overflow: hidden;
+  width: 350px;
+  height: 300px;
+  border-radius: 5px;
+}
 .card_media--img img {
   box-shadow: 0px 6px 7px 3px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
@@ -165,11 +173,12 @@ figure {
 }
 
 .card_media--vid {
+  overflow: hidden;
   box-shadow: 0px 6px 7px 3px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
   border-radius: 5px;
   width: 350px;
   height: 300px;
-  object-fit: cover;
 }
 .card_media--img img:hover,
 .card_media--vid:hover {
@@ -191,6 +200,16 @@ figure {
 }
 .likes {
   margin-right: 0.5rem;
+}
+.active .card_media--vid,
+.active .card_media--img img {
+  box-shadow: none;
+}
+
+.active .card_media--img img:hover,
+.active .card_media--vid:hover {
+  transition: none;
+  box-shadow: none;
 }
 
 /* Modale de Formulaire */
@@ -372,4 +391,27 @@ button.lightbox-btn.close:focus {
   padding: 0.5rem 1rem;
   border-radius: 5px 0 5px 0;
   font-weight: bold;
+}
+
+@media all and (min-width: 1400px) {
+  .media-container {
+    gap: 50px !important;
+    max-width: 1400px;
+  }
+}
+@media all and (max-width: 1220px) {
+  .box__btn {
+    top: 52%;
+  }
+}
+@media all and (min-width: 1200px) {
+  .media-container {
+    gap: 25px;
+    min-width: 1100px;
+  }
+}
+@media all and (max-width: 950px) {
+  .media-container {
+    gap: 25px;
+  }
 }

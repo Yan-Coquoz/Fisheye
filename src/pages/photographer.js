@@ -217,8 +217,8 @@ class Photographer {
   async init() {
     // reccup les donnée de l'api
     const { photographers, media } = await this.photographers.getData();
-    const datas = await getDatasByPhotographId(this.id, media);
     const photographer = await getPhotographer(this.id, photographers);
+    const datas = await getDatasByPhotographId(this.id, media);
 
     this.setDatas(datas);
 

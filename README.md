@@ -1,4 +1,5 @@
 # Base de code du projet P6 - Parcours Front-end
+![GitHub repo size](<https://img.shields.io/github/repo-size/Yan-Coquoz/Fisheye>) 
 
 ## Démarrer le projet
 

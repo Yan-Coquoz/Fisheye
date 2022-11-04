@@ -59,6 +59,9 @@ class MediaFactory {
     section.setAttribute("tabindex", "-1");
     section.setAttribute("aria-hidden", "true");
 
+    const footer = document.querySelector("footer");
+    footer.setAttribute("tabindex", "-1");
+
     document.querySelectorAll(".likes_container").forEach((elt) => {
       elt.setAttribute("tabindex", "-1");
     });

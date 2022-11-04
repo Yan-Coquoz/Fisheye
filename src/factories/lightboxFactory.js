@@ -90,6 +90,9 @@ class LightboxFactory {
       elt.setAttribute("tabindex", "0");
     });
 
+    const footer = document.querySelector("footer");
+    footer.setAttribute("tabindex", "0");
+
     window.scrollTo(0, 0);
 
     document.removeEventListener("keyup", this.onKeyUp);

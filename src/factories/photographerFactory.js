@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import { getAllLike } from "../utils/likes.js";
 
 import { MediaFactory } from "./mediaFactory.js";
@@ -79,7 +78,6 @@ class PhotographerFactory {
     <div class="header__block-right">
       <img class="photographer" loading="lazy" alt="" src="../../public/assets/photographers/${this.portrait}"> 
     </div> 
-
     
     `;
     body.appendChild(footer);
